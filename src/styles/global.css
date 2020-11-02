@@ -1,0 +1,9 @@
+
+.app {
+  display: flex;
+  justify-content: center;
+}
+
+.center-container {
+  width: 80%;
+}
