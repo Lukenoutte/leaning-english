@@ -30,4 +30,19 @@
     height: 40px;
     border-radius: 15px;
     outline: none;
+    padding: 0 10px;
+}
+.input-and-button button{
+    height: 40px;
+    border-radius: 15px;
+    margin-left: 20px;
+    outline: none;
+}
+.word-hightlight{
+    background-color: cadetblue!important;
+}
+
+.unknown-words-container{
+    display: flex;
+    flex-direction: column-reverse;
 }

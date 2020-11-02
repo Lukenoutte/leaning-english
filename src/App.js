@@ -24,13 +24,13 @@ function App() {
         <div className="input-and-button">
         <h1> Learning english with phrases</h1>
         <input ref={inputPhrase} type="text" />
-        <button onClick={handleClickInput}>Click here</button>
+        <button onClick={handleClickInput}>Try it!</button>
         </div>
         <div className="phrase">
           {phrase.length > 0 &&
             phrase.map((word, index) => {
               return (
-                <button onClick={() => handleClickWord(word)} key={index}>
+                <button className={unknownWords.includes(word)?"word-hightlight":""} onClick={() => handleClickWord(word)} key={index}>
                   {word}
                 </button>
               );
