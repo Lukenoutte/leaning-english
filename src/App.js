@@ -24,20 +24,21 @@ function App() {
   function listHightLightedWords() {
     let divList = [];
     for (let i = 0; i < unknownWords.length; i++) {
-      if(translatedWords[i] !== undefined){
+      let waitTranslation = translatedWords[i] === undefined?'Loading...':translatedWords[i].map(objects => { return objects.normalizedTarget});
       divList.push(<div className="unknown-words" key={i}>
-      <p key={i}>{unknownWords[i] + "-" + translatedWords[i]}</p>
+      <p key={i}>{unknownWords[i] + "-" +  waitTranslation}</p>
       </div>);
-      }
+      
      }
      return divList;
   }
 
   useEffect(() => {
     if (unknownWords.length > 0) {
+      console.log('test');
       axios({
         baseURL: process.env.REACT_APP_ENDPOINT,
-        url: "/translate",
+        url: "/dictionary/lookup",
         method: "post",
         headers: {
           "Ocp-Apim-Subscription-Key": process.env.REACT_APP_KEY,
@@ -52,19 +53,22 @@ function App() {
         data: [{ text: unknownWords[unknownWords.length - 1] }],
         responseType: "json",
       }).then(function (response) {
-        let newTranslation = response.data[0].translations[0].text;
-        setTranslatedWords((oldArray) => [...oldArray, newTranslation]);
+       
+        let newTranslations = response.data[0].translations;
+        
+        setTranslatedWords((oldArray) => [...oldArray, newTranslations]);
+        
       });
     }
-
-  }, [axios, uuidv4, unknownWords]);
+// eslint-disable-next-line
+  }, [unknownWords]);
 
   return (
     <div className="app">
       <div className="center-container">
         <div className="input-and-button">
           <h1> Learning english with phrases</h1>
-
+          {console.log(translatedWords)}
           <input ref={inputPhrase} type="text" />
           <button onClick={handleClickInput}>Try it!</button>
         </div>
