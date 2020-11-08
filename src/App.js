@@ -10,21 +10,36 @@ function App() {
   const uuidv4 = require("uuid/v4");
   const axios = require("axios").default;
 
-  function handleClickInput() {
+  function handleClickButton() {
     let currentPhrase = inputPhrase.current.value;
     setPhrase(currentPhrase.split(" "));
   }
 
   function handleClickWord(word) {
-    if (!unknownWords.includes(word)) {
-      setUnknownWords((oldArray) => [...oldArray, word]);
+    let newWord = word.replace(/[.,\s]/g, '');
+
+    if (!unknownWords.includes(newWord)) {
+      setUnknownWords((oldArray) => [...oldArray, newWord]);
     }
   }
 
-  function listHightLightedWords() {
+  function listHightLightedWordsAndTranslations() {
     let divList = [];
+    let waitTranslation= '';
+
     for (let i = 0; i < unknownWords.length; i++) {
-      let waitTranslation = translatedWords[i] === undefined?'Loading...':translatedWords[i].map(objects => { return objects.normalizedTarget});
+
+      if(translatedWords[i] === undefined){
+        waitTranslation = 'Loading...';
+      }else {
+        if(translatedWords[i].length === 0){
+          waitTranslation = 'Nenhuma tradução encontrada :(';
+        }else{
+          waitTranslation = translatedWords[i].map(objects => { return objects.normalizedTarget});
+        }
+        
+      }
+      
       divList.push(<div className="unknown-words" key={i}>
       <p key={i}>{unknownWords[i] + "-" +  waitTranslation}</p>
       </div>);
@@ -35,7 +50,7 @@ function App() {
 
   useEffect(() => {
     if (unknownWords.length > 0) {
-      console.log('test');
+   
       axios({
         baseURL: process.env.REACT_APP_ENDPOINT,
         url: "/dictionary/lookup",
@@ -68,9 +83,9 @@ function App() {
       <div className="center-container">
         <div className="input-and-button">
           <h1> Learning english with phrases</h1>
-          {console.log(translatedWords)}
+     
           <input ref={inputPhrase} type="text" />
-          <button onClick={handleClickInput}>Try it!</button>
+          <button onClick={handleClickButton}>Try it!</button>
         </div>
         <div className="phrase">
           {phrase.length > 0 &&
@@ -78,7 +93,7 @@ function App() {
               return (
                 <button
                   className={
-                    unknownWords.includes(word) ? "word-hightlight" : ""
+                    unknownWords.includes(word.replace(/[.,\s]/g, '')) ? "word-hightlight" : ""
                   }
                   onClick={() => handleClickWord(word)}
                   key={index}
@@ -90,7 +105,7 @@ function App() {
         </div>
         <div className="unknown-words-container">
           {unknownWords.length > 0 &&
-            listHightLightedWords().map(div => { return div})
+            listHightLightedWordsAndTranslations().map(div => { return div})
             }
         </div>
       </div>
