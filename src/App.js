@@ -15,6 +15,19 @@ function App() {
     setPhrase(currentPhrase.split(" "));
   }
 
+  function handleClickButtonClear() {
+    setUnknownWords([]);
+    setPhrase([]);
+    setTranslatedWords([]);
+    inputPhrase.current.value = '';
+  }
+
+  function removeOneWord(indexProps){
+    setUnknownWords(unknownWords.filter((item) => unknownWords.indexOf(item) !== indexProps));
+    setTranslatedWords(translatedWords.filter((item) => translatedWords.indexOf(item) !== indexProps));
+    
+  }
+
   function handleClickWord(word) {
     let newWord = word.replace(/[.,\s]/g, '');
 
@@ -42,6 +55,7 @@ function App() {
       
       divList.push(<div className="unknown-words" key={i}>
       <p key={i}>{unknownWords[i] + "-" +  waitTranslation}</p>
+      <button onClick={() => removeOneWord(i)}>x</button>
       </div>);
       
      }
@@ -83,9 +97,10 @@ function App() {
       <div className="center-container">
         <div className="input-and-button">
           <h1> Learning english with phrases</h1>
-     
+        
           <input ref={inputPhrase} type="text" />
           <button onClick={handleClickButton}>Try it!</button>
+          <button onClick={handleClickButtonClear}>Clear all</button>
         </div>
         <div className="phrase">
           {phrase.length > 0 &&
