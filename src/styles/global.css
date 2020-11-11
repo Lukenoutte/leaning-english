@@ -1,3 +1,31 @@
+  
+:root {
+  font-size: 60%;
+  --main-color: #db66a2;
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root,
+.app
+{
+  min-height: 90vh;
+
+}
+
+body,
+button,
+input,
+textarea{
+    font: 500 1.6rem Poppins;
+  }
 
 .app {
   display: flex;
@@ -7,4 +35,11 @@
 .center-container {
   width: 80%;
   margin-bottom: 30px;
+}
+
+
+@media(min-width: 700px){
+  :root{
+      font-size: 62.5%;
+  }
 }

@@ -8,38 +8,46 @@
     border: none;
     font-size: 15px;
     outline: none;
+    margin-left: 5px;
 }
 
 .phrase button:hover{
-    background: red;
+    background: #FFF;
 }
 
 .unknown-words{
     height: 80px;
     width: 100%;
-    background: cadetblue;
+    background: #FFF;
     display: flex;
     align-items: center;
     margin-top: 20px;
     border-radius: 15px;
     padding: 10px;
+    color: var(--main-color);
 }
-
+.input-and-button h1{
+    margin-bottom: 30px;
+    color: #FFF;
+}
 .input-and-button input{
     width: 70%;
-    height: 40px;
+    height: 50px;
     border-radius: 15px;
     outline: none;
     padding: 0 10px;
+    border: none;
 }
 .input-and-button button{
-    height: 40px;
+    height: 50px;
     border-radius: 15px;
     margin-left: 20px;
     outline: none;
+    border: none;
+    width: 100px;
 }
 .word-hightlight{
-    background-color: cadetblue!important;
+    background-color: #FFF!important;
 }
 
 .unknown-words-container{
@@ -55,4 +63,6 @@
     top: -3px;
     border-radius: 50%;
     outline: none;
+    height: 30px;
+    width: 30px;
 }
