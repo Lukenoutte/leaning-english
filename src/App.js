@@ -22,9 +22,10 @@ function App() {
     inputPhrase.current.value = '';
   }
 
-  function removeOneWord(indexProps){
-    setUnknownWords(unknownWords.filter((item) => unknownWords.indexOf(item) !== indexProps));
-    setTranslatedWords(translatedWords.filter((item) => translatedWords.indexOf(item) !== indexProps));
+  function removeOneWord(targetIndex){
+    setUnknownWords(unknownWords.filter((item) => unknownWords.indexOf(item) !== targetIndex));
+    setTranslatedWords(translatedWords.filter((item) => translatedWords.indexOf(item) !== targetIndex));
+
     
   }
 
@@ -63,7 +64,7 @@ function App() {
   }
 
   useEffect(() => {
-    if (unknownWords.length > 0) {
+    if (unknownWords.length > 0 && translatedWords.length < unknownWords.length) {
    
       axios({
         baseURL: process.env.REACT_APP_ENDPOINT,
@@ -86,7 +87,7 @@ function App() {
         let newTranslations = response.data[0].translations;
         
         setTranslatedWords((oldArray) => [...oldArray, newTranslations]);
-        
+     
       });
     }
 // eslint-disable-next-line
@@ -97,7 +98,8 @@ function App() {
       <div className="center-container">
         <div className="input-and-button">
           <h1> Learning english with phrases</h1>
-        
+          {console.log("unknown:" + unknownWords.length)}
+          {console.log("translated:" + translatedWords.length)}
           <input ref={inputPhrase} type="text" />
           <button onClick={handleClickButton}>Try it!</button>
           <button onClick={handleClickButtonClear}>Clear all</button>
