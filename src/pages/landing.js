@@ -4,7 +4,7 @@ import '../styles/landing.css';
 
 export default function Landing(){
     return(<div>
-            <header> </header>
+            <header> <div className="center-container">Learning english</div></header>
             <main>
                 <MainTool/>
             </main>

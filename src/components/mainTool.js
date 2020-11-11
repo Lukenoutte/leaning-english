@@ -46,20 +46,20 @@ function Main() {
 
     for (let i = 0; i < unknownWords.length; i++) {
       if (translatedWords[i] === undefined) {
-        waitTranslation = "Loading...";
+        waitTranslation = " Loading...";
       } else {
         if (translatedWords[i].length === 0) {
-          waitTranslation = "Nenhuma tradução encontrada :(";
+          waitTranslation = " Nenhuma tradução encontrada :(";
         } else {
           waitTranslation = translatedWords[i].map((objects) => {
-            return objects.normalizedTarget;
+            return ' ' + objects.normalizedTarget;
           });
         }
       }
 
       divList.push(
         <div className="unknown-words" key={i}>
-          <p key={i}>{unknownWords[i] + "-" + waitTranslation}</p>
+          <p key={i}>{unknownWords[i].toUpperCase() + " -" + waitTranslation}</p>
           <button onClick={() => removeOneWord(i)}>x</button>
         </div>
       );

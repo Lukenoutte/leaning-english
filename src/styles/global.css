@@ -2,6 +2,7 @@
 :root {
   font-size: 60%;
   --main-color: #db66a2;
+  --secundary-color: #281ac8;
 }
 
 
@@ -16,7 +17,7 @@ body,
 #root,
 .app
 {
-  min-height: 90vh;
+  min-height: 100vh;
 
 }
 
@@ -34,7 +35,7 @@ textarea{
 
 .center-container {
   width: 80%;
-  margin-bottom: 30px;
+
 }
 
 
