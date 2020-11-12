@@ -1,9 +1,11 @@
   
 :root {
   font-size: 60%;
-  --main-color: #db66a2;
-  --secundary-color: #281ac8;
-}
+  --main-color: #476ef7;
+  --secundary-color: #eb648c;
+  --grey-color: #eaeef7;
+  --white-color: #FFF;
+  }
 
 
 * {
@@ -34,8 +36,8 @@ textarea{
 }
 
 .center-container {
-  width: 80%;
-
+  width: 60%;
+  max-width: 2000px;
 }
 
 

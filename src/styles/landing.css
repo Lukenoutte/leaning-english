@@ -9,8 +9,8 @@ header{
 
 main{
     padding-top: 60px;
-    background: rgb(59,34,196);
-    background: linear-gradient(0deg, rgba(59,34,196,1) 0%, rgba(143,70,178,1) 28%, rgba(220,102,162,1) 90%);
+    background: rgb(74,109,243);
+    background: linear-gradient(0deg, rgba(74,109,243,1) 28%, rgba(115,175,247,1) 90%);
     height: 100%;
     
 }
