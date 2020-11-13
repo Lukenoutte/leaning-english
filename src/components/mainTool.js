@@ -11,7 +11,9 @@ function Main() {
 
   function handleClickButton() {
     let currentPhrase = inputPhrase.current.value;
+    if(currentPhrase !== ''){
     setPhrase(currentPhrase.split(" "));
+    }
   }
 
   function handleClickButtonClear() {
