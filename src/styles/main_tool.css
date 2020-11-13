@@ -1,36 +1,44 @@
-.phrase {
+.phrase-wrapper {
   margin-top: 20px;
-}
-
-.phrase button {
-  background: transparent;
-  border: none;
-  font-size: 15px;
-  outline: none;
-
-  color: var(--white-color);
-  font-weight: bolder;
-  padding: 0 7px;
-}
-
-.phrase button:hover {
-  background: var(--secundary-color);
-}
-
-.unknown-words {
-  height: 80px;
-  width: 100%;
   background: var(--white-color);
-  display: flex;
-  align-items: center;
-  margin-top: 20px;
+  width: 100%;
+  min-height: 100px;
   border-radius: 15px;
   padding: 30px;
-  color: var(--main-color);
+
 }
+
+
+
+.phrase-wrapper button {
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  outline: none;
+  font-weight: bolder;
+  padding: 0 7px;
+  cursor: pointer;
+
+}
+
+.phrase-wrapper button:hover {
+  background: var(--secundary-color);
+  color: var(--white-color);
+}
+
+.input-and-button{  
+  width: 100%;
+  background-color: var(--white-color);
+
+  padding: 30px;
+  border-radius: 15px;
+
+}
+
 .input-and-button h1 {
   margin-bottom: 30px;
-  color: var(--white-color);
+  font-size: 20px;
+ 
 }
 .input-and-button input {
   width: 60%;
@@ -41,6 +49,8 @@
   border: none;
   color: var(--secundary-color);
   font-weight: bolder;
+  background: var(--background);
+  border: 2px solid var(--border-grey);
 }
 
 .input-and-button input:focus{
@@ -49,11 +59,13 @@
 
 .input-and-button button {
   height: 50px;
+  width: 17%;
+  min-width: 85px;
   border-radius: 15px;
   margin-left: 3%;
   outline: none;
   border: none;
-  width: 17%;
+  
   font-weight: bolder;
   color: var(--secundary-color);
   background: var(--white-color);
@@ -68,6 +80,7 @@
 
 .word-hightlight {
   background-color: var(--secundary-color) !important;
+  color: var(--white-color);
 }
 
 .unknown-words-container {
@@ -77,13 +90,24 @@
 .unknown-words {
   position: relative;
   font-weight: bolder;
+  
+ 
+  width: 100%;
+  background: var(--white-color);
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  border-radius: 15px;
+  padding: 30px;
+
 
 }
+
 .unknown-words button {
   position: absolute;
   right: 0px;
   top: 0px;
-  border-radius: 20%;
+  border-radius: 25%;
   outline: none;
   height: 25px;
   width: 25px;
@@ -91,4 +115,19 @@
   color: var(--white-color);
   border: none;
   cursor: pointer;
+}
+
+@media(max-width:768px){
+  .input-and-button input {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .input-and-button button {
+    width: 100%;
+    margin-left: 0%;
+    margin-bottom: 5px; 
+  }
+
+
 }

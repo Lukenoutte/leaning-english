@@ -5,6 +5,9 @@
   --secundary-color: #eb648c;
   --grey-color: #eaeef7;
   --white-color: #FFF;
+  --background: #f5f6f8;
+  --border-grey: #ecedf4;
+  --main-font-color: #36436d;
   }
 
 
@@ -28,21 +31,40 @@ button,
 input,
 textarea{
     font: 500 1.6rem Poppins;
+    color: var(--main-font-color);
   }
 
 .app {
   display: flex;
   justify-content: center;
+ 
 }
 
+.center-container-header {
+  width: 60%;
+  max-width: 2000px;
+}
 .center-container {
   width: 60%;
   max-width: 2000px;
+  padding-bottom: 30px;
+}
+
+.shadow-light{
+  -webkit-box-shadow: 0px 0px 12px -9px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 0px 12px -9px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 12px -9px rgba(0,0,0,0.75);
 }
 
 
 @media(min-width: 700px){
   :root{
       font-size: 62.5%;
+  }
+}
+
+@media(max-width:768px){
+  .center-container,.center-container-header {
+    width: 80%;
   }
 }

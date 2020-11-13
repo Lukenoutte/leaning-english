@@ -33,7 +33,7 @@ function Main() {
   }
 
   function handleClickWord(word) {
-    let newWord = word.replace(/[.,\s]/g, "");
+    let newWord = word.replace(/[.,?!;:-\s]/g, "");
 
     if (!unknownWords.includes(newWord)) {
       setUnknownWords((oldArray) => [...oldArray, newWord]);
@@ -58,7 +58,7 @@ function Main() {
       }
 
       divList.push(
-        <div className="unknown-words" key={i}>
+        <div className="unknown-words shadow-light" key={i}>
           <p key={i}>{unknownWords[i].toUpperCase() + " -" + waitTranslation}</p>
           <button onClick={() => removeOneWord(i)}>x</button>
         </div>
@@ -100,21 +100,20 @@ function Main() {
   return (
     <div className="app">
       <div className="center-container">
-        <div className="input-and-button">
-          <h1> Learning english with phrases</h1>
-          {console.log("unknown:" + unknownWords.length)}
-          {console.log("translated:" + translatedWords.length)}
+        <div className="input-and-button shadow-light">
+          <h1> Copy and paste some phrase:</h1>
+    
           <input ref={inputPhrase} type="text" />
           <button onClick={handleClickButton}>Try it!</button>
           <button onClick={handleClickButtonClear}>Clear all</button>
         </div>
-        <div className="phrase">
-          {phrase.length > 0 &&
+        <div className="phrase-wrapper shadow-light">
+          {phrase.length > 0 ?
             phrase.map((word, index) => {
               return (
                 <button
                   className={
-                    unknownWords.includes(word.replace(/[.,\s]/g, ""))
+                    unknownWords.includes(word.replace(/[.,?!;:-\s]/g, ""))
                       ? "word-hightlight"
                       : ""
                   }
@@ -124,7 +123,7 @@ function Main() {
                   {word}
                 </button>
               );
-            })}
+            }):<p>Nothing yet...</p>}
         </div>
         <div className="unknown-words-container">
           {unknownWords.length > 0 &&
@@ -133,6 +132,7 @@ function Main() {
             })}
         </div>
       </div>
+      
     </div>
   );
 }

@@ -9,8 +9,16 @@ header{
 
 main{
     padding-top: 60px;
-    background: rgb(74,109,243);
-    background: linear-gradient(0deg, rgba(74,109,243,1) 28%, rgba(115,175,247,1) 90%);
+    background: var(--background);
+
     height: 100%;
     
+}
+
+footer{
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
 }
