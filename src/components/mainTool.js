@@ -11,8 +11,8 @@ function Main() {
 
   function handleClickButton() {
     let currentPhrase = inputPhrase.current.value;
-    if(currentPhrase !== ''){
-    setPhrase(currentPhrase.split(" "));
+    if (currentPhrase !== "") {
+      setPhrase(currentPhrase.split(" "));
     }
   }
 
@@ -23,7 +23,7 @@ function Main() {
     inputPhrase.current.value = "";
   }
 
-  function removeOneWord(targetIndex) {
+  function removeOneWordHighlighted(targetIndex) {
     setUnknownWords(
       unknownWords.filter((item) => unknownWords.indexOf(item) !== targetIndex)
     );
@@ -35,7 +35,7 @@ function Main() {
   }
 
   function handleClickWord(word) {
-    let newWord = word.replace(/[.,?!;:-\s]/g, "");
+    let newWord = word.replace(/[.,?!;:\s]/g, "");
 
     if (!unknownWords.includes(newWord)) {
       setUnknownWords((oldArray) => [...oldArray, newWord]);
@@ -54,22 +54,25 @@ function Main() {
           waitTranslation = " Nenhuma tradução encontrada :(";
         } else {
           waitTranslation = translatedWords[i].map((objects) => {
-            return ' ' + objects.normalizedTarget;
+            return " " + objects.normalizedTarget;
           });
         }
       }
 
       divList.push(
         <div className="unknown-words shadow-light" key={i}>
-          <p key={i}>{unknownWords[i].toUpperCase() + " -" + waitTranslation}</p>
-          <button onClick={() => removeOneWord(i)}>x</button>
+          <p key={i}>
+            {unknownWords[i].toUpperCase() + " -" + waitTranslation}
+          </p>
+          <button onClick={() => removeOneWordHighlighted(i)}>x</button>
         </div>
       );
     }
     return divList;
   }
 
-  useEffect(() => {// API CALL
+  useEffect(() => {
+    // API CALL
     if (
       unknownWords.length > 0 &&
       translatedWords.length < unknownWords.length
@@ -102,20 +105,26 @@ function Main() {
   return (
     <div className="app">
       <div className="center-container">
+        <div className="choose-language-wrapper">
+          <div className="from-container shadow-light">
+            
+          </div>
+          <div className="to-container shadow-light"></div>
+        </div>
         <div className="input-and-button shadow-light">
-          <h1> Copy and paste some phrase:</h1>
-    
+          <h1> Copy and paste some sentence or text in english:</h1>
+
           <input ref={inputPhrase} type="text" />
-          <button onClick={handleClickButton}>Try it!</button>
+          <button id="try-it-button" onClick={handleClickButton}>Try it!</button>
           <button onClick={handleClickButtonClear}>Clear all</button>
         </div>
-        <div className="phrase-wrapper shadow-light">
-          {phrase.length > 0 ?
-            phrase.map((word, index) => {
+        {phrase.length > 0 && (
+          <div className="phrase-wrapper shadow-light">
+            {phrase.map((word, index) => {
               return (
                 <button
                   className={
-                    unknownWords.includes(word.replace(/[.,?!;:-\s]/g, ""))
+                    unknownWords.includes(word.replace(/[.,?!;:\s]/g, ""))
                       ? "word-hightlight"
                       : ""
                   }
@@ -125,8 +134,9 @@ function Main() {
                   {word}
                 </button>
               );
-            }):<p>Nothing yet...</p>}
-        </div>
+            })}
+          </div>
+        )}
         <div className="unknown-words-container">
           {unknownWords.length > 0 &&
             listHightLightedWordsAndTranslations().map((div) => {
@@ -134,7 +144,6 @@ function Main() {
             })}
         </div>
       </div>
-      
     </div>
   );
 }

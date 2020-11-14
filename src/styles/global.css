@@ -3,6 +3,7 @@
   font-size: 60%;
   --main-color: #476ef7;
   --secundary-color: #eb648c;
+  --secundary-hover: #f56791;
   --grey-color: #eaeef7;
   --white-color: #FFF;
   --background: #f5f6f8;
@@ -65,6 +66,6 @@ textarea{
 
 @media(max-width:768px){
   .center-container,.center-container-header {
-    width: 80%;
+    width: 90%;
   }
 }
