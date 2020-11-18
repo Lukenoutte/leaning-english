@@ -4,13 +4,13 @@ header{
     align-items: center;
     justify-content: center;
     color: var(--secundary-color);
-
+    position: relative;
+    z-index: 99;
 }
 
 main{
     padding-top: 60px;
     background: var(--background);
-
     height: 100%;
     
 }

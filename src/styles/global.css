@@ -20,11 +20,9 @@
 
 html,
 body,
-#root,
-.app
-{
-  min-height: 100vh;
-
+#root{
+  min-height: 100% !important;
+  height: 100%;
 }
 
 body,
@@ -34,12 +32,6 @@ textarea{
     font: 500 1.6rem Poppins;
     color: var(--main-font-color);
   }
-
-.app {
-  display: flex;
-  justify-content: center;
- 
-}
 
 .center-container-header {
   width: 60%;

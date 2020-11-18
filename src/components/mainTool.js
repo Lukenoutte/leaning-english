@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import "../styles/main_tool.css";
 
-function Main() {
+function MainTool() {
   const [phrase, setPhrase] = useState([]);
   const [unknownWords, setUnknownWords] = useState([]);
   const [translatedWords, setTranslatedWords] = useState([]);
@@ -103,7 +103,7 @@ function Main() {
   }, [unknownWords]);
 
   return (
-    <div className="app">
+    <div className="main-tool">
       <div className="center-container">
         <div className="choose-language-wrapper">
           <div className="from-container shadow-light">
@@ -148,4 +148,4 @@ function Main() {
   );
 }
 
-export default Main;
+export default MainTool;

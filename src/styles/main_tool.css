@@ -1,4 +1,11 @@
-.phrase-wrapper {
+
+.main-tool {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+}
+
+.main-tool .phrase-wrapper {
   margin-top: 20px;
   background: var(--white-color);
   width: 100%;
@@ -10,7 +17,7 @@
 
 
 
-.phrase-wrapper button {
+.main-tool .phrase-wrapper button {
   background: transparent;
   border: none;
   font-size: 20px;
@@ -21,12 +28,12 @@
 
 }
 
-.phrase-wrapper button:hover {
+.main-tool .phrase-wrapper button:hover {
   background: var(--secundary-color);
   color: var(--white-color);
 }
 
-.input-and-button{  
+.main-tool .input-and-button{  
   width: 100%;
   background-color: var(--white-color);
 
@@ -35,12 +42,12 @@
 
 }
 
-.input-and-button h1 {
+.main-tool .input-and-button h1 {
   margin-bottom: 30px;
   font-size: 20px;
  
 }
-.input-and-button input {
+.main-tool .input-and-button input {
   width: 60%;
   height: 50px;
   border-radius: 15px;
@@ -53,11 +60,11 @@
   border: 2px solid var(--border-grey);
 }
 
-.input-and-button input:focus{
+.main-tool .input-and-button input:focus{
     border: 2px solid var(--secundary-color);
 }
 
-.input-and-button button {
+.main-tool .input-and-button button {
   height: 50px;
   width: 17%;
   min-width: 85px;
@@ -72,30 +79,30 @@
   cursor: pointer;
 }
 
-.input-and-button #try-it-button{
+.main-tool .input-and-button #try-it-button{
   background: var(--secundary-color);
   color: var(--white-color);
 }
 
-.input-and-button #try-it-button:hover{
+.main-tool .input-and-button #try-it-button:hover{
   background: var(--secundary-hover);
 }
 
-.input-and-button button:hover {
+.main-tool .input-and-button button:hover {
   background: var(--secundary-color);
   color: var(--white-color);
 }
 
-.word-hightlight {
+.main-tool .word-hightlight {
   background-color: var(--secundary-color) !important;
   color: var(--white-color);
 }
 
-.unknown-words-container {
+.main-tool .unknown-words-container {
   display: flex;
   flex-direction: column-reverse;
 }
-.unknown-words {
+.main-tool .unknown-words {
   position: relative;
   font-weight: bolder;
   
@@ -111,7 +118,7 @@
 
 }
 
-.unknown-words button {
+.main-tool .unknown-words button {
   position: absolute;
   right: 0px;
   top: 0px;
@@ -125,13 +132,29 @@
   cursor: pointer;
 }
 
-@media(max-width:768px){
-  .input-and-button input {
+.main-tool .choose-language-wrapper{
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.choose-language-wrapper .from-container, .choose-language-wrapper .to-container {
+  width: 48%;
+  background: var(--white-color);
+  height: 100px;
+  border-radius: 15px;
+}
+
+
+
+@media(max-width:950px){
+  .main-tool .input-and-button input {
     width: 100%;
     margin-bottom: 20px;
   }
 
-  .input-and-button button {
+  .main-tool .input-and-button button {
     width: 100%;
     margin-left: 0%;
     margin-bottom: 5px; 
