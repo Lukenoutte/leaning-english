@@ -3,6 +3,8 @@ import "../styles/main_tool.css";
 
 function MainTool() {
   const [phrase, setPhrase] = useState([]);
+  const [toSelectValue, setToSelectValue] = useState('pt-br');
+  const [fromSelectValue, setFromSelectValue] = useState('en');
   const [unknownWords, setUnknownWords] = useState([]);
   const [translatedWords, setTranslatedWords] = useState([]);
   const inputPhrase = useRef(null);
@@ -16,11 +18,26 @@ function MainTool() {
     }
   }
 
-  function handleClickButtonClear() {
+
+  function handleToSelect(event) {
+    setToSelectValue(event.target.value);
+    clearUnkownandTranslated();
+  }
+
+  function handleFromSelect(event) {
+    setFromSelectValue(event.target.value);
+    clearUnkownandTranslated();
+  }
+
+  function clearUnkownandTranslated() {
     setUnknownWords([]);
-    setPhrase([]);
     setTranslatedWords([]);
-    inputPhrase.current.value = "";
+  }
+
+  function handleClickButtonClear() {
+     setPhrase([]);
+     clearUnkownandTranslated();
+     inputPhrase.current.value = "";
   }
 
   function removeOneWordHighlighted(targetIndex) {
@@ -88,8 +105,8 @@ function MainTool() {
         },
         params: {
           "api-version": "3.0",
-          from: "en",
-          to: ["pt"],
+          from: fromSelectValue,
+          to: toSelectValue,
         },
         data: [{ text: unknownWords[unknownWords.length - 1] }],
         responseType: "json",
@@ -100,22 +117,41 @@ function MainTool() {
       });
     }
     // eslint-disable-next-line
-  }, [unknownWords]);
+  }, [unknownWords, toSelectValue, fromSelectValue]);
 
   return (
     <div className="main-tool">
       <div className="center-container">
         <div className="choose-language-wrapper">
           <div className="from-container shadow-light">
+            <span>From: </span>
+            <select name="languages" value={fromSelectValue} onChange={handleFromSelect}>
+              <option value="en">English</option>
+              <option value="pt-br">Portuguese (BR)</option>
+              <option value="fr">French</option>
+              <option value="es">Spanish</option>
+              <option value="ja">Japanese</option>
+            </select>
+          </div>
+          <div className="to-container shadow-light">
+            <span>To: </span>
+            <select name="languages" value={toSelectValue} onChange={handleToSelect}>
+              <option value="en">English</option>
+              <option value="pt-br">Portuguese (BR)</option>
+              <option value="fr">French</option>
+              <option value="es">Spanish</option>
+              <option value="ja">Japanese</option>
+            </select>
             
           </div>
-          <div className="to-container shadow-light"></div>
         </div>
         <div className="input-and-button shadow-light">
           <h1> Copy and paste some sentence or text in english:</h1>
 
           <input ref={inputPhrase} type="text" />
-          <button id="try-it-button" onClick={handleClickButton}>Try it!</button>
+          <button id="try-it-button" onClick={handleClickButton}>
+            Try it!
+          </button>
           <button onClick={handleClickButtonClear}>Clear all</button>
         </div>
         {phrase.length > 0 && (
