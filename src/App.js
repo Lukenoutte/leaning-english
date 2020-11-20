@@ -1,10 +1,37 @@
 import React from "react";
 import "./styles/global.css";
-import Landing from './pages/landing';
+import MainTool from "./components/mainTool";
+import "./styles/landing.css";
+import { ReactComponent as MainIcon } from "./assets/icons/mainIcon.svg";
 
 function App() {
     return(
-      <Landing/>
+      <>
+      <header className="shadow-light">
+      
+        <div className="center-container-header icon-and-name">
+         
+          <MainIcon className="main-icon" /> Learning english
+        </div>
+      </header>
+      <main>
+        <MainTool />
+      </main>
+      <footer className="shadow-light">
+     
+        <p>
+          Desenvolvido por{' '}
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Github"
+            href="https://github.com/Lukenoutte"
+          >
+             @Lukenoutte
+          </a>
+        </p>
+      </footer>
+    </>
     );
 }
 

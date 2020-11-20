@@ -164,6 +164,16 @@
   
 }
 
+.close-icon{
+  width: 10px;
+  height: 10px;
+
+  fill: var(--white-color);
+}
+
+.unknown-word{
+color: var(--secundary-color);
+}
 
 @media(max-width:950px){
   .main-tool .input-and-button input {
