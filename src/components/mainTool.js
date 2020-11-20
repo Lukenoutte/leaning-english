@@ -3,14 +3,15 @@ import "../styles/main_tool.css";
 import ChooseLanguage from "./chooseLanguage";
 import SentenceSliced from "./sentenceSliced";
 import WordsAndTranslations from "./wordsAndTranslation";
+import { v4 as uuidv4 } from 'uuid';
 
 function MainTool() {
   const [unknownWords, setUnknownWords] = useState([]);
   const [sentence, setSentence] = useState([]);
-  const [toSelectValue, setToSelectValue] = useState("pt-br"); 
+  const [toSelectValue, setToSelectValue] = useState("pt-br");
   const [translatedWords, setTranslatedWords] = useState([]);
   const inputPhrase = useRef(null);
-  const uuidv4 = require("uuid/v4");
+ 
   const axios = require("axios").default;
 
   function handleClickButton() {
@@ -71,6 +72,7 @@ function MainTool() {
   return (
     <div className="main-tool">
       <div className="center-container">
+        
         <ChooseLanguage
           valueSelected={toSelectValue}
           functionSelect={ChangeSelectTo}
