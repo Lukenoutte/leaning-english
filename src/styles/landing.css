@@ -31,9 +31,12 @@ footer{
     margin-right: 10px;
 }
 
-.icon-and-name{
+.icon-and-name a{
     display: flex;
     align-items: center;
+    text-decoration: none;
+    color: var(--secundary-color);
+    width: fit-content;
 }
 
 footer a{

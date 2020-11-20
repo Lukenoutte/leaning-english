@@ -10,8 +10,9 @@ function App() {
       <header className="shadow-light">
       
         <div className="center-container-header icon-and-name">
-         
-          <MainIcon className="main-icon" /> Learning english
+          <a href="/">
+          <MainIcon className="main-icon" /> Surligner
+          </a>
         </div>
       </header>
       <main>
