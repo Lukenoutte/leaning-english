@@ -1,11 +1,13 @@
 import React, { useState, useRef, useEffect } from "react";
-import "../styles/main_tool.css";
-import ChooseLanguage from "./chooseLanguage";
-import SentenceSliced from "./sentenceSliced";
-import WordsAndTranslations from "./wordsAndTranslation";
+import HeaderAndFotter from "../components/headerAndFooter";
+import ChooseLanguage from "../components/chooseLanguage";
+import SentenceSliced from "../components/sentenceSliced";
+import WordsAndTranslations from "../components/wordsAndTranslation";
+import "../styles/main.css";
 import { v4 as uuidv4 } from 'uuid';
 
-function MainTool() {
+function Main() {
+
   const [unknownWords, setUnknownWords] = useState([]);
   const [sentence, setSentence] = useState([]);
   const [toSelectValue, setToSelectValue] = useState("pt-br");
@@ -69,8 +71,9 @@ function MainTool() {
     // eslint-disable-next-line
   }, [unknownWords, toSelectValue]);
 
-  return (
-    <div className="main-tool">
+
+  return (<HeaderAndFotter> 
+       <div className="main-tool">
       <div className="center-container">
         
         <ChooseLanguage
@@ -100,7 +103,7 @@ function MainTool() {
         />
       </div>
     </div>
-  );
+  </HeaderAndFotter> );
 }
 
-export default MainTool;
+export default Main;

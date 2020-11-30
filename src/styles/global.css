@@ -33,10 +33,6 @@ select{
     color: var(--main-font-color);
   }
 
-.center-container-header {
-  width: 60%;
-  max-width: 2000px;
-}
 .center-container {
   width: 60%;
   max-width: 2000px;

@@ -9,6 +9,14 @@ header{
 
 }
 
+.center-container-header {
+    width: 60%;
+    max-width: 2000px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
 main{
     padding-top: 30px;
     background: var(--background);
