@@ -4,16 +4,15 @@ import ChooseLanguage from "../components/chooseLanguage";
 import SentenceSliced from "../components/sentenceSliced";
 import WordsAndTranslations from "../components/wordsAndTranslation";
 import "../styles/main.css";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 
 function Main() {
-
   const [unknownWords, setUnknownWords] = useState([]);
   const [sentence, setSentence] = useState([]);
   const [toSelectValue, setToSelectValue] = useState("pt-br");
   const [translatedWords, setTranslatedWords] = useState([]);
   const inputPhrase = useRef(null);
- 
+
   const axios = require("axios").default;
 
   function handleClickButton() {
@@ -71,39 +70,39 @@ function Main() {
     // eslint-disable-next-line
   }, [unknownWords, toSelectValue]);
 
+  return (
+    <HeaderAndFotter>
+      <div className="main-tool">
+        <div className="center-container">
+          <ChooseLanguage
+            valueSelected={toSelectValue}
+            functionSelect={ChangeSelectTo}
+          />
 
-  return (<HeaderAndFotter> 
-       <div className="main-tool">
-      <div className="center-container">
-        
-        <ChooseLanguage
-          valueSelected={toSelectValue}
-          functionSelect={ChangeSelectTo}
-        />
+          <div className="input-and-button shadow-light">
+            <h1> Copy and paste some sentence or text in english:</h1>
 
-        <div className="input-and-button shadow-light">
-          <h1> Copy and paste some sentence or text in english:</h1>
-
-          <input ref={inputPhrase} type="text" />
-          <button id="try-it-button" onClick={handleClickButton}>
-            Try it!
-          </button>
-          <button onClick={handleClickButtonClear}>Clear all</button>
+            <input ref={inputPhrase} type="text" />
+            <button id="try-it-button" onClick={handleClickButton}>
+              Try it!
+            </button>
+            <button onClick={handleClickButtonClear}>Clear all</button>
+          </div>
+          <SentenceSliced
+            sentenceVar={sentence}
+            unknownWordsVar={unknownWords}
+            setUnknownWordsFunc={setUnknownWords}
+          />
+          <WordsAndTranslations
+            translatedWordsVar={translatedWords}
+            unknownWordsVar={unknownWords}
+            setUnknownWordsFunc={setUnknownWords}
+            setTranslatedWordsFunc={setTranslatedWords}
+          />
         </div>
-        <SentenceSliced
-          sentenceVar={sentence}
-          unknownWordsVar={unknownWords}
-          setUnknownWordsFunc={setUnknownWords}
-        />
-        <WordsAndTranslations
-          translatedWordsVar={translatedWords}
-          unknownWordsVar={unknownWords}
-          setUnknownWordsFunc={setUnknownWords}
-          setTranslatedWordsFunc={setTranslatedWords}
-        />
       </div>
-    </div>
-  </HeaderAndFotter> );
+    </HeaderAndFotter>
+  );
 }
 
 export default Main;

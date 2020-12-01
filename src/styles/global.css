@@ -46,6 +46,36 @@ select{
 }
 
 
+input {
+  width: 60%;
+  height: 50px;
+  border-radius: 15px;
+  outline: none;
+  padding: 0 20px;
+  border: none;
+  color: var(--secundary-color);
+  font-weight: bolder;
+  background: var(--background);
+  border: 2px solid var(--border-grey);
+}
+
+input:focus{
+  border: 2px solid var(--secundary-color);
+}
+
+
+button {
+  height: 50px;
+  width: 17%;
+  min-width: 85px;
+  border-radius: 15px;
+  margin-left: 3%;
+  outline: none;
+  border: none;  
+  font-weight: bolder;
+  cursor: pointer;
+}
+
 @media(min-width: 700px){
   :root{
       font-size: 62.5%;
@@ -53,7 +83,7 @@ select{
 }
 
 @media(max-width:768px){
-  .center-container,.center-container-header {
-    width: 90%;
+  .center-container, .center-container-header {
+    width: 90%!important;
   }
 }
