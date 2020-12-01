@@ -10,17 +10,7 @@
   align-items: center;
 }
 
-.login .inputs-wrapper {
-  background-color: var(--white-color);
-  border-radius: 15px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 50px;
-  width:80%;
-  height: 80%;
-  justify-content: center;
-}
+
 .login .inputs-wrapper button{
     width: 150px;
 }
@@ -30,30 +20,16 @@
 margin-bottom: 20px;
 }
 
-.login .inputs-wrapper button{
-    background: var(--secundary-color);
-    color: var(--white-color);
-    margin-top: 20px;
+
+  
+.inputs-wrapper a{
+  margin-top: 10px;
+  text-decoration: none;
+  color: var(--secundary-color);
 }
 
-
-.login .inputs-wrapper button:hover{
-    background: var(--secundary-hover);
-  }
-  
 #pass-input{
     margin-top: 20px;
 }
 
 
-@media(max-width:768px){
-    .login input {
-        width: 90%;
-    }
-
-    .login .inputs-wrapper {
-        padding: 30px;
-        width: 100%;
-    }
-
-  }

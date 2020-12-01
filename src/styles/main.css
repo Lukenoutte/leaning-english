@@ -51,7 +51,8 @@
   color: var(--secundary-color);
   background: var(--white-color);
   border: 2px solid var(--secundary-color);
-
+  margin-left: 3%;
+  
 }
 
 .main-tool .input-and-button #try-it-button{

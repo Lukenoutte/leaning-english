@@ -79,7 +79,7 @@ function Main() {
             functionSelect={ChangeSelectTo}
           />
 
-          <div className="input-and-button shadow-light">
+          <div className="input-and-button shadow-light styled-buttons">
             <h1> Copy and paste some sentence or text in english:</h1>
 
             <input ref={inputPhrase} type="text" />
