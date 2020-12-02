@@ -6,7 +6,7 @@ import {Link} from 'react-router-dom';
 function Login() {
   return (
     <HeaderAndFotter>
-      <div className="login">
+      <div className="login global-wrapper">
         <div className="center-container">
           
           <div className="inputs-wrapper shadow-light styled-buttons"> 

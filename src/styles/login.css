@@ -1,16 +1,3 @@
-.login {
-  display: flex;
-  justify-content: center;
-  min-height: 100vh;
-}
-
-.login .center-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-
 .login .inputs-wrapper button{
     width: 150px;
 }

@@ -52,3 +52,12 @@ footer a{
     color: var(--secundary-color);
     text-decoration: none;
 }
+
+.login-and-sign-up{
+    display: flex;
+    flex-direction: row;
+}
+
+.login-and-sign-up a {
+    margin-left: 20px;
+} 

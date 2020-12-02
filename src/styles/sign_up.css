@@ -1,0 +1,10 @@
+  .sign-up input{
+      margin-top: 20px;
+  }
+  .sign-up .inputs-wrapper{
+    height: 90%;
+  }
+
+  .sign-up .styled-buttons button {
+    width: 170px;
+  }

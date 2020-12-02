@@ -12,7 +12,10 @@ function headerAndFooter(props) {
           <Link to="/">
           <MainIcon className="main-icon" /> Surligner
           </Link>
+          <div className="login-and-sign-up">
           <Link to="/login">Login</Link>
+          <Link to="/sign_up">Sign Up</Link>
+          </div>
         </div>
       </header>
       <main>

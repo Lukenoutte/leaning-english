@@ -8,7 +8,7 @@
   --background: #f5f6f8;
   --border-grey: #ecedf4;
   --main-font-color: #36436d;
-  --placeholder: #d7dade
+  --placeholder: #c2c3c4
   }
 
 
@@ -38,6 +38,18 @@ select{
   width: 60%;
   max-width: 2000px;
   padding-bottom: 30px;
+}
+
+.login .center-container, .sign-up .center-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.global-wrapper{
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
 }
 
 .shadow-light{
