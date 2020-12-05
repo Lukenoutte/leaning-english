@@ -72,7 +72,7 @@ function Main() {
 
   return (
     <HeaderAndFotter>
-      <div className="main-tool">
+      <div className="main-tool global-wrapper">
         <div className="center-container">
           <ChooseLanguage
             valueSelected={toSelectValue}

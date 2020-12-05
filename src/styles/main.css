@@ -1,10 +1,4 @@
 
-.main-tool {
-  display: flex;
-  justify-content: center;
-  min-height: 100vh;
-}
-
 .main-tool .phrase-wrapper {
   margin-top: 20px;
   background: var(--white-color);
@@ -151,7 +145,7 @@
 color: var(--secundary-color);
 }
 
-@media(max-width:950px){
+@media(max-width:1281px){
   .main-tool .input-and-button input {
     width: 100%;
     margin-bottom: 20px;

@@ -49,7 +49,7 @@ select{
 .global-wrapper{
   display: flex;
   justify-content: center;
-  min-height: 100vh;
+  min-height: 69vh;
 }
 
 .shadow-light{
@@ -61,7 +61,7 @@ select{
 
 input {
   width: 60%;
-  height: 50px;
+  min-height: 50px;
   border-radius: 15px;
   outline: none;
   padding: 0 20px;
@@ -88,12 +88,12 @@ input:focus{
   align-items: center;
   padding: 50px;
   width:80%;
-  height: 80%;
+  min-height: 100%;
   justify-content: center;
 }
 
 .styled-buttons button {
-  height: 50px;
+  min-height: 50px;
   width: 17%;
   min-width: 85px;
   border-radius: 15px;
@@ -119,11 +119,7 @@ input:focus{
   }
 }
 
-@media(max-width:768px){
-  .center-container, .center-container-header {
-    width: 90%!important;
-  }
-
+@media(max-width:1281px){
   input {
     width: 90%;
 }
@@ -132,5 +128,19 @@ input:focus{
     padding: 30px;
     width: 100%;
 }
+}
+
+@media(max-width:768px){
+  .center-container, .center-container-header {
+    width: 90%!important;
+  }
+
+
+}
+
+@media(min-width:1500px){
+  .global-wrapper{
+    min-height: 100vh;
+  }
 }
 
