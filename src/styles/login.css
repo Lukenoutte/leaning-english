@@ -20,3 +20,11 @@ margin-bottom: 20px;
 }
 
 
+@media(max-width:768px){
+
+  .empty-input-error{
+ 
+    padding: 5px 15px;
+  }
+
+}

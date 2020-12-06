@@ -90,6 +90,7 @@ input:focus{
   width:80%;
   min-height: 100%;
   justify-content: center;
+  position: relative;
 }
 
 .styled-buttons button {
@@ -111,6 +112,21 @@ input:focus{
 
 .inputs-wrapper button:hover{
   background: var(--secundary-hover);
+}
+
+.empty-input-error{
+  background-color: var(--secundary-color);
+  padding: 5px 50px;
+  border-radius: 15px;
+  margin-bottom: 10px;
+}
+
+.empty-input-error p{
+  color: var(--white-color);
+}
+
+.input-error{
+  border: 2px solid var(--secundary-color);
 }
 
 @media(min-width: 700px){
