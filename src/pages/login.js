@@ -15,7 +15,7 @@ function Login() {
     let pass = inputPass.current.value;
 
     if (email !== "" && pass !== "") {
-      services.login({ email: email, pass: pass });
+      services.login({ email, pass });
       setEmptyInput(false);
     } else {
       
@@ -23,6 +23,13 @@ function Login() {
     }
   };
 
+  const inputClass = (ref) => {
+    if(emptyInput && ref.current.value === ""){
+     return "input-error";
+    }
+
+    return "";
+  }
 
   return (
     <HeaderAndFotter>
@@ -39,16 +46,12 @@ function Login() {
             )}
 
             <h1>Login</h1>
-
+      
             <input
               type="text"
               placeholder="E-mail"
               ref={inputEmail}
-              className={
-                emptyInput && inputEmail.current.value === ""
-                  ? "input-error"
-                  : ""
-              }
+              className={inputClass(inputEmail)}
             />
 
             <input
@@ -56,11 +59,7 @@ function Login() {
               type="password"
               placeholder="Password"
               ref={inputPass}
-              className={
-                emptyInput && inputPass.current.value === ""
-                  ? "input-error"
-                  : ""
-              }
+              className={inputClass(inputPass)}
             />
             <Link to="/">Forgot password?</Link>
             <button onClick={(e) => HandleLogin(e)}>Login</button>

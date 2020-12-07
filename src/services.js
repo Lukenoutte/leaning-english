@@ -16,5 +16,20 @@ const login = (arg) => {
   });
 };
 
+const signUp = (arg) => {
 
-export default {login};
+  axios({
+   baseURL: urlApi,
+   url: "/auth/register",
+   method: "post",
+   headers: {
+     "Content-type": "application/json",
+   },
+   data: {name: arg.name , email: arg.email , password: arg.pass, confirmPass: arg.confirmPass},
+ }).then((response) => {
+   console.log(response);
+ });
+};
+
+
+export default {login, signUp};

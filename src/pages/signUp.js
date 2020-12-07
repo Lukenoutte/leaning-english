@@ -10,6 +10,7 @@ function SignUp() {
   const inputPass = useRef("");
   const inputConfirmPass = useRef("");
   const [emptyInput, setEmptyInput] = useState(false);
+  const [differentPass, setDifferentPass] = useState(false);
 
   const HandleSignUp = (event) => {
     event.preventDefault();
@@ -20,14 +21,28 @@ function SignUp() {
 
     if (name === "" || email === "" || pass === "" || confirmPass === "") {
       setEmptyInput(true);
+      return;
     } else {
       setEmptyInput(false);
     }
 
     if (pass !== confirmPass) {
+      setDifferentPass(true);
       return;
-    }
+    };
+    
+
+    services.signUp({name, email, pass, confirmPass})
   };
+
+  const inputClass = (ref) => {
+    if(emptyInput && ref.current.value === ""){
+     return "input-error";
+    }
+    
+
+    return "";
+  }
 
   return (
     <HeaderAndFotter>
@@ -46,41 +61,25 @@ function SignUp() {
               type="text"
               placeholder="Name"
               ref={inputName}
-              className={
-                emptyInput && inputName.current.value === ""
-                  ? "input-error"
-                  : ""
-              }
+              className={inputClass(inputName)}
             />
             <input
               type="text"
               placeholder="E-mail"
               ref={inputEmail}
-              className={
-                emptyInput && inputEmail.current.value === ""
-                  ? "input-error"
-                  : ""
-              }
+              className={inputClass(inputEmail)}
             />
             <input
               type="password"
               placeholder="Password"
               ref={inputPass}
-              className={
-                emptyInput && inputPass.current.value === ""
-                  ? "input-error"
-                  : ""
-              }
+              className={inputClass(inputPass)}
             />
             <input
               type="password"
               placeholder="Confirm Password"
               ref={inputConfirmPass}
-              className={
-                emptyInput && inputConfirmPass.current.value === ""
-                  ? "input-error"
-                  : ""
-              }
+              className={inputClass(inputConfirmPass)}
             />
             <button onClick={(e) => HandleSignUp(e)}>Start</button>
           </div>
