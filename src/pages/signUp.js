@@ -29,33 +29,47 @@ function SignUp() {
     if (pass !== confirmPass) {
       setDifferentPass(true);
       return;
-    };
-    
+    }
 
-    services.signUp({name, email, pass, confirmPass})
+    services.signUp({ name, email, pass, confirmPass });
   };
 
-  const inputClass = (ref) => {
-    if(emptyInput && ref.current.value === ""){
-     return "input-error";
+  const inputClass = (ref, isPassInput) => {
+    if (emptyInput && ref.current.value === "") {
+      return "input-error";
     }
-    
+
+    if (differentPass && isPassInput) return "input-error";
 
     return "";
-  }
+  };
+
+  const ErrorMessage = () => {
+    if (emptyInput) {
+      return (
+        <div className="empty-input-error">
+          <p>Ops, Campo vazio!</p>
+        </div>
+      );
+    }
+
+    if (differentPass) {
+      return (
+        <div className="empty-input-error">
+          <p>Ops, senhas não coincidem!</p>
+        </div>
+      );
+    }
+
+    return false;
+  };
 
   return (
     <HeaderAndFotter>
       <div className="sign-up global-wrapper">
         <div className="center-container">
           <div className="inputs-wrapper shadow-light styled-buttons">
-            {emptyInput ? (
-              <div className="empty-input-error">
-                <p>Ops, Campo vazio!</p>
-              </div>
-            ) : (
-              false
-            )}
+            <ErrorMessage/>
             <h1>Sign Up</h1>
             <input
               type="text"
@@ -73,13 +87,13 @@ function SignUp() {
               type="password"
               placeholder="Password"
               ref={inputPass}
-              className={inputClass(inputPass)}
+              className={inputClass(inputPass, true)}
             />
             <input
               type="password"
               placeholder="Confirm Password"
               ref={inputConfirmPass}
-              className={inputClass(inputConfirmPass)}
+              className={inputClass(inputConfirmPass, true)}
             />
             <button onClick={(e) => HandleSignUp(e)}>Start</button>
           </div>

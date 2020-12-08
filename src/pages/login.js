@@ -23,7 +23,7 @@ function Login() {
     }
   };
 
-  const inputClass = (ref) => {
+  const emptyInputClass = (ref) => {
     if(emptyInput && ref.current.value === ""){
      return "input-error";
     }
@@ -31,19 +31,25 @@ function Login() {
     return "";
   }
 
+  const ErrorMessage = () => {
+    if (emptyInput) {
+      return (
+        <div className="empty-input-error">
+          <p>Ops, Campo vazio!</p>
+        </div>
+      );
+    }
+
+    return false;
+  };
+
   return (
     <HeaderAndFotter>
       <div className="login global-wrapper">
         <div className="center-container">
           <div className="inputs-wrapper shadow-light styled-buttons">
 
-          {emptyInput ? (
-              <div className="empty-input-error">
-                      <p>Ops, Campo vazio!</p>
-              </div>
-            ) : (
-              false
-            )}
+          <ErrorMessage/>
 
             <h1>Login</h1>
       
@@ -51,7 +57,7 @@ function Login() {
               type="text"
               placeholder="E-mail"
               ref={inputEmail}
-              className={inputClass(inputEmail)}
+              className={emptyInputClass(inputEmail)}
             />
 
             <input
@@ -59,7 +65,7 @@ function Login() {
               type="password"
               placeholder="Password"
               ref={inputPass}
-              className={inputClass(inputPass)}
+              className={emptyInputClass(inputPass)}
             />
             <Link to="/">Forgot password?</Link>
             <button onClick={(e) => HandleLogin(e)}>Login</button>
