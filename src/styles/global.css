@@ -50,6 +50,7 @@ select{
   display: flex;
   justify-content: center;
   min-height: 69vh;
+  
 }
 
 .shadow-light{
@@ -91,6 +92,7 @@ input:focus{
   min-height: 100%;
   justify-content: center;
   position: relative;
+  
 }
 
 .styled-buttons button {

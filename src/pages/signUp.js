@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import HeaderAndFotter from "../components/headerAndFooter";
 import "../styles/sign_up.css";
 
-import services from "../services";
+import { signUp } from "../services";
 
 function SignUp() {
   const inputName = useRef("");
@@ -31,7 +31,7 @@ function SignUp() {
       return;
     }
 
-    services.signUp({ name, email, pass, confirmPass });
+    signUp({ name, email, pass, confirmPass });
   };
 
   const inputClass = (ref, isPassInput) => {
@@ -48,7 +48,7 @@ function SignUp() {
     if (emptyInput) {
       return (
         <div className="empty-input-error">
-          <p>Ops, Campo vazio!</p>
+          <p>Ops, Empty field!</p>
         </div>
       );
     }
@@ -56,7 +56,7 @@ function SignUp() {
     if (differentPass) {
       return (
         <div className="empty-input-error">
-          <p>Ops, senhas não coincidem!</p>
+          <p>Ops, passwords don't match!</p>
         </div>
       );
     }

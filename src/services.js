@@ -32,4 +32,4 @@ const signUp = (arg) => {
 };
 
 
-export default {login, signUp};
+export {login, signUp};

@@ -24,7 +24,7 @@ function headerAndFooter(props) {
       <footer className="shadow-light">
      
         <p>
-          Desenvolvido por{' '}
+        Developed by{' '}
           <a
             target="_blank"
             rel="noopener noreferrer"
