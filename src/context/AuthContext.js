@@ -5,8 +5,9 @@ const Context = createContext();
 function AuthProvider({children}){
     const [authenticated, setAuthenticated] = useState(false);
 
+
     return(
-        <Context.Provider value={{authenticated}}>
+        <Context.Provider value={{authenticated, setAuthenticated}}>
             {children}
         </Context.Provider>
     )

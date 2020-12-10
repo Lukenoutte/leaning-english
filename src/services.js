@@ -1,9 +1,9 @@
 const urlApi = process.env.REACT_APP_API_LINK;
 const axios = require("axios").default;
 
-const login = (arg) => {
+const login =  async (arg) => {
    
-   axios({
+   let response = await axios({
     baseURL: urlApi,
     url: "/auth/authenticate",
     method: "post",
@@ -11,9 +11,9 @@ const login = (arg) => {
       "Content-type": "application/json",
     },
     data: {email: arg.email , password: arg.pass},
-  }).then((response) => {
-    console.log(response);
-  });
+  })
+  
+  return response;
 };
 
 const signUp = (arg) => {

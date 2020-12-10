@@ -9,17 +9,22 @@ function Login() {
   const inputEmail = useRef("");
   const inputPass = useRef("");
   const [emptyInput, setEmptyInput] = useState(false);
-  const { authenticated } = useContext(Context);
+  const { authenticated, setAuthenticated } = useContext(Context);
 
-  const HandleLogin = (event) => {
+  const HandleLogin = async (event) => {
     event.preventDefault();
     let email = inputEmail.current.value;
     let pass = inputPass.current.value;
 
     if (email !== "" && pass !== "") {
-      login({ email, pass });
-      setEmptyInput(false);
-  
+      let response = await login({ email, pass });
+
+      if(response.status === 200){
+        setAuthenticated(true);
+        let token = response.data.token;
+        localStorage.setItem("token", JSON.stringify(token));
+      }
+        
     } else {
       setEmptyInput(true);
     }
