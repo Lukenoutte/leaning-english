@@ -11,6 +11,8 @@ const login =  async (arg) => {
       "Content-type": "application/json",
     },
     data: {email: arg.email , password: arg.pass},
+  }).catch((err) => {
+    return err;
   })
   
   return response;

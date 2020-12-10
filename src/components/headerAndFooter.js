@@ -1,9 +1,12 @@
-import React from "react";
+import React, {useContext} from "react";
 import "../styles/header_and_footer.css";
 import { ReactComponent as MainIcon } from "../assets/icons/mainIcon.svg";
 import {Link} from 'react-router-dom';
+import { Context } from "../context/AuthContext";
 
-function headerAndFooter(props) { 
+function HeaderAndFooter(props) { 
+    const { authenticated } = useContext(Context);
+
     return(
       <>
       <header className="shadow-light">
@@ -12,10 +15,12 @@ function headerAndFooter(props) {
           <Link to="/">
           <MainIcon className="main-icon" /> Surligner
           </Link>
+          {!authenticated && (
           <div className="login-and-sign-up">
           <Link to="/login">Login</Link>
           <Link to="/sign_up">Sign Up</Link>
-          </div>
+          </div>)
+          }
         </div>
       </header>
       <main>
@@ -39,4 +44,4 @@ function headerAndFooter(props) {
     );
 }
 
-export default headerAndFooter;
+export default HeaderAndFooter;

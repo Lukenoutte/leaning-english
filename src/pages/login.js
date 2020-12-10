@@ -4,6 +4,7 @@ import "../styles/login.css";
 import { Link } from "react-router-dom";
 import { login } from "../services";
 import { Context } from "../context/AuthContext";
+import history from '../history';
 
 function Login() {
   const inputEmail = useRef("");
@@ -23,6 +24,7 @@ function Login() {
         setAuthenticated(true);
         let token = response.data.token;
         localStorage.setItem("token", JSON.stringify(token));
+        history.push('/');
       }
         
     } else {
