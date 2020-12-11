@@ -12,7 +12,9 @@ const login =  async (arg) => {
     },
     data: {email: arg.email , password: arg.pass},
   }).catch((err) => {
-    return err;
+    let errorMessage = err.response;
+
+    return  errorMessage;
   })
   
   return response;
@@ -34,4 +36,4 @@ const signUp = (arg) => {
 };
 
 
-export {login, signUp};
+export {login, signUp, axios};

@@ -10,6 +10,8 @@ function Login() {
   const inputEmail = useRef("");
   const inputPass = useRef("");
   const [emptyInput, setEmptyInput] = useState(false);
+  const [loginFail, setLoginFail] = useState(false);
+  const [loginFailMessage, setLoginFailMessage] = useState("");
   const { authenticated, setAuthenticated } = useContext(Context);
 
   const HandleLogin = async (event) => {
@@ -18,13 +20,20 @@ function Login() {
     let pass = inputPass.current.value;
 
     if (email !== "" && pass !== "") {
+      if(emptyInput) setEmptyInput(false);
+
       let response = await login({ email, pass });
 
-      if(response.status === 200){
+      if(response && response.status === 200){
         setAuthenticated(true);
         let token = response.data.token;
         localStorage.setItem("token", JSON.stringify(token));
         history.push('/');
+      }else if(response.status === 400){
+        
+        setLoginFailMessage(response.data.error);
+   
+        setLoginFail(true);
       }
         
     } else {
@@ -32,8 +41,12 @@ function Login() {
     }
   };
 
-  const emptyInputClass = (ref) => {
+  const InputClass = (ref) => {
     if (emptyInput && ref.current.value === "") {
+      return "input-error";
+    }
+
+    if (loginFail) {
       return "input-error";
     }
 
@@ -45,6 +58,14 @@ function Login() {
       return (
         <div className="empty-input-error">
           <p>Ops, Empty field!</p>
+        </div>
+      );
+    }
+
+    if(loginFail){
+      return (
+        <div className="empty-input-error">
+          <p>{loginFailMessage}</p>
         </div>
       );
     }
@@ -66,7 +87,7 @@ function Login() {
               type="text"
               placeholder="E-mail"
               ref={inputEmail}
-              className={emptyInputClass(inputEmail)}
+              className={InputClass(inputEmail)}
             />
 
             <input
@@ -74,7 +95,7 @@ function Login() {
               type="password"
               placeholder="Password"
               ref={inputPass}
-              className={emptyInputClass(inputPass)}
+              className={InputClass(inputPass)}
             />
             <Link to="/">Forgot password?</Link>
             <button onClick={(e) => HandleLogin(e)}>Login</button>
