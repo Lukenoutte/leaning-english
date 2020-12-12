@@ -11,6 +11,7 @@ function SignUp() {
   const inputConfirmPass = useRef("");
   const [emptyInput, setEmptyInput] = useState(false);
   const [differentPass, setDifferentPass] = useState(false);
+  const [loginFailMessage, setLoginFailMessage] = useState("");
 
   const HandleSignUp = (event) => {
     event.preventDefault();
@@ -21,13 +22,13 @@ function SignUp() {
 
     if (name === "" || email === "" || pass === "" || confirmPass === "") {
       setEmptyInput(true);
+      setLoginFailMessage("Ops, Empty field!");
       return;
-    } else {
-      setEmptyInput(false);
     }
 
     if (pass !== confirmPass) {
       setDifferentPass(true);
+      setLoginFailMessage("Ops, passwords don't match!");
       return;
     }
 
@@ -48,15 +49,7 @@ function SignUp() {
     if (emptyInput) {
       return (
         <div className="empty-input-error">
-          <p>Ops, Empty field!</p>
-        </div>
-      );
-    }
-
-    if (differentPass) {
-      return (
-        <div className="empty-input-error">
-          <p>Ops, passwords don't match!</p>
+          <p>{loginFailMessage}</p>
         </div>
       );
     }

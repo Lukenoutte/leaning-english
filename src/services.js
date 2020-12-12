@@ -12,17 +12,15 @@ const login =  async (arg) => {
     },
     data: {email: arg.email , password: arg.pass},
   }).catch((err) => {
-    let errorMessage = err.response;
-
-    return  errorMessage;
+     return  err.response;
   })
   
   return response;
 };
 
-const signUp = (arg) => {
+const signUp = async (arg) => {
 
-  axios({
+  let response = await axios({
    baseURL: urlApi,
    url: "/auth/register",
    method: "post",
@@ -30,9 +28,11 @@ const signUp = (arg) => {
      "Content-type": "application/json",
    },
    data: {name: arg.name , email: arg.email , password: arg.pass, confirmPass: arg.confirmPass},
- }).then((response) => {
-   console.log(response);
- });
+ }).catch((err) => {
+  return  err.response;
+})
+
+ return response;
 };
 
 

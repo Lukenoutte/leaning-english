@@ -4,7 +4,7 @@ import "../styles/login.css";
 import { Link } from "react-router-dom";
 import { login } from "../services";
 import { Context } from "../context/AuthContext";
-import history from '../history';
+import history from "../history";
 
 function Login() {
   const inputEmail = useRef("");
@@ -19,34 +19,33 @@ function Login() {
     let email = inputEmail.current.value;
     let pass = inputPass.current.value;
 
-    if (email !== "" && pass !== "") {
-      if(emptyInput) setEmptyInput(false);
+    if (email === "" || pass === "") {
+      setEmptyInput(true);
+      setLoginFailMessage("Ops, Empty field!");
+      return;
+    }
 
-      let response = await login({ email, pass });
+    let response = await login({ email, pass });
 
-      if(response && response.status === 200){
+    if (response) {
+      if (response.status === 200) {
         setAuthenticated(true);
         let token = response.data.token;
         localStorage.setItem("token", JSON.stringify(token));
-        history.push('/');
-      }else if(response.status === 400){
-        
+        history.push("/");
+      } else if (response.status === 400) {
         setLoginFailMessage(response.data.error);
-   
+
         setLoginFail(true);
       }
-        
     } else {
-      setEmptyInput(true);
+      setLoginFail(true);
+      setLoginFailMessage("Somenthing wrong, try again :(");
     }
   };
 
   const InputClass = (ref) => {
-    if (emptyInput && ref.current.value === "") {
-      return "input-error";
-    }
-
-    if (loginFail) {
+    if (loginFail || (emptyInput && ref.current.value === "")) {
       return "input-error";
     }
 
@@ -54,15 +53,7 @@ function Login() {
   };
 
   const ErrorMessage = () => {
-    if (emptyInput) {
-      return (
-        <div className="empty-input-error">
-          <p>Ops, Empty field!</p>
-        </div>
-      );
-    }
-
-    if(loginFail){
+    if (loginFail || emptyInput) {
       return (
         <div className="empty-input-error">
           <p>{loginFailMessage}</p>
