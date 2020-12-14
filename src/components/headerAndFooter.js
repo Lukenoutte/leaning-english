@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom';
 import { Context } from "../context/AuthContext";
 
 function HeaderAndFooter(props) { 
-    const { authenticated } = useContext(Context);
+    const { authenticated, handleLogout } = useContext(Context);
 
     return(
       <>
@@ -15,11 +15,11 @@ function HeaderAndFooter(props) {
           <Link to="/">
           <MainIcon className="main-icon" /> Surligner
           </Link>
-          {!authenticated && (
+          {!authenticated?(
           <div className="login-and-sign-up">
           <Link to="/login">Login</Link>
           <Link to="/sign_up">Sign Up</Link>
-          </div>)
+          </div>): (<button onClick={handleLogout}> Logout </button>)
           }
         </div>
       </header>

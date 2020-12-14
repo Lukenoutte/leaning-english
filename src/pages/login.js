@@ -2,7 +2,7 @@ import React, { useRef, useState, useContext } from "react";
 import HeaderAndFotter from "../components/headerAndFooter";
 import "../styles/login.css";
 import { Link } from "react-router-dom";
-import { login } from "../services";
+import { login, axios } from "../services";
 import { Context } from "../context/AuthContext";
 import history from "../history";
 
@@ -32,6 +32,7 @@ function Login() {
         setAuthenticated(true);
         let token = response.data.token;
         localStorage.setItem("token", JSON.stringify(token));
+        axios.defaults.headers.autorization = `Bearer ${token}`;
         history.push("/");
       } else if (response.status === 400) {
         setLoginFailMessage(response.data.error);
