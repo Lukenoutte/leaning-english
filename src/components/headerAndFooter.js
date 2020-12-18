@@ -32,6 +32,7 @@ function HeaderAndFooter(props) {
 
           <Drawer
             className="drawer"
+     
             anchor={"top"}
             open={drawerIsOpen}
             onEscapeKeyDown={handleDrawer}

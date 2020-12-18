@@ -21,8 +21,7 @@
 html,
 body,
 #root{
-  min-height: 100vh !important;
-  
+  height: 100%;
 }
 
 body,
@@ -49,8 +48,7 @@ select{
 .global-wrapper{
   display: flex;
   justify-content: center;
-  min-height: 75vh;
-  
+
 }
 
 .shadow-light{
@@ -153,12 +151,6 @@ input:focus{
     width: 90%!important;
   }
 
-
 }
 
-@media(min-width:1024px){
-  .global-wrapper{
-    min-height: 100vh;
-  }
-}
 
