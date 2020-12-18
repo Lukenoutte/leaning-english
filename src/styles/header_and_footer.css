@@ -9,6 +9,7 @@ header{
 
 }
 
+
 .center-container-header {
     width: 60%;
     max-width: 2000px;
@@ -47,6 +48,23 @@ footer{
     width: fit-content;
 }
 
+.icon-and-name-drawer{
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: var(--white-color);
+    width: 100%;
+    height: 80px;
+    background: var(--secundary-color);
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+}
+
+.icon-and-name-drawer .main-icon{
+    fill: var(--white-color);
+}
+
 footer a{
     font-weight: bold;
     color: var(--secundary-color);
@@ -61,3 +79,39 @@ footer a{
 .login-and-sign-up a {
     margin-left: 20px;
 } 
+
+
+.drawer-button{
+    display: none;
+}
+
+.menu-icon{
+    width: 30px;
+    height: 30px;
+    fill: var(--secundary-color);
+}
+
+.drawer a{
+ padding: 20px 0;
+ text-decoration: none;
+ font-weight: bold;
+ color: var(--secundary-color);
+ border-bottom: 3px solid var(--secundary-color);
+ display: flex;
+ justify-content: center;
+}
+
+@media(max-width:700px){
+    .drawer-button{
+        display: inline;
+        display: flex;
+        align-items: center;
+        background: transparent;
+        border: none;
+        outline: none;
+        
+    }
+    .login-and-sign-up{
+        display: none;
+    }
+}

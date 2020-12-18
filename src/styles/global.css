@@ -49,7 +49,7 @@ select{
 .global-wrapper{
   display: flex;
   justify-content: center;
-  min-height: 69vh;
+  min-height: 75vh;
   
 }
 
