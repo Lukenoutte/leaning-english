@@ -1,116 +1,142 @@
-header{
-    height: 80px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--secundary-color);
-    position: relative;
-    z-index: 99;
-
+header {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--secundary-color);
+  position: relative;
+  z-index: 99;
 }
-
 
 .center-container-header {
-    width: 60%;
-    max-width: 2000px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-  }
-
-main{
-    padding-top: 30px;
-    background: var(--background);
-    height: 100%;
+  width: 60%;
+  max-width: 2000px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
-footer{
-    height: 80px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 12px;
+main {
+  padding-top: 30px;
+  background: var(--background);
+  min-height: 100%;
 }
 
-.main-icon{
-    width: 35px;
-    height: 35px;
-    fill: var(--secundary-color);
-    margin-right: 10px;
+footer {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
 }
 
-.icon-and-name a{
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    color: var(--secundary-color);
-    width: fit-content;
+.main-icon {
+  width: 35px;
+  height: 35px;
+  fill: var(--secundary-color);
+  margin-right: 10px;
 }
 
-.icon-and-name-drawer{
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    color: var(--white-color);
-    width: 100%;
-    height: 80px;
-    background: var(--secundary-color);
-    font-weight: bold;
-    display: flex;
-    justify-content: center;
+.icon-and-name a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: var(--secundary-color);
+  width: fit-content;
 }
 
-.icon-and-name-drawer .main-icon{
-    fill: var(--white-color);
+.icon-and-name-drawer {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: var(--white-color);
+  width: 100%;
+  height: 80px;
+  background: var(--secundary-color);
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
 }
 
-footer a{
-    font-weight: bold;
-    color: var(--secundary-color);
-    text-decoration: none;
+.icon-and-name-drawer .main-icon {
+  fill: var(--white-color);
 }
 
-.login-and-sign-up{
-    display: flex;
-    flex-direction: row;
+footer a {
+  font-weight: bold;
+  color: var(--secundary-color);
+  text-decoration: none;
+}
+
+.login-and-sign-up {
+  display: flex;
+  flex-direction: row;
 }
 
 .login-and-sign-up a {
-    margin-left: 20px;
-} 
+  margin-left: 20px;
+}
 
+.drawer-button {
+  display: none;
+}
 
-.drawer-button{
+.menu-icon {
+  width: 30px;
+  height: 30px;
+  fill: var(--secundary-color);
+}
+
+.drawer a {
+  padding: 20px 0;
+  text-decoration: none;
+  font-weight: bold;
+  color: var(--secundary-color);
+  border-bottom: 3px solid var(--secundary-color);
+  display: flex;
+  justify-content: center;
+}
+
+.drawer button {
+  padding: 20px 0;
+  font-weight: bold;
+  color: var(--secundary-color);
+  border: none;
+  border-bottom: 3px solid var(--secundary-color);
+  display: flex;
+  justify-content: center;
+  background: var(--white-color);
+  outline: none;
+}
+
+.logout-icon {
+  width: 30px;
+  height: 30px;
+  fill: var(--secundary-color);
+}
+
+.logout-button {
+  background: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  outline: none;
+}
+
+@media (max-width: 700px) {
+  .drawer-button {
+    display: inline;
+    display: flex;
+    align-items: center;
+    background: transparent;
+    border: none;
+    outline: none;
+  }
+  .login-and-sign-up {
     display: none;
-}
-
-.menu-icon{
-    width: 30px;
-    height: 30px;
-    fill: var(--secundary-color);
-}
-
-.drawer a{
- padding: 20px 0;
- text-decoration: none;
- font-weight: bold;
- color: var(--secundary-color);
- border-bottom: 3px solid var(--secundary-color);
- display: flex;
- justify-content: center;
-}
-
-@media(max-width:700px){
-    .drawer-button{
-        display: inline;
-        display: flex;
-        align-items: center;
-        background: transparent;
-        border: none;
-        outline: none;
-        
-    }
-    .login-and-sign-up{
-        display: none;
-    }
+  }
+  .logout-button {
+    display: none;
+  }
 }
