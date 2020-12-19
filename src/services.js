@@ -33,5 +33,21 @@ const signUp = async (arg) => {
  return response;
 };
 
+const verifyToken =  async (arg) => {
+   
+  let response = await axios({
+   url: "/auth/verify_token",
+   method: "get",
+   headers: {
+    "Content-type": "application/json",    
+    "autorization": arg.token
+  }  
+ }).catch((err) => {
+    return  err.response;
+ })
+ 
+ return response;
+};
 
-export {login, signUp, axios};
+
+export {login, signUp, verifyToken, axios};

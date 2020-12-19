@@ -12,7 +12,7 @@ function Login() {
   const [emptyInput, setEmptyInput] = useState(false);
   const [loginFail, setLoginFail] = useState(false);
   const [loginFailMessage, setLoginFailMessage] = useState("");
-  const { authenticated, setAuthenticated } = useContext(Context);
+  const { setAuthenticated } = useContext(Context);
 
   const HandleLogin = async (event) => {
     event.preventDefault();
@@ -66,8 +66,7 @@ function Login() {
   };
 
   return (
-    <HeaderAndFotter>
-      {console.log(authenticated)}
+    <HeaderAndFotter>      
       <div className="login global-wrapper">
         <div className="center-container">
           <div className="inputs-wrapper shadow-light styled-buttons">
