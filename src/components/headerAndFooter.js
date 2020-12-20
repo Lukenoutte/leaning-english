@@ -19,6 +19,29 @@ function HeaderAndFooter(props) {
     }
   };
 
+  const MyDrawer = () => {
+    return (<Drawer
+      className="drawer"
+      anchor={"top"}
+      open={drawerIsOpen}
+      onEscapeKeyDown={handleDrawer}
+      onBackdropClick={handleDrawer}
+    >
+      <div className="icon-and-name-drawer">
+        <MainIcon className="main-icon" /> <p>Surligner</p>
+      </div>
+      <Link to="/">Home</Link>
+      {!authenticated ? (
+        <>
+          <Link to="/login">Login</Link>
+          <Link to="/sign_up">Sign up</Link>
+        </>
+      ) : (
+        <button onClick={handleLogout}>Logout</button>
+      )}
+    </Drawer>);
+  };
+
   return (
     <>
       <header className="shadow-light">
@@ -30,29 +53,8 @@ function HeaderAndFooter(props) {
           <button className="drawer-button" onClick={handleDrawer}>
             <MenuIcon className="menu-icon" />
           </button>
-
-          <Drawer
-            className="drawer"
-     
-            anchor={"top"}
-            open={drawerIsOpen}
-            onEscapeKeyDown={handleDrawer}
-            onBackdropClick={handleDrawer}
-          >
-            <div className="icon-and-name-drawer">
-              
-                <MainIcon className="main-icon" /> <p>Surligner</p>
-           
-            </div>
-            <Link to="/">Home</Link>
-            {!authenticated ?
-            (<>
-            <Link to="/login">Login</Link>
-            <Link to="/sign_up">Sign up</Link>
-            </>):
-            (<button onClick={handleLogout} >Logout</button>)
-            }
-          </Drawer>
+          
+          <MyDrawer/>
 
           {!authenticated ? (
             <div className="login-and-sign-up">
@@ -60,7 +62,10 @@ function HeaderAndFooter(props) {
               <Link to="/sign_up">Sign Up</Link>
             </div>
           ) : (
-            <button className="logout-button" onClick={handleLogout}> <LogoutIcon className="logout-icon" /> </button>
+            <button className="logout-button" onClick={handleLogout}>
+              {" "}
+              <LogoutIcon className="logout-icon" />{" "}
+            </button>
           )}
         </div>
       </header>

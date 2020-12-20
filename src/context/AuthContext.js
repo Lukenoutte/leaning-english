@@ -7,7 +7,7 @@ function AuthProvider({ children }) {
   const [authenticated, setAuthenticated] = useState(false);
 
   useEffect(() => {
-    async function verification() {
+    async function tokenVerification() {
       const token = localStorage.getItem("token");
 
       if (token) {
@@ -15,14 +15,14 @@ function AuthProvider({ children }) {
           token: `Bearer ${JSON.parse(token)}`,
         });
   
-        if(status.data.tokenStatus){
+        if(status && status.data.tokenStatus){
         axios.defaults.headers.autorization = `Bearer ${JSON.parse(token)}`;
         setAuthenticated(true);
         }
       }
     }
 
-    verification();
+    tokenVerification();
   }, []);
 
   function handleLogout() {

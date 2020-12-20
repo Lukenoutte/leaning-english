@@ -16,7 +16,7 @@ function Login() {
 
   const HandleLogin = async (event) => {
     event.preventDefault();
-    let email = inputEmail.current.value;
+    let email = (inputEmail.current.value).replace(/\s/g, "");
     let pass = inputPass.current.value;
 
     if (email === "" || pass === "") {
@@ -29,9 +29,12 @@ function Login() {
 
     if (response) {
       if (response.status === 200) {
+        console.log(response);
         setAuthenticated(true);
         let token = response.data.token;
+        let id = response.data.user._id;
         localStorage.setItem("token", JSON.stringify(token));
+        localStorage.setItem("id", JSON.stringify(id));
         axios.defaults.headers.autorization = `Bearer ${token}`;
         history.push("/");
       } else if (response.status === 400) {

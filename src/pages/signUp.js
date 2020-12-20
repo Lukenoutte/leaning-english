@@ -13,7 +13,7 @@ function SignUp() {
   const [differentPass, setDifferentPass] = useState(false);
   const [loginFailMessage, setLoginFailMessage] = useState("");
 
-  const HandleSignUp = (event) => {
+  const HandleSignUp = async (event) => {
     event.preventDefault();
     let name = inputName.current.value;
     let email = inputEmail.current.value;
@@ -32,7 +32,14 @@ function SignUp() {
       return;
     }
 
-    signUp({ name, email, pass, confirmPass });
+    let response = await signUp({ name, email, pass, confirmPass });
+
+    if (response) {
+      console.log(response);
+      if (response.status === 200) {
+        console.log("OK")
+      }
+    }
   };
 
   const inputClass = (ref, isPassInput) => {
