@@ -15,7 +15,7 @@ const login = async (arg) => {
     return err.response;
   });
 
-  if (response.data) {
+  if (response && response.data) {
     return { data: response.data, status: response.status };
   }
 
@@ -36,7 +36,7 @@ const signUp = async (arg) => {
     return err.response;
   });
 
-  if (response.data) {
+  if (response && response.data) {
     return { data: response.data, status: response.status };
   }
 

@@ -44,7 +44,7 @@ function Login() {
       }
     } else {
       setLoginFail(true);
-      setLoginFailMessage("Somenthing wrong, try again :(");
+      setLoginFailMessage("Somenthing wrong :(");
     }
   };
 

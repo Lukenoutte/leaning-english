@@ -12,6 +12,7 @@ function SignUp() {
   const [emptyInput, setEmptyInput] = useState(false);
   const [differentPass, setDifferentPass] = useState(false);
   const [loginFailMessage, setLoginFailMessage] = useState("");
+  const [loginFail, setLoginFail] = useState(false);
 
   const HandleSignUp = async (event) => {
     event.preventDefault();
@@ -38,7 +39,14 @@ function SignUp() {
       console.log(response);
       if (response.status === 200) {
         console.log("OK")
+      } else if (response.status === 400) {
+        setLoginFailMessage(response.data.error);
+
+        setLoginFail(true);
       }
+    }else {
+      setLoginFail(true);
+      setLoginFailMessage("Somenthing wrong :(");
     }
   };
 
@@ -53,7 +61,7 @@ function SignUp() {
   };
 
   const ErrorMessage = () => {
-    if (emptyInput) {
+    if (loginFail || emptyInput) {
       return (
         <div className="empty-input-error">
           <p>{loginFailMessage}</p>
