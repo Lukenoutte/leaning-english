@@ -5,6 +5,7 @@ import SentenceSliced from "../components/sentenceSliced";
 import WordsAndTranslations from "../components/wordsAndTranslation";
 import "../styles/main.css";
 import { v4 as uuidv4 } from "uuid";
+import { addWords } from "../services";
 
 function Main() {
   const [unknownWords, setUnknownWords] = useState([]);
@@ -38,6 +39,13 @@ function Main() {
     clearUnkownAndTranslated();
     inputPhrase.current.value = "";
   }
+
+  async function handleAddWords() {
+    const response = await addWords({unknownWords});
+    console.log(response);
+  }
+
+
 
   useEffect(() => {
     // API CALL
@@ -101,6 +109,7 @@ function Main() {
           />
         </div>
       </div>
+      <button className="add-to-profile-list" onClick={handleAddWords}> + </button>
     </HeaderAndFotter>
   );
 }

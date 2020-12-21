@@ -58,4 +58,22 @@ const verifyToken = async (arg) => {
   return response;
 };
 
-export { login, signUp, verifyToken, axios };
+const addWords = async (arg) => {
+  const id = JSON.parse(localStorage.getItem("id"));
+
+  let response = await axios({
+    url: "/projects/add_unknown_words",
+    method: "post",
+    data: {
+      id: id,
+      unkownWords: arg.unknownWords,
+    }, 
+  }).catch((err) => {
+    return err.response;
+  });
+
+  return response;
+};
+
+
+export { login, signUp, verifyToken, addWords, axios };

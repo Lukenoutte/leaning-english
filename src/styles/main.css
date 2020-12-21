@@ -1,15 +1,11 @@
-
 .main-tool .phrase-wrapper {
   margin-top: 20px;
   background: var(--white-color);
   width: 100%;
- 
+
   border-radius: 15px;
   padding: 30px;
-
 }
-
-
 
 .main-tool .phrase-wrapper button {
   background: transparent;
@@ -19,7 +15,6 @@
   font-weight: bolder;
   padding: 0 7px;
   cursor: pointer;
-
 }
 
 .main-tool .phrase-wrapper button:hover {
@@ -27,18 +22,16 @@
   color: var(--white-color);
 }
 
-.main-tool .input-and-button{  
+.main-tool .input-and-button {
   width: 100%;
   background-color: var(--white-color);
   padding: 30px;
   border-radius: 15px;
-
 }
 
 .main-tool .input-and-button h1 {
   margin-bottom: 30px;
   font-size: 20px;
- 
 }
 
 .main-tool .input-and-button button {
@@ -46,15 +39,14 @@
   background: var(--white-color);
   border: 2px solid var(--secundary-color);
   margin-left: 3%;
-  
 }
 
-.main-tool .input-and-button #try-it-button{
+.main-tool .input-and-button #try-it-button {
   background: var(--secundary-color);
   color: var(--white-color);
 }
 
-.main-tool .input-and-button #try-it-button:hover{
+.main-tool .input-and-button #try-it-button:hover {
   background: var(--secundary-hover);
 }
 
@@ -75,8 +67,7 @@
 .main-tool .unknown-words {
   position: relative;
   font-weight: bolder;
-  
- 
+
   width: 100%;
   background: var(--white-color);
   display: flex;
@@ -84,8 +75,6 @@
   margin-top: 20px;
   border-radius: 15px;
   padding: 30px;
-
-
 }
 
 .main-tool .unknown-words button {
@@ -102,14 +91,15 @@
   cursor: pointer;
 }
 
-.main-tool .choose-language-wrapper{
+.main-tool .choose-language-wrapper {
   margin-bottom: 30px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
 
-.choose-language-wrapper .from-container, .choose-language-wrapper .to-container {
+.choose-language-wrapper .from-container,
+.choose-language-wrapper .to-container {
   width: 48%;
   background: var(--white-color);
   border-radius: 15px;
@@ -120,7 +110,8 @@
   padding: 20px;
 }
 
-.from-container select, .to-container select{
+.from-container select,
+.to-container select {
   border: 2px solid var(--secundary-color);
   border-radius: 15px;
   width: 80%;
@@ -131,21 +122,38 @@
   margin-top: 10px;
   font-weight: bold;
   font-size: 1.3rem;
-  
 }
 
-.close-icon{
+.close-icon {
   width: 10px;
   height: 10px;
 
   fill: var(--white-color);
 }
 
-.unknown-word{
-color: var(--secundary-color);
+.unknown-word {
+  color: var(--secundary-color);
 }
 
-@media(max-width:1281px){
+.add-to-profile-list {
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  outline: none;
+  border: none;
+  background: var(--secundary-color);
+  color: var(--white-color);
+  cursor: pointer;
+}
+
+.add-to-profile-list:hover{
+  background: var(--secundary-hover);
+}
+
+@media (max-width: 1281px) {
   .main-tool .input-and-button input {
     width: 100%;
     margin-bottom: 20px;
@@ -154,8 +162,6 @@ color: var(--secundary-color);
   .main-tool .input-and-button button {
     width: 100%;
     margin-left: 0%;
-    margin-bottom: 5px; 
+    margin-bottom: 5px;
   }
-
-
 }
