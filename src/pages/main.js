@@ -19,14 +19,14 @@ function Main() {
 
   const axios = require("axios").default;
 
-  function handleClickButton() {
+  function handleButtonSplitPhrase() {
     let currentPhrase = inputPhrase.current.value;
     if (currentPhrase !== "") {
       setSentence(currentPhrase.split(" "));
     }
   }
 
-  function ChangeSelectTo(event) {
+  function ChangeLanguage(event) {
     setToSelectValue(event.target.value);
 
     clearUnkownAndTranslated();
@@ -43,7 +43,7 @@ function Main() {
     inputPhrase.current.value = "";
   }
 
-  async function handleAddWords() {
+  async function handleAddProfileWords() {
     const response = await addWords({ unknownWords });
     if (response.status === 200) {
       console.log("OK");
@@ -86,28 +86,38 @@ function Main() {
     if (authenticated) {
       const wordsList = async () => {
         const words = await getWords();
-        if(words.status === 200){
-        setProfileWordsList(words);
+        if (words.status === 200) {
+          setProfileWordsList(words.data);
         }
       };
       wordsList();
     }
   }, [authenticated]);
 
-  return (
+  useEffect(() => {
+    if (authenticated && sentence.length > 0) {
+      
+      const wordsFound = profileWordsList.filter((element => sentence.indexOf(element) !== -1));
+       
+      setUnknownWords((oldArray) => oldArray.concat(wordsFound));
+    }
+  }, [authenticated, sentence, profileWordsList]);
+
+  return (    
     <HeaderAndFotter>
+      
       <div className="main-tool global-wrapper">
         <div className="center-container">
           <ChooseLanguage
             valueSelected={toSelectValue}
-            functionSelect={ChangeSelectTo}
+            functionSelect={ChangeLanguage}
           />
 
           <div className="input-and-button shadow-light styled-buttons">
             <h1> Copy and paste some sentence or text in english:</h1>
 
             <input ref={inputPhrase} type="text" />
-            <button id="try-it-button" onClick={handleClickButton}>
+            <button id="try-it-button" onClick={handleButtonSplitPhrase}>
               Try it!
             </button>
             <button onClick={handleClickButtonClear}>Clear all</button>
@@ -126,7 +136,7 @@ function Main() {
         </div>
       </div>
       {authenticated && unknownWords.length > 0 && (
-        <button className="add-to-profile-list" onClick={handleAddWords}>
+        <button className="add-to-profile-list" onClick={handleAddProfileWords}>
           +
         </button>
       )}

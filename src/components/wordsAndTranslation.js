@@ -36,9 +36,10 @@ export default function sentenceSliced(props) {
       divList.push(
         <div className="unknown-words shadow-light" key={i}>
           <p key={i}>
-            <span className="unknown-word">
+            {props.unknownWordsVar[i] !== undefined &&
+            (<span className="unknown-word">
               {props.unknownWordsVar[i].toUpperCase()}
-            </span>{" "}
+            </span>)}
             {" -" + waitTranslation}
           </p>
           <button onClick={() => removeOneWordHighlighted(i)}>
