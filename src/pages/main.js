@@ -1,18 +1,21 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
 import HeaderAndFotter from "../components/headerAndFooter";
 import ChooseLanguage from "../components/chooseLanguage";
 import SentenceSliced from "../components/sentenceSliced";
 import WordsAndTranslations from "../components/wordsAndTranslation";
 import "../styles/main.css";
 import { v4 as uuidv4 } from "uuid";
-import { addWords } from "../services";
+import { addWords, getWords } from "../services";
+import { Context } from "../context/AuthContext";
 
 function Main() {
   const [unknownWords, setUnknownWords] = useState([]);
   const [sentence, setSentence] = useState([]);
   const [toSelectValue, setToSelectValue] = useState("pt-br");
   const [translatedWords, setTranslatedWords] = useState([]);
+  const [profileWordsList, setProfileWordsList] = useState([]);
   const inputPhrase = useRef(null);
+  const { authenticated } = useContext(Context);
 
   const axios = require("axios").default;
 
@@ -41,11 +44,11 @@ function Main() {
   }
 
   async function handleAddWords() {
-    const response = await addWords({unknownWords});
-    console.log(response);
+    const response = await addWords({ unknownWords });
+    if (response.status === 200) {
+      console.log("OK");
+    }
   }
-
-
 
   useEffect(() => {
     // API CALL
@@ -75,8 +78,21 @@ function Main() {
         setTranslatedWords((oldArray) => [...oldArray, newTranslations]);
       });
     }
+
     // eslint-disable-next-line
   }, [unknownWords, toSelectValue]);
+
+  useEffect(() => {
+    if (authenticated) {
+      const wordsList = async () => {
+        const words = await getWords();
+        if(words.status === 200){
+        setProfileWordsList(words);
+        }
+      };
+      wordsList();
+    }
+  }, [authenticated]);
 
   return (
     <HeaderAndFotter>
@@ -109,7 +125,11 @@ function Main() {
           />
         </div>
       </div>
-      <button className="add-to-profile-list" onClick={handleAddWords}> + </button>
+      {authenticated && unknownWords.length > 0 && (
+        <button className="add-to-profile-list" onClick={handleAddWords}>
+          +
+        </button>
+      )}
     </HeaderAndFotter>
   );
 }

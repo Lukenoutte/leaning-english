@@ -76,4 +76,25 @@ const addWords = async (arg) => {
 };
 
 
-export { login, signUp, verifyToken, addWords, axios };
+
+const getWords = async () => {
+  const id = JSON.parse(localStorage.getItem("id"));
+
+  let response = await axios({
+    url: "/projects/list_words",
+    method: "post",
+    data: {
+      id: id,      
+    }, 
+  }).catch((err) => {
+    return err.response;
+  });
+
+  if (response && response.data) {
+    return { data: response.data, status: response.status };
+  }
+  
+  return response;
+};
+
+export { login, signUp, verifyToken, addWords, getWords, axios };
