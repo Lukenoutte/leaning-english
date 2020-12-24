@@ -1,13 +1,21 @@
-const urlApi = process.env.REACT_APP_API_LINK;
-const axios = require("axios").create({
-  baseURL: urlApi,
+import { v4 as uuidv4 } from "uuid";
+
+const urlMyApi = process.env.REACT_APP_MYAPI_LINK;
+const urlMicrosoftApi = process.env.REACT_APP_ENDPOINT_MICROSOFT;
+const keyMicrosoftApi = process.env.REACT_APP_KEY;
+const myApi = require("axios").create({
+  baseURL: urlMyApi,
   headers: {
     "Content-type": "application/json",
   },
 });
 
+
+const microsoftApi = require("axios").default;
+
 const login = async (arg) => {
-  let response = await axios({
+
+  let response = await myApi({
     url: "/auth/authenticate",
     method: "post",
     data: { email: arg.email, password: arg.pass },
@@ -23,7 +31,7 @@ const login = async (arg) => {
 };
 
 const signUp = async (arg) => {
-  let response = await axios({
+  let response = await myApi({
     url: "/auth/register",
     method: "post",
     data: {
@@ -44,7 +52,7 @@ const signUp = async (arg) => {
 };
 
 const verifyToken = async (arg) => {
-  let response = await axios({
+  let response = await myApi({
     url: "/auth/verify_token",
     method: "get",
     headers: {
@@ -61,7 +69,7 @@ const verifyToken = async (arg) => {
 const addWords = async (arg) => {
   const id = JSON.parse(localStorage.getItem("id"));
 
-  let response = await axios({
+  let response = await myApi({
     url: "/projects/add_unknown_words",
     method: "post",
     data: {
@@ -80,7 +88,7 @@ const addWords = async (arg) => {
 const getWords = async () => {
   const id = JSON.parse(localStorage.getItem("id"));
 
-  let response = await axios({
+  let response = await myApi({
     url: "/projects/list_words",
     method: "post",
     data: {
@@ -97,4 +105,29 @@ const getWords = async () => {
   return response;
 };
 
-export { login, signUp, verifyToken, addWords, getWords, axios };
+const postMicrosoftApi = async (arg) => {
+
+  let response = await microsoftApi(
+    {
+      baseURL: urlMicrosoftApi,
+      url: "/dictionary/lookup",
+      method: "post",
+      headers: {
+        "Ocp-Apim-Subscription-Key": keyMicrosoftApi,
+        "Content-type": "application/json",
+        "X-ClientTraceId": uuidv4().toString(),
+      },
+      params: {
+        "api-version": "3.0",
+        from: "en",
+        to: arg.languageSelectValue,
+      },
+      data: [{ text: arg.data }],
+      responseType: "json",
+    }
+  );
+
+  return response;
+}
+
+export { login, signUp, verifyToken, addWords, getWords, myApi, postMicrosoftApi};

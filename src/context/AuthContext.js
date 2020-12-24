@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect } from "react";
-import { axios, verifyToken } from "../services";
+import { myApi, verifyToken } from "../services";
 import history from "../history";
 const Context = createContext();
 
@@ -16,7 +16,7 @@ function AuthProvider({ children }) {
         });
   
         if(status && status.data.tokenStatus){
-        axios.defaults.headers.autorization = `Bearer ${JSON.parse(token)}`;
+          myApi.defaults.headers.autorization = `Bearer ${JSON.parse(token)}`;
         setAuthenticated(true);
         }
       }
@@ -28,12 +28,22 @@ function AuthProvider({ children }) {
   function handleLogout() {
     setAuthenticated(false);
     localStorage.removeItem("token");
-    axios.defaults.headers.autorization = undefined;
+    myApi.defaults.headers.autorization = undefined;
     history.push("/login");
   }
 
+  function handleLogin(arg) {
+    setAuthenticated(true);
+    let token = arg.response.data.token;
+    let id = arg.response.data.user._id;
+    localStorage.setItem("token", JSON.stringify(token));
+    localStorage.setItem("id", JSON.stringify(id));
+    myApi.defaults.headers.autorization = `Bearer ${token}`;
+    history.push("/");
+  }
+
   return (
-    <Context.Provider value={{ authenticated, setAuthenticated, handleLogout }}>
+    <Context.Provider value={{ authenticated, setAuthenticated, handleLogout, handleLogin }}>
       {children}
     </Context.Provider>
   );

@@ -4,20 +4,19 @@ import ChooseLanguage from "../components/chooseLanguage";
 import SentenceSliced from "../components/sentenceSliced";
 import WordsAndTranslations from "../components/wordsAndTranslation";
 import "../styles/main.css";
-import { v4 as uuidv4 } from "uuid";
-import { addWords, getWords } from "../services";
+
+import { addWords, getWords, postMicrosoftApi } from "../services";
 import { Context } from "../context/AuthContext";
 
 function Main() {
   const [unknownWords, setUnknownWords] = useState([]);
+
   const [sentence, setSentence] = useState([]);
-  const [toSelectValue, setToSelectValue] = useState("pt-br");
+  const [languageSelectValue, setLanguageToSelectValue] = useState("pt-br");
   const [translatedWords, setTranslatedWords] = useState([]);
   const [profileWordsList, setProfileWordsList] = useState([]);
   const inputPhrase = useRef(null);
   const { authenticated } = useContext(Context);
-
-  const axios = require("axios").default;
 
   function handleButtonSplitPhrase() {
     let currentPhrase = inputPhrase.current.value;
@@ -27,7 +26,7 @@ function Main() {
   }
 
   function ChangeLanguage(event) {
-    setToSelectValue(event.target.value);
+    setLanguageToSelectValue(event.target.value);
 
     clearUnkownAndTranslated();
   }
@@ -56,22 +55,10 @@ function Main() {
       unknownWords.length > 0 &&
       translatedWords.length < unknownWords.length
     ) {
-      axios({
-        baseURL: process.env.REACT_APP_ENDPOINT,
-        url: "/dictionary/lookup",
-        method: "post",
-        headers: {
-          "Ocp-Apim-Subscription-Key": process.env.REACT_APP_KEY,
-          "Content-type": "application/json",
-          "X-ClientTraceId": uuidv4().toString(),
-        },
-        params: {
-          "api-version": "3.0",
-          from: "en",
-          to: toSelectValue,
-        },
-        data: [{ text: unknownWords[unknownWords.length - 1] }],
-        responseType: "json",
+     
+      postMicrosoftApi({
+        languageSelectValue,
+        data: unknownWords[unknownWords.length - 1],
       }).then(function (response) {
         let newTranslations = response.data[0].translations;
 
@@ -80,9 +67,9 @@ function Main() {
     }
 
     // eslint-disable-next-line
-  }, [unknownWords, toSelectValue]);
+  }, [unknownWords, languageSelectValue]);
 
-  useEffect(() => {
+  useEffect(() => { // Get word list from api
     if (authenticated) {
       const wordsList = async () => {
         const words = await getWords();
@@ -95,21 +82,25 @@ function Main() {
   }, [authenticated]);
 
   useEffect(() => {
+    // Profile words equals to the sentense
     if (authenticated && sentence.length > 0) {
-      
-      const wordsFound = profileWordsList.filter((element => sentence.indexOf(element) !== -1));
-       
-      setUnknownWords((oldArray) => oldArray.concat(wordsFound));
+      const wordsFound = profileWordsList.filter(
+        (element) => sentence.indexOf(element) !== -1
+      );
+
+      setUnknownWords((oldArray) =>
+        oldArray.concat(wordsFound.filter((item) => oldArray.indexOf(item) < 0)));
+
+     
     }
   }, [authenticated, sentence, profileWordsList]);
 
-  return (    
+  return (
     <HeaderAndFotter>
-      
       <div className="main-tool global-wrapper">
         <div className="center-container">
           <ChooseLanguage
-            valueSelected={toSelectValue}
+            valueSelected={languageSelectValue}
             functionSelect={ChangeLanguage}
           />
 

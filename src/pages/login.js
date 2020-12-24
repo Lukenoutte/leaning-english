@@ -2,9 +2,9 @@ import React, { useRef, useState, useContext } from "react";
 import HeaderAndFotter from "../components/headerAndFooter";
 import "../styles/login.css";
 import { Link } from "react-router-dom";
-import { login, axios } from "../services";
+import { login } from "../services";
 import { Context } from "../context/AuthContext";
-import history from "../history";
+
 
 function Login() {
   const inputEmail = useRef("");
@@ -12,9 +12,9 @@ function Login() {
   const [emptyInput, setEmptyInput] = useState(false);
   const [loginFail, setLoginFail] = useState(false);
   const [loginFailMessage, setLoginFailMessage] = useState("");
-  const { setAuthenticated } = useContext(Context);
+  const { handleLogin } = useContext(Context);
 
-  const HandleLogin = async (event) => {
+  const loginFunc = async (event) => {
     event.preventDefault();
     let email = (inputEmail.current.value).replace(/\s/g, "");
     let pass = inputPass.current.value;
@@ -29,14 +29,7 @@ function Login() {
 
     if (response) {
       if (response.status === 200) {
-        console.log(response);
-        setAuthenticated(true);
-        let token = response.data.token;
-        let id = response.data.user._id;
-        localStorage.setItem("token", JSON.stringify(token));
-        localStorage.setItem("id", JSON.stringify(id));
-        axios.defaults.headers.autorization = `Bearer ${token}`;
-        history.push("/");
+        handleLogin({response});
       } else if (response.status === 400) {
         setLoginFailMessage(response.data.error);
 
@@ -92,7 +85,7 @@ function Login() {
               className={InputClass(inputPass)}
             />
             <Link to="/">Forgot password?</Link>
-            <button onClick={(e) => HandleLogin(e)}>Login</button>
+            <button onClick={(e) => loginFunc(e)}>Login</button>
           </div>
         </div>
       </div>
