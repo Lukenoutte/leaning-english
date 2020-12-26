@@ -19,7 +19,8 @@ export default function sentenceSliced(props) {
                 className={
                   props.unknownWordsVar.includes(
                     word.replace(/[.,?!;:\s]/g, "")
-                  )
+                  ) ||
+                  props.sameWordsVar.includes(word.replace(/[.,?!;:\s]/g, ""))
                     ? "word-hightlight"
                     : ""
                 }

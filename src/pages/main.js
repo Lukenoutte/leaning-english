@@ -10,12 +10,14 @@ import { Context } from "../context/AuthContext";
 
 function Main() {
   const [unknownWords, setUnknownWords] = useState([]);
-
+  const [sameWords, setSameWords] = useState([]);
   const [sentence, setSentence] = useState([]);
   const [languageSelectValue, setLanguageToSelectValue] = useState("pt-br");
-  const [translatedWords, setTranslatedWords] = useState([]);
+  const [translatedWords, setTranslatedWords] = useState({});
   const [profileWordsList, setProfileWordsList] = useState([]);
+  
   const inputPhrase = useRef(null);
+  
   const { authenticated } = useContext(Context);
 
   function handleButtonSplitPhrase() {
@@ -52,24 +54,28 @@ function Main() {
   useEffect(() => {
     // API CALL
     if (
-      unknownWords.length > 0 &&
-      translatedWords.length < unknownWords.length
+      unknownWords.length > 0 
     ) {
-     
       postMicrosoftApi({
         languageSelectValue,
         data: unknownWords[unknownWords.length - 1],
       }).then(function (response) {
+       
         let newTranslations = response.data[0].translations;
+        var key = unknownWords[unknownWords.length - 1];
+        var obj = {};
+        obj[key] = newTranslations;
+  
+        setTranslatedWords((oldArray) => ({...oldArray, ...obj}));  // problem
+      })
 
-        setTranslatedWords((oldArray) => [...oldArray, newTranslations]);
-      });
     }
 
     // eslint-disable-next-line
   }, [unknownWords, languageSelectValue]);
 
-  useEffect(() => { // Get word list from api
+  useEffect(() => {
+    // Get word list from my api
     if (authenticated) {
       const wordsList = async () => {
         const words = await getWords();
@@ -88,15 +94,33 @@ function Main() {
         (element) => sentence.indexOf(element) !== -1
       );
 
-      setUnknownWords((oldArray) =>
-        oldArray.concat(wordsFound.filter((item) => oldArray.indexOf(item) < 0)));
-
-     
+      setSameWords((oldArray) =>
+        oldArray.concat(wordsFound.filter((item) => oldArray.indexOf(item) < 0))
+      );
     }
   }, [authenticated, sentence, profileWordsList]);
 
+  useEffect(() => {
+    // API CALL only to translate words from profile
+    if (sameWords.length > 0) {
+      sameWords.map((word) =>
+        postMicrosoftApi({
+          languageSelectValue,
+          data: word,
+        }).then(function (response) {
+          let newTranslations = response.data[0].translations;
+
+          setTranslatedWords((oldArray) => [...oldArray, newTranslations]);
+        })
+      );
+    }
+  }, [sameWords, languageSelectValue]);
+
+ 
+
   return (
     <HeaderAndFotter>
+     {console.log(translatedWords)}
       <div className="main-tool global-wrapper">
         <div className="center-container">
           <ChooseLanguage
@@ -117,6 +141,7 @@ function Main() {
             sentenceVar={sentence}
             unknownWordsVar={unknownWords}
             setUnknownWordsFunc={setUnknownWords}
+            sameWordsVar={sameWords}
           />
           <WordsAndTranslations
             translatedWordsVar={translatedWords}
