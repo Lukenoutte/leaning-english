@@ -15,9 +15,9 @@ function Main() {
   const [languageSelectValue, setLanguageToSelectValue] = useState("pt-br");
   const [translatedWords, setTranslatedWords] = useState({});
   const [profileWordsList, setProfileWordsList] = useState([]);
-  
+
   const inputPhrase = useRef(null);
-  
+
   const { authenticated } = useContext(Context);
 
   function handleButtonSplitPhrase() {
@@ -52,26 +52,22 @@ function Main() {
   }
 
   useEffect(() => {
-    // API CALL
-    if (
-      unknownWords.length > 0 
-    ) {
+    // API CALL to translate selected word
+    if (unknownWords.length > 0) {
       postMicrosoftApi({
         languageSelectValue,
         data: unknownWords[unknownWords.length - 1],
       }).then(function (response) {
-       
         let newTranslations = response.data[0].translations;
         var key = unknownWords[unknownWords.length - 1];
         var obj = {};
         obj[key] = newTranslations;
-  
-        setTranslatedWords((oldArray) => ({...oldArray, ...obj}));  // problem
-      })
 
+        setTranslatedWords((oldArray) => ({ ...oldArray, ...obj })); 
+      });
     }
 
-    // eslint-disable-next-line
+   
   }, [unknownWords, languageSelectValue]);
 
   useEffect(() => {
@@ -88,7 +84,7 @@ function Main() {
   }, [authenticated]);
 
   useEffect(() => {
-    // Profile words equals to the sentense
+    // Compare user sentence and profile words
     if (authenticated && sentence.length > 0) {
       const wordsFound = profileWordsList.filter(
         (element) => sentence.indexOf(element) !== -1
@@ -110,17 +106,19 @@ function Main() {
         }).then(function (response) {
           let newTranslations = response.data[0].translations;
 
-          setTranslatedWords((oldArray) => [...oldArray, newTranslations]);
+          var key = word;
+          var obj = {};
+          obj[key] = newTranslations;
+
+          setTranslatedWords((oldArray) => ({ ...oldArray, ...obj }));
         })
       );
     }
   }, [sameWords, languageSelectValue]);
 
- 
-
   return (
     <HeaderAndFotter>
-     {console.log(translatedWords)}
+      
       <div className="main-tool global-wrapper">
         <div className="center-container">
           <ChooseLanguage
@@ -148,6 +146,7 @@ function Main() {
             unknownWordsVar={unknownWords}
             setUnknownWordsFunc={setUnknownWords}
             setTranslatedWordsFunc={setTranslatedWords}
+            sameWordsVar={sameWords}
           />
         </div>
       </div>

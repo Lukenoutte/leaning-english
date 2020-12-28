@@ -4,21 +4,37 @@ import { ReactComponent as CloseIcon } from "../assets/icons/closeIcon.svg";
 export default function sentenceSliced(props) {
   function removeOneWordHighlighted(target) {
     props.setUnknownWordsFunc(
-      props.unknownWordsVar.filter((item) => props.unknownWordsVar !== target)
+      props.unknownWordsVar.filter((word) => word !== target)
     );
-    props.setTranslatedWordsFunc(
-      props.translatedWordsVar.filter(
-        (item) => props.translatedWordsVar.indexOf(item) !== target
-      )
-    );
+    const translatedWords = props.translatedWordsVar;
+
+    if (translatedWords) {
+      delete translatedWords[target];
+      props.setTranslatedWordsFunc(translatedWords);
+    }
   }
 
-  function listHightLightedWordsAndTranslations() {
+  function listWordsAndTranslations() {
     let divList = [];
+    let arrayWords = [];
+    if (props.unknownWordsVar && props.unknownWordsVar.length > 0) {
+      arrayWords.push.apply(arrayWords,  props.unknownWordsVar);
+    }
+    if (props.sameWordsVar && props.sameWordsVar.length > 0) {
+
+      arrayWords.push.apply(arrayWords,  props.sameWordsVar);;
+      }
+
+    return selectedWord({ divList, arrayWords });
+  }
+
+  function selectedWord(args) {
+    let divList = args.divList;
     let waitTranslation = "";
-  
-    if (props.unknownWordsVar !== undefined) {
-      props.unknownWordsVar.map((word) => {
+    let myArray = args.arrayWords;
+    console.log(myArray);
+    if (myArray !== undefined) {
+      myArray.map((word) => {
         if (props.translatedWordsVar[word] === undefined) {
           waitTranslation = " Loading...";
         } else {
@@ -50,12 +66,12 @@ export default function sentenceSliced(props) {
 
   return (
     <div className="unknown-words-container">
-
-      {props.unknownWordsVar !== undefined &&
-        props.unknownWordsVar.length > 0 &&
-        listHightLightedWordsAndTranslations().map((div) => {
+      {props.unknownWordsVar ||
+        props.sameWordsVar?
+        listWordsAndTranslations().map((div) => {
           return div;
-        })}
+        }):false
+      }
     </div>
   );
 }
