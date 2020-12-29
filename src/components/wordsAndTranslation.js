@@ -1,11 +1,18 @@
 import React from "react";
 import { ReactComponent as CloseIcon } from "../assets/icons/closeIcon.svg";
 
-export default function sentenceSliced(props) {
+export default function WordsAndTranslation(props) {
+
+
   function removeOneWordHighlighted(target) {
     props.setUnknownWordsFunc(
       props.unknownWordsVar.filter((word) => word !== target)
     );
+
+    props.setSameWordsFunc(
+      props.sameWordsVar.filter((word) => word !== target)
+    );
+
     const translatedWords = props.translatedWordsVar;
 
     if (translatedWords) {
@@ -17,13 +24,15 @@ export default function sentenceSliced(props) {
   function listWordsAndTranslations() {
     let divList = [];
     let arrayWords = [];
-    if (props.unknownWordsVar && props.unknownWordsVar.length > 0) {
-      arrayWords.push.apply(arrayWords,  props.unknownWordsVar);
-    }
     if (props.sameWordsVar && props.sameWordsVar.length > 0) {
+      arrayWords.push.apply(arrayWords, props.sameWordsVar);
+    }
 
-      arrayWords.push.apply(arrayWords,  props.sameWordsVar);;
-      }
+    if (props.unknownWordsVar && props.unknownWordsVar.length > 0) {
+      arrayWords.push.apply(arrayWords, props.unknownWordsVar);
+    }
+
+
 
     return selectedWord({ divList, arrayWords });
   }
@@ -32,7 +41,7 @@ export default function sentenceSliced(props) {
     let divList = args.divList;
     let waitTranslation = "";
     let myArray = args.arrayWords;
-    console.log(myArray);
+
     if (myArray !== undefined) {
       myArray.map((word) => {
         if (props.translatedWordsVar[word] === undefined) {
@@ -66,12 +75,11 @@ export default function sentenceSliced(props) {
 
   return (
     <div className="unknown-words-container">
-      {props.unknownWordsVar ||
-        props.sameWordsVar?
-        listWordsAndTranslations().map((div) => {
-          return div;
-        }):false
-      }
+      {props.unknownWordsVar || props.sameWordsVar
+        ? listWordsAndTranslations().map((div) => {
+            return div;
+          })
+        : false}
     </div>
   );
 }

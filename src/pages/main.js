@@ -147,6 +147,7 @@ function Main() {
             setUnknownWordsFunc={setUnknownWords}
             setTranslatedWordsFunc={setTranslatedWords}
             sameWordsVar={sameWords}
+            setSameWordsFunc={setSameWords}
           />
         </div>
       </div>
