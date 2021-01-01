@@ -1,4 +1,5 @@
 import React from "react";
+import "./styles/choose_language.css";
 
 export default function ChooseLanguage(props) {
   return (

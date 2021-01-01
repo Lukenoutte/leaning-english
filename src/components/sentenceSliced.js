@@ -1,4 +1,5 @@
 import React from "react";
+import "./styles/sentence_sliced.css";
 
 export default function sentenceSliced(props) {
   function handleClickWord(word) {
@@ -20,7 +21,7 @@ export default function sentenceSliced(props) {
                   props.unknownWordsVar.includes(
                     word.replace(/[.,?!;:\s]/g, "")
                   ) ||
-                  props.sameWordsVar.includes(word.replace(/[.,?!;:\s]/g, ""))
+                  props.sameWordsFromProfileVar.includes(word.replace(/[.,?!;:\s]/g, ""))
                     ? "word-hightlight"
                     : ""
                 }

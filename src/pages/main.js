@@ -10,7 +10,7 @@ import { Context } from "../context/AuthContext";
 
 function Main() {
   const [unknownWords, setUnknownWords] = useState([]);
-  const [sameWords, setSameWords] = useState([]);
+  const [sameWordsFromProfile, setSameWordsFromProfile] = useState([]);
   const [sentence, setSentence] = useState([]);
   const [languageSelectValue, setLanguageToSelectValue] = useState("pt-br");
   const [translatedWords, setTranslatedWords] = useState({});
@@ -36,6 +36,7 @@ function Main() {
   function clearUnkownAndTranslated() {
     setUnknownWords([]);
     setTranslatedWords([]);
+    setSameWordsFromProfile([]);
   }
 
   function handleClickButtonClear() {
@@ -63,15 +64,13 @@ function Main() {
         var obj = {};
         obj[key] = newTranslations;
 
-        setTranslatedWords((oldArray) => ({ ...oldArray, ...obj })); 
+        setTranslatedWords((oldArray) => ({ ...oldArray, ...obj }));
       });
     }
-
-   
   }, [unknownWords, languageSelectValue]);
 
   useEffect(() => {
-    // Get word list from my api
+    // Get unknown words list from my api
     if (authenticated) {
       const wordsList = async () => {
         const words = await getWords();
@@ -90,7 +89,7 @@ function Main() {
         (element) => sentence.indexOf(element) !== -1
       );
 
-      setSameWords((oldArray) =>
+      setSameWordsFromProfile((oldArray) =>
         oldArray.concat(wordsFound.filter((item) => oldArray.indexOf(item) < 0))
       );
     }
@@ -98,8 +97,8 @@ function Main() {
 
   useEffect(() => {
     // API CALL only to translate words from profile
-    if (sameWords.length > 0) {
-      sameWords.map((word) =>
+    if (sameWordsFromProfile.length > 0) {
+      sameWordsFromProfile.map((word) =>
         postMicrosoftApi({
           languageSelectValue,
           data: word,
@@ -114,11 +113,10 @@ function Main() {
         })
       );
     }
-  }, [sameWords, languageSelectValue]);
+  }, [sameWordsFromProfile, languageSelectValue]);
 
   return (
     <HeaderAndFotter>
-      
       <div className="main-tool global-wrapper">
         <div className="center-container">
           <ChooseLanguage
@@ -139,15 +137,15 @@ function Main() {
             sentenceVar={sentence}
             unknownWordsVar={unknownWords}
             setUnknownWordsFunc={setUnknownWords}
-            sameWordsVar={sameWords}
+            sameWordsFromProfileVar={sameWordsFromProfile}
           />
           <WordsAndTranslations
             translatedWordsVar={translatedWords}
             unknownWordsVar={unknownWords}
             setUnknownWordsFunc={setUnknownWords}
             setTranslatedWordsFunc={setTranslatedWords}
-            sameWordsVar={sameWords}
-            setSameWordsFunc={setSameWords}
+            sameWordsFromProfileVar={sameWordsFromProfile}
+            setDameWordsFromProfileFunc={setSameWordsFromProfile}
           />
         </div>
       </div>

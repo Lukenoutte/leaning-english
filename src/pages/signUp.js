@@ -9,10 +9,10 @@ function SignUp() {
   const inputEmail = useRef("");
   const inputPass = useRef("");
   const inputConfirmPass = useRef("");
-  const [emptyInput, setEmptyInput] = useState(false);
-  const [differentPass, setDifferentPass] = useState(false);
-  const [loginFailMessage, setLoginFailMessage] = useState("");
-  const [loginFail, setLoginFail] = useState(false);
+  const [emptyInput, setPassError] = useState(false);
+  const [passError, setDifferentPass] = useState(false);
+  const [signUpFailMessage, setSignUpFailMessage] = useState("");
+  const [signUpFail, setSignUpFail] = useState(false);
 
   const HandleSignUp = async (event) => {
     event.preventDefault();
@@ -22,14 +22,22 @@ function SignUp() {
     let confirmPass = inputConfirmPass.current.value;
 
     if (name === "" || email === "" || pass === "" || confirmPass === "") {
-      setEmptyInput(true);
-      setLoginFailMessage("Ops, Empty field!");
+      setPassError(true);
+      setSignUpFailMessage("Ops, Empty field!");
       return;
     }
 
     if (pass !== confirmPass) {
       setDifferentPass(true);
-      setLoginFailMessage("Ops, passwords don't match!");
+      setSignUpFailMessage("Ops, passwords don't match!");
+      return;
+    }
+
+    
+    if (pass.length < 6 && confirmPass.length < 6) {
+      setDifferentPass(true);
+      setSignUpFail(true);
+      setSignUpFailMessage("Ops, passwords too small!");
       return;
     }
 
@@ -40,13 +48,13 @@ function SignUp() {
       if (response.status === 200) {
         console.log("OK")
       } else if (response.status === 400) {
-        setLoginFailMessage(response.data.error);
+        setSignUpFailMessage(response.data.error);
 
-        setLoginFail(true);
+        setSignUpFail(true);
       }
     }else {
-      setLoginFail(true);
-      setLoginFailMessage("Somenthing wrong :(");
+      setSignUpFail(true);
+      setSignUpFailMessage("Somenthing wrong :(");
     }
   };
 
@@ -55,16 +63,16 @@ function SignUp() {
       return "input-error";
     }
 
-    if (differentPass && isPassInput) return "input-error";
+    if (passError && isPassInput) return "input-error";
 
     return "";
   };
 
   const ErrorMessage = () => {
-    if (loginFail || emptyInput) {
+    if (signUpFail || emptyInput) {
       return (
         <div className="empty-input-error">
-          <p>{loginFailMessage}</p>
+          <p>{signUpFailMessage}</p>
         </div>
       );
     }

@@ -1,0 +1,32 @@
+.main-tool .choose-language-wrapper {
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.choose-language-wrapper .from-container,
+.choose-language-wrapper .to-container {
+  width: 48%;
+  background: var(--white-color);
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.from-container select,
+.to-container select {
+  border: 2px solid var(--secundary-color);
+  border-radius: 15px;
+  width: 80%;
+  height: 35px;
+  outline: none;
+  padding-left: 5px;
+
+  margin-top: 10px;
+  font-weight: bold;
+  font-size: 1.3rem;
+}

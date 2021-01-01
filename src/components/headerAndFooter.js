@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import "../styles/header_and_footer.css";
+import "./styles/header_and_footer.css";
 import { ReactComponent as MainIcon } from "../assets/icons/mainIcon.svg";
 import { ReactComponent as MenuIcon } from "../assets/icons/menuIcon.svg";
 import { ReactComponent as LogoutIcon } from "../assets/icons/logoutIcon.svg";

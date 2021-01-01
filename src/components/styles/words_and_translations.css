@@ -1,0 +1,42 @@
+.main-tool .unknown-words-container {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.main-tool .unknown-words {
+  position: relative;
+  font-weight: bolder;
+
+  width: 100%;
+  background: var(--white-color);
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  border-radius: 15px;
+  padding: 30px;
+}
+
+.main-tool .unknown-words button {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  border-radius: 25%;
+  outline: none;
+  height: 25px;
+  width: 25px;
+  background: var(--secundary-color);
+  color: var(--white-color);
+  border: none;
+  cursor: pointer;
+}
+
+.unknown-word {
+  color: var(--secundary-color);
+}
+
+.close-icon {
+  width: 10px;
+  height: 10px;
+
+  fill: var(--white-color);
+}

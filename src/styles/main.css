@@ -1,27 +1,3 @@
-.main-tool .phrase-wrapper {
-  margin-top: 20px;
-  background: var(--white-color);
-  width: 100%;
-
-  border-radius: 15px;
-  padding: 30px;
-}
-
-.main-tool .phrase-wrapper button {
-  background: transparent;
-  border: none;
-  font-size: 20px;
-  outline: none;
-  font-weight: bolder;
-  padding: 0 7px;
-  cursor: pointer;
-}
-
-.main-tool .phrase-wrapper button:hover {
-  background: var(--secundary-color);
-  color: var(--white-color);
-}
-
 .main-tool .input-and-button {
   width: 100%;
   background-color: var(--white-color);
@@ -60,81 +36,6 @@
   color: var(--white-color);
 }
 
-.main-tool .unknown-words-container {
-  display: flex;
-  flex-direction: column-reverse;
-}
-.main-tool .unknown-words {
-  position: relative;
-  font-weight: bolder;
-
-  width: 100%;
-  background: var(--white-color);
-  display: flex;
-  align-items: center;
-  margin-top: 20px;
-  border-radius: 15px;
-  padding: 30px;
-}
-
-.main-tool .unknown-words button {
-  position: absolute;
-  right: 0px;
-  top: 0px;
-  border-radius: 25%;
-  outline: none;
-  height: 25px;
-  width: 25px;
-  background: var(--secundary-color);
-  color: var(--white-color);
-  border: none;
-  cursor: pointer;
-}
-
-.main-tool .choose-language-wrapper {
-  margin-bottom: 30px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.choose-language-wrapper .from-container,
-.choose-language-wrapper .to-container {
-  width: 48%;
-  background: var(--white-color);
-  border-radius: 15px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  padding: 20px;
-}
-
-.from-container select,
-.to-container select {
-  border: 2px solid var(--secundary-color);
-  border-radius: 15px;
-  width: 80%;
-  height: 35px;
-  outline: none;
-  padding-left: 5px;
-
-  margin-top: 10px;
-  font-weight: bold;
-  font-size: 1.3rem;
-}
-
-.close-icon {
-  width: 10px;
-  height: 10px;
-
-  fill: var(--white-color);
-}
-
-.unknown-word {
-  color: var(--secundary-color);
-}
-
 .add-to-profile-list {
   position: fixed;
   right: 10px;
@@ -149,7 +50,7 @@
   cursor: pointer;
 }
 
-.add-to-profile-list:hover{
+.add-to-profile-list:hover {
   background: var(--secundary-hover);
 }
 

@@ -1,0 +1,23 @@
+.main-tool .phrase-wrapper button {
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  outline: none;
+  font-weight: bolder;
+  padding: 0 7px;
+  cursor: pointer;
+}
+
+.main-tool .phrase-wrapper button:hover {
+  background: var(--secundary-color);
+  color: var(--white-color);
+}
+
+.main-tool .phrase-wrapper {
+  margin-top: 20px;
+  background: var(--white-color);
+  width: 100%;
+
+  border-radius: 15px;
+  padding: 30px;
+}

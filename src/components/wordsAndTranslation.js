@@ -1,5 +1,6 @@
 import React from "react";
 import { ReactComponent as CloseIcon } from "../assets/icons/closeIcon.svg";
+import "./styles/words_and_translations.css";
 
 export default function WordsAndTranslation(props) {
 
@@ -10,7 +11,7 @@ export default function WordsAndTranslation(props) {
     );
 
     props.setSameWordsFunc(
-      props.sameWordsVar.filter((word) => word !== target)
+      props.sameWordsFromProfileVar.filter((word) => word !== target)
     );
 
     const translatedWords = props.translatedWordsVar;
@@ -24,8 +25,8 @@ export default function WordsAndTranslation(props) {
   function listWordsAndTranslations() {
     let divList = [];
     let arrayWords = [];
-    if (props.sameWordsVar && props.sameWordsVar.length > 0) {
-      arrayWords.push.apply(arrayWords, props.sameWordsVar);
+    if (props.sameWordsFromProfileVar && props.sameWordsFromProfileVar.length > 0) {
+      arrayWords.push.apply(arrayWords, props.sameWordsFromProfileVar);
     }
 
     if (props.unknownWordsVar && props.unknownWordsVar.length > 0) {
@@ -75,7 +76,7 @@ export default function WordsAndTranslation(props) {
 
   return (
     <div className="unknown-words-container">
-      {props.unknownWordsVar || props.sameWordsVar
+      {props.unknownWordsVar || props.sameWordsFromProfileVar
         ? listWordsAndTranslations().map((div) => {
             return div;
           })
