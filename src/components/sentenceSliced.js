@@ -10,6 +10,20 @@ export default function sentenceSliced(props) {
     }
   }
 
+  function handleClassWord(word) {
+    let clearWord = word.replace(/[.,?!;:\s]/g, "");
+
+    if (props.unknownWordsVar.includes(clearWord)) {
+      return "word-hightlight";
+    }
+
+    if (props.sameWordsFromProfileVar.includes(clearWord)) {
+      return "word-hightlight-profile";
+    }
+
+    return "";
+  }
+
   return (
     <>
       {props.sentenceVar.length > 0 && (
@@ -17,14 +31,7 @@ export default function sentenceSliced(props) {
           {props.sentenceVar.map((word, index) => {
             return (
               <button
-                className={
-                  props.unknownWordsVar.includes(
-                    word.replace(/[.,?!;:\s]/g, "")
-                  ) ||
-                  props.sameWordsFromProfileVar.includes(word.replace(/[.,?!;:\s]/g, ""))
-                    ? "word-hightlight"
-                    : ""
-                }
+                className={handleClassWord(word)}
                 onClick={() => handleClickWord(word)}
                 key={index}
               >

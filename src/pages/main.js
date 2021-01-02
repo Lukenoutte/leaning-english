@@ -145,7 +145,7 @@ function Main() {
             setUnknownWordsFunc={setUnknownWords}
             setTranslatedWordsFunc={setTranslatedWords}
             sameWordsFromProfileVar={sameWordsFromProfile}
-            setDameWordsFromProfileFunc={setSameWordsFromProfile}
+            setSameWordsFuncProfileFunc={setSameWordsFromProfile}
           />
         </div>
       </div>

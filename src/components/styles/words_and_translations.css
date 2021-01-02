@@ -16,6 +16,10 @@
   padding: 30px;
 }
 
+.main-tool .profile-word {
+  background: var(--secundary-light) !important;
+}
+
 .main-tool .unknown-words button {
   position: absolute;
   right: 0px;

@@ -3,14 +3,12 @@ import { ReactComponent as CloseIcon } from "../assets/icons/closeIcon.svg";
 import "./styles/words_and_translations.css";
 
 export default function WordsAndTranslation(props) {
-
-
   function removeOneWordHighlighted(target) {
     props.setUnknownWordsFunc(
       props.unknownWordsVar.filter((word) => word !== target)
     );
 
-    props.setSameWordsFunc(
+    props.setSameWordsFuncProfileFunc(
       props.sameWordsFromProfileVar.filter((word) => word !== target)
     );
 
@@ -24,18 +22,27 @@ export default function WordsAndTranslation(props) {
 
   function listWordsAndTranslations() {
     let divList = [];
-    let arrayWords = [];
-    if (props.sameWordsFromProfileVar && props.sameWordsFromProfileVar.length > 0) {
-      arrayWords.push.apply(arrayWords, props.sameWordsFromProfileVar);
+
+    let profileWords = props.sameWordsFromProfileVar;
+    let unknownWordsAux = props.unknownWordsVar;
+
+    if (profileWords && profileWords.length > 0) {
+      divList = selectedWord({
+        divList,
+        arrayWords: profileWords,
+        isProfileWord: true,
+      });
     }
 
-    if (props.unknownWordsVar && props.unknownWordsVar.length > 0) {
-      arrayWords.push.apply(arrayWords, props.unknownWordsVar);
+    if (unknownWordsAux && unknownWordsAux.length > 0) {
+      divList = selectedWord({
+        divList,
+        arrayWords: profileWords,
+        isProfileWord: false,
+      });
     }
 
-
-
-    return selectedWord({ divList, arrayWords });
+    return divList;
   }
 
   function selectedWord(args) {
@@ -58,14 +65,16 @@ export default function WordsAndTranslation(props) {
         }
 
         divList.push(
-          <div className="unknown-words shadow-light" key={word}>
+          <div className={args.isProfileWord?"unknown-words shadow-light profile-word":"unknown-words shadow-light"} key={word}>
             <p>
               <span className="unknown-word">{word.toUpperCase()}</span>
               {" -" + waitTranslation}
             </p>
-            <button onClick={() => removeOneWordHighlighted(word)}>
-              <CloseIcon className="close-icon" />
-            </button>
+            {!args.isProfileWord && (
+              <button onClick={() => removeOneWordHighlighted(word)}>
+                <CloseIcon className="close-icon" />
+              </button>
+            )}
           </div>
         );
         return divList;

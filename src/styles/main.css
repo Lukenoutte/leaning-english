@@ -31,11 +31,6 @@
   color: var(--white-color);
 }
 
-.main-tool .word-hightlight {
-  background-color: var(--secundary-color) !important;
-  color: var(--white-color);
-}
-
 .add-to-profile-list {
   position: fixed;
   right: 10px;

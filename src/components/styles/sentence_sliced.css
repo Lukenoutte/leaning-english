@@ -21,3 +21,14 @@
   border-radius: 15px;
   padding: 30px;
 }
+
+
+.main-tool .word-hightlight {
+  background-color: var(--secundary-color) !important;
+  color: var(--white-color);
+}
+
+.main-tool .word-hightlight-profile {
+  background-color: var(--secundary-strong) !important;
+  color: var(--white-color);
+}
