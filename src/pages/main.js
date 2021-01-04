@@ -47,11 +47,15 @@ function Main() {
     inputPhrase.current.value = "";
   }
 
+  function closePopUpTimer() {
+    setShowPopUp(false); 
+  }
+
   async function handleAddProfileWords() {
     const response = await addWords({ unknownWords });
     if (response.status === 200) {
-      console.log("OK");
       setShowPopUp(true);
+      setTimeout(closePopUpTimer, 2000); 
     }
   }
 
@@ -152,7 +156,6 @@ function Main() {
             sameWordsFromProfileVar={sameWordsFromProfile}
             setSameWordsFuncProfileFunc={setSameWordsFromProfile}
           />
-
         </div>
       </div>
       {authenticated && unknownWords.length > 0 && (
@@ -161,10 +164,8 @@ function Main() {
         </button>
       )}
 
-      {showPopUp && (
-       <PopUp message={"You add a new word!"} />
-      )}
-
+      {showPopUp && <PopUp message={"You add a new word to your list!"} />}
+     
     </HeaderAndFotter>
   );
 }
