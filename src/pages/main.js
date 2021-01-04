@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect, useContext } from "react";
 import HeaderAndFotter from "../components/headerAndFooter";
 import ChooseLanguage from "../components/chooseLanguage";
 import SentenceSliced from "../components/sentenceSliced";
+import PopUp from "../components/popUp";
 import WordsAndTranslations from "../components/wordsAndTranslation";
 import "../styles/main.css";
 
@@ -15,6 +16,7 @@ function Main() {
   const [languageSelectValue, setLanguageToSelectValue] = useState("pt-br");
   const [translatedWords, setTranslatedWords] = useState({});
   const [profileWordsList, setProfileWordsList] = useState([]);
+  const [showPopUp, setShowPopUp] = useState(false);
 
   const inputPhrase = useRef(null);
 
@@ -49,6 +51,7 @@ function Main() {
     const response = await addWords({ unknownWords });
     if (response.status === 200) {
       console.log("OK");
+      setShowPopUp(true);
     }
   }
 
@@ -70,7 +73,7 @@ function Main() {
   }, [unknownWords, languageSelectValue]);
 
   useEffect(() => {
-    // Get unknown words list from my api
+    // Get unknown words profile list from my api
     if (authenticated) {
       const wordsList = async () => {
         const words = await getWords();
@@ -80,7 +83,7 @@ function Main() {
       };
       wordsList();
     }
-  }, [authenticated]);
+  }, [authenticated, unknownWords]);
 
   useEffect(() => {
     // Compare user sentence and profile words
@@ -133,12 +136,14 @@ function Main() {
             </button>
             <button onClick={handleClickButtonClear}>Clear all</button>
           </div>
+
           <SentenceSliced
             sentenceVar={sentence}
             unknownWordsVar={unknownWords}
             setUnknownWordsFunc={setUnknownWords}
             sameWordsFromProfileVar={sameWordsFromProfile}
           />
+
           <WordsAndTranslations
             translatedWordsVar={translatedWords}
             unknownWordsVar={unknownWords}
@@ -147,6 +152,7 @@ function Main() {
             sameWordsFromProfileVar={sameWordsFromProfile}
             setSameWordsFuncProfileFunc={setSameWordsFromProfile}
           />
+
         </div>
       </div>
       {authenticated && unknownWords.length > 0 && (
@@ -154,6 +160,11 @@ function Main() {
           +
         </button>
       )}
+
+      {showPopUp && (
+       <PopUp message={"You add a new word!"} />
+      )}
+
     </HeaderAndFotter>
   );
 }

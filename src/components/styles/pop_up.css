@@ -1,0 +1,10 @@
+.pop-up-wrapper{
+    background-color: var(--secundary-color);
+    color: var(--white-color);
+  
+
+    position: fixed;
+    bottom: 10px;
+    right: 40%;
+    padding: 10px 50px;
+}

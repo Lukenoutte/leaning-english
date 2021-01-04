@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { Context } from "../context/AuthContext";
 import { Drawer } from "@material-ui/core";
 
-function HeaderAndFooter(props) {
+export default function HeaderAndFooter(props) {
   const { authenticated, handleLogout } = useContext(Context);
   const [drawerIsOpen, setDrawerIsOpen] = useState(false);
 
@@ -87,4 +87,4 @@ function HeaderAndFooter(props) {
   );
 }
 
-export default HeaderAndFooter;
+

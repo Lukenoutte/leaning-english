@@ -23,13 +23,13 @@ export default function WordsAndTranslation(props) {
   function listWordsAndTranslations() {
     let divList = [];
 
-    let profileWords = props.sameWordsFromProfileVar;
+    let profileWordsAux = props.sameWordsFromProfileVar;
     let unknownWordsAux = props.unknownWordsVar;
 
-    if (profileWords && profileWords.length > 0) {
+    if (profileWordsAux && profileWordsAux.length > 0) {
       divList = selectedWord({
         divList,
-        arrayWords: profileWords,
+        arrayWords: profileWordsAux,
         isProfileWord: true,
       });
     }
@@ -37,7 +37,7 @@ export default function WordsAndTranslation(props) {
     if (unknownWordsAux && unknownWordsAux.length > 0) {
       divList = selectedWord({
         divList,
-        arrayWords: profileWords,
+        arrayWords: unknownWordsAux,
         isProfileWord: false,
       });
     }
