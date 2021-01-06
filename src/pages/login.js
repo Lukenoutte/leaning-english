@@ -3,7 +3,7 @@ import HeaderAndFotter from "../components/headerAndFooter";
 import "../styles/login.css";
 import { Link } from "react-router-dom";
 import { login } from "../services";
-import { Context } from "../context/AuthContext";
+import { AuthContext } from "../context/AuthContext";
 
 
 function Login() {
@@ -12,7 +12,7 @@ function Login() {
   const [emptyInput, setEmptyInput] = useState(false);
   const [loginFail, setLoginFail] = useState(false);
   const [loginFailMessage, setLoginFailMessage] = useState("");
-  const { handleLogin } = useContext(Context);
+  const { handleLogin } = useContext(AuthContext);
 
   const loginFunc = async (event) => {
     event.preventDefault();

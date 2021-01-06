@@ -4,11 +4,11 @@ import { ReactComponent as MainIcon } from "../assets/icons/mainIcon.svg";
 import { ReactComponent as MenuIcon } from "../assets/icons/menuIcon.svg";
 import { ReactComponent as LogoutIcon } from "../assets/icons/logoutIcon.svg";
 import { Link } from "react-router-dom";
-import { Context } from "../context/AuthContext";
+import { AuthContext } from "../context/AuthContext";
 import { Drawer } from "@material-ui/core";
 
 export default function HeaderAndFooter(props) {
-  const { authenticated, handleLogout } = useContext(Context);
+  const { authenticated, handleLogout } = useContext(AuthContext);
   const [drawerIsOpen, setDrawerIsOpen] = useState(false);
 
   const handleDrawer = () => {

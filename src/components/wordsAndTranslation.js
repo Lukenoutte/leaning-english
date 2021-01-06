@@ -1,30 +1,35 @@
-import React from "react";
+import React, { useContext } from "react";
 import { ReactComponent as CloseIcon } from "../assets/icons/closeIcon.svg";
 import "./styles/words_and_translations.css";
+import { MainContext } from "../context/MainContext";
 
 export default function WordsAndTranslation(props) {
+  const {
+    translatedWords,
+    setTranslatedWords,
+    unknownWords,
+    setUnknownWords,
+    sameWordsFromProfile,
+    setSameWordsFromProfile,
+  } = useContext(MainContext);
+
   function removeOneWordHighlighted(target) {
-    props.setUnknownWordsFunc(
-      props.unknownWordsVar.filter((word) => word !== target)
-    );
+    setUnknownWords(unknownWords.filter((word) => word !== target));
 
-    props.setSameWordsFuncProfileFunc(
-      props.sameWordsFromProfileVar.filter((word) => word !== target)
+    setSameWordsFromProfile(
+      sameWordsFromProfile.filter((word) => word !== target)
     );
-
-    const translatedWords = props.translatedWordsVar;
 
     if (translatedWords) {
       delete translatedWords[target];
-      props.setTranslatedWordsFunc(translatedWords);
+      setTranslatedWords(translatedWords);
     }
   }
 
   function listWordsAndTranslations() {
     let divList = [];
 
-    let profileWordsAux = props.sameWordsFromProfileVar;
-    let unknownWordsAux = props.unknownWordsVar;
+    let profileWordsAux = sameWordsFromProfile;
 
     if (profileWordsAux && profileWordsAux.length > 0) {
       divList = selectedWord({
@@ -34,10 +39,10 @@ export default function WordsAndTranslation(props) {
       });
     }
 
-    if (unknownWordsAux && unknownWordsAux.length > 0) {
+    if (unknownWords && unknownWords.length > 0) {
       divList = selectedWord({
         divList,
-        arrayWords: unknownWordsAux,
+        arrayWords: unknownWords,
         isProfileWord: false,
       });
     }
@@ -52,20 +57,27 @@ export default function WordsAndTranslation(props) {
 
     if (myArray !== undefined) {
       myArray.map((word) => {
-        if (props.translatedWordsVar[word] === undefined) {
+        if (translatedWords[word] === undefined) {
           waitTranslation = " Loading...";
         } else {
-          if (props.translatedWordsVar[word].length === 0) {
-            waitTranslation = " Nenhuma tradução encontrada :(";
+          if (translatedWords[word].length === 0) {
+            waitTranslation = " No translations found :(";
           } else {
-            waitTranslation = props.translatedWordsVar[word].map((objects) => {
+            waitTranslation = translatedWords[word].map((objects) => {
               return "  " + objects.normalizedTarget;
             });
           }
         }
 
         divList.push(
-          <div className={args.isProfileWord?"unknown-words shadow-light profile-word":"unknown-words shadow-light"} key={word}>
+          <div
+            className={
+              args.isProfileWord
+                ? "unknown-words shadow-light profile-word"
+                : "unknown-words shadow-light"
+            }
+            key={word}
+          >
             <p>
               <span className="unknown-word">{word.toUpperCase()}</span>
               {" -" + waitTranslation}
@@ -85,7 +97,7 @@ export default function WordsAndTranslation(props) {
 
   return (
     <div className="unknown-words-container">
-      {props.unknownWordsVar || props.sameWordsFromProfileVar
+      {unknownWords || sameWordsFromProfile
         ? listWordsAndTranslations().map((div) => {
             return div;
           })

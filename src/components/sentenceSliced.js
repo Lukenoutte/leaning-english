@@ -1,23 +1,32 @@
-import React from "react";
+import React,{ useContext } from "react";
 import "./styles/sentence_sliced.css";
+import { MainContext } from "../context/MainContext";
 
-export default function sentenceSliced(props) {
+export default function SentenceSliced(props) {
+
+  const {
+    unknownWords,
+    setUnknownWords,
+    sameWordsFromProfile,  
+    sentence
+  } = useContext(MainContext);
+
   function handleClickWord(word) {
     let newWord = word.replace(/[.,?!;:\s]/g, "");
 
-    if (!props.unknownWordsVar.includes(newWord)) {
-      props.setUnknownWordsFunc((oldArray) => [...oldArray, newWord]);
+    if (!unknownWords.includes(newWord) && !sameWordsFromProfile.includes(newWord) ) {
+      setUnknownWords((oldArray) => [...oldArray, newWord]);
     }
   }
 
   function handleClassWord(word) {
     let clearWord = word.replace(/[.,?!;:\s]/g, "");
 
-    if (props.unknownWordsVar.includes(clearWord)) {
+    if (unknownWords.includes(clearWord)) {
       return "word-hightlight";
     }
 
-    if (props.sameWordsFromProfileVar.includes(clearWord)) {
+    if (sameWordsFromProfile.includes(clearWord)) {
       return "word-hightlight-profile";
     }
 
@@ -26,9 +35,9 @@ export default function sentenceSliced(props) {
 
   return (
     <>
-      {props.sentenceVar.length > 0 && (
+      {sentence.length > 0 && (
         <div className="phrase-wrapper shadow-light">
-          {props.sentenceVar.map((word, index) => {
+          {sentence.map((word, index) => {
             return (
               <button
                 className={handleClassWord(word)}
