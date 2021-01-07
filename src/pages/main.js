@@ -11,22 +11,23 @@ import { AuthContext } from "../context/AuthContext";
 import { MainContext } from "../context/MainContext";
 
 function Main() {
-
   const [languageSelectValue, setLanguageToSelectValue] = useState("pt-br");
 
   const [profileWordsList, setProfileWordsList] = useState([]);
-  const [showPopUp, setShowPopUp] = useState(false);
   const inputPhrase = useRef(null);
 
   const { authenticated } = useContext(AuthContext);
   const {
+    translatedWords,
     setTranslatedWords,
     unknownWords,
     setUnknownWords,
     sameWordsFromProfile,
     setSameWordsFromProfile,
     sentence,
-    setSentence
+    setSentence,
+    showPopUp,
+    setShowPopUp,
   } = useContext(MainContext);
 
   function handleButtonSplitPhrase() {
@@ -54,15 +55,16 @@ function Main() {
     inputPhrase.current.value = "";
   }
 
-  function closePopUpTimer() {
-    setShowPopUp(false);
-  }
-
   async function handleAddProfileWords() {
-    const response = await addWords({ unknownWords });
-    if (response.status === 200) {
-      setShowPopUp(true);
-      setTimeout(closePopUpTimer, 2000);
+    let validWords = unknownWords.filter(
+      (word) => translatedWords[word].length > 0
+    );
+    if (validWords.length > 0) {
+      const response = await addWords({ validWords });
+      if (response.status === 200) {
+        setShowPopUp(true);
+        
+      }
     }
   }
 
@@ -100,7 +102,10 @@ function Main() {
     // Compare user sentence and profile words
     if (authenticated && sentence.length > 0) {
       const wordsFound = profileWordsList.filter(
-        (element) => sentence.map(word => word.replace(/[.,?!;:\s]/g, "")).indexOf(element) !== -1
+        (element) =>
+          sentence
+            .map((word) => word.replace(/[.,?!;:\s]/g, ""))
+            .indexOf(element) !== -1
       );
 
       setSameWordsFromProfile((oldArray) =>
@@ -150,7 +155,7 @@ function Main() {
 
           <SentenceSliced />
 
-          <WordsAndTranslations/>
+          <WordsAndTranslations />
         </div>
       </div>
       {authenticated && unknownWords.length > 0 && (

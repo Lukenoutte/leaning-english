@@ -6,17 +6,25 @@ function MainProvider({ children }) {
   const [unknownWords, setUnknownWords] = useState([]);
   const [sameWordsFromProfile, setSameWordsFromProfile] = useState([]);
   const [sentence, setSentence] = useState([]);
+  const [showPopUp, setShowPopUp] = useState(false);
+
   return (
     <MainContext.Provider
       value={{
         translatedWords,
         setTranslatedWords,
+
         unknownWords,
         setUnknownWords,
+
         sameWordsFromProfile,
         setSameWordsFromProfile,
+
         sentence,
-        setSentence
+        setSentence,
+        
+        showPopUp,
+        setShowPopUp
       }}
     >
       {children}
