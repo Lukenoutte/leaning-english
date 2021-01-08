@@ -20,26 +20,28 @@ export default function HeaderAndFooter(props) {
   };
 
   const MyDrawer = () => {
-    return (<Drawer
-      className="drawer"
-      anchor={"top"}
-      open={drawerIsOpen}
-      onEscapeKeyDown={handleDrawer}
-      onBackdropClick={handleDrawer}
-    >
-      <div className="icon-and-name-drawer">
-        <MainIcon className="main-icon" /> <p>Surligner</p>
-      </div>
-      <Link to="/">Home</Link>
-      {!authenticated ? (
-        <>
-          <Link to="/login">Login</Link>
-          <Link to="/sign_up">Sign up</Link>
-        </>
-      ) : (
-        <button onClick={handleLogout}>Logout</button>
-      )}
-    </Drawer>);
+    return (
+      <Drawer
+        className="drawer"
+        anchor={"top"}
+        open={drawerIsOpen}
+        onEscapeKeyDown={handleDrawer}
+        onBackdropClick={handleDrawer}
+      >
+        <div className="icon-and-name-drawer">
+          <MainIcon className="main-icon" /> <p>Surligner</p>
+        </div>
+        <Link to="/">Home</Link>
+        {!authenticated ? (
+          <>
+            <Link to="/login">Login</Link>
+            <Link to="/sign_up">Sign up</Link>
+          </>
+        ) : (
+          <button onClick={handleLogout}>Logout</button>
+        )}
+      </Drawer>
+    );
   };
 
   return (
@@ -53,8 +55,8 @@ export default function HeaderAndFooter(props) {
           <button className="drawer-button" onClick={handleDrawer}>
             <MenuIcon className="menu-icon" />
           </button>
-          
-          <MyDrawer/>
+
+          <MyDrawer />
 
           {!authenticated ? (
             <div className="login-and-sign-up">
@@ -62,10 +64,13 @@ export default function HeaderAndFooter(props) {
               <Link to="/sign_up">Sign Up</Link>
             </div>
           ) : (
-            <button className="logout-button" onClick={handleLogout}>
-              {" "}
-              <LogoutIcon className="logout-icon" />{" "}
-            </button>
+            <div className="logout-and-profile">
+              <Link to="/profile">Profile</Link>
+              <button className="logout-button" onClick={handleLogout}>
+                {" "}
+                <LogoutIcon className="logout-icon" />{" "}
+              </button>
+            </div>
           )}
         </div>
       </header>
@@ -86,5 +91,3 @@ export default function HeaderAndFooter(props) {
     </>
   );
 }
-
-

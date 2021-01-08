@@ -83,7 +83,25 @@ const addWords = async (arg) => {
   return response;
 };
 
+const userInformations = async () => {
+  const id = JSON.parse(localStorage.getItem("id"));
 
+  let response = await myApi({
+    url: "/projects/user_informations",
+    method: "post",
+    data: {
+      id: id,      
+    }, 
+  }).catch((err) => {
+    return err.response;
+  });
+
+  if (response && response.data) {
+    return { data: response.data, status: response.status };
+  }
+  
+  return response;
+}
 
 const getWords = async () => {
   const id = JSON.parse(localStorage.getItem("id"));
@@ -130,4 +148,4 @@ const postMicrosoftApi = async (arg) => {
   return response;
 }
 
-export { login, signUp, verifyToken, addWords, getWords, myApi, postMicrosoftApi};
+export { login, signUp, verifyToken, addWords, getWords, myApi, postMicrosoftApi, userInformations};

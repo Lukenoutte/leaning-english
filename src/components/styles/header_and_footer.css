@@ -124,6 +124,15 @@ footer a {
   outline: none;
 }
 
+.logout-and-profile{
+  display: flex;
+  flex-direction: row;
+}
+
+.logout-and-profile button{
+  margin-left: 20px;
+}
+
 @media (max-width: 700px) {
   .drawer-button {
     display: inline;
@@ -136,7 +145,7 @@ footer a {
   .login-and-sign-up {
     display: none;
   }
-  .logout-button {
+  .logout-and-profile {
     display: none;
   }
 }
