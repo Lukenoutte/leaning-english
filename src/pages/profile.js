@@ -12,6 +12,6 @@ export default function Profile() {
         getUserInfo();
     }, [])
     return (<HeaderAndFotter>
-
+        {console.log(userInfo)}
     </HeaderAndFotter>);
 }

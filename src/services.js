@@ -74,7 +74,7 @@ const addWords = async (arg) => {
     method: "post",
     data: {
       id: id,
-      unkownWords: arg.unknownWords,
+      unkownWords: arg.validWords,
     }, 
   }).catch((err) => {
     return err.response;

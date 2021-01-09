@@ -7,6 +7,7 @@ function MainProvider({ children }) {
   const [sameWordsFromProfile, setSameWordsFromProfile] = useState([]);
   const [sentence, setSentence] = useState([]);
   const [showPopUp, setShowPopUp] = useState(false);
+  const [profileWordsList, setProfileWordsList] = useState([]);
 
   return (
     <MainContext.Provider
@@ -24,7 +25,10 @@ function MainProvider({ children }) {
         setSentence,
         
         showPopUp,
-        setShowPopUp
+        setShowPopUp,
+        
+        profileWordsList,
+        setProfileWordsList
       }}
     >
       {children}

@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useContext } from "react";
+import React, { useState, useRef, useEffect, useContext, useCallback } from "react";
 import HeaderAndFotter from "../components/headerAndFooter";
 import ChooseLanguage from "../components/chooseLanguage";
 import SentenceSliced from "../components/sentenceSliced";
@@ -13,7 +13,7 @@ import { MainContext } from "../context/MainContext";
 function Main() {
   const [languageSelectValue, setLanguageToSelectValue] = useState("pt-br");
 
-  const [profileWordsList, setProfileWordsList] = useState([]);
+ 
   const inputPhrase = useRef(null);
 
   const { authenticated } = useContext(AuthContext);
@@ -28,6 +28,8 @@ function Main() {
     setSentence,
     showPopUp,
     setShowPopUp,
+    profileWordsList,
+    setProfileWordsList
   } = useContext(MainContext);
 
   function handleButtonSplitPhrase() {
@@ -55,18 +57,20 @@ function Main() {
     inputPhrase.current.value = "";
   }
 
-  async function handleAddProfileWords() {
+  const callbackProfileWords = useCallback( async () => {
     let validWords = unknownWords.filter(
       (word) => translatedWords[word].length > 0
     );
     if (validWords.length > 0) {
-      const response = await addWords({ validWords });
+      
+      const response = await addWords({validWords});
       if (response.status === 200) {
         setShowPopUp(true);
         
       }
+      console.log("callback");
     }
-  }
+  },[unknownWords, translatedWords, setShowPopUp]);
 
   useEffect(() => {
     // API CALL to translate selected word
@@ -92,11 +96,12 @@ function Main() {
         const words = await getWords();
         if (words.status === 200) {
           setProfileWordsList(words.data);
+          console.log(words);
         }
       };
       wordsList();
     }
-  }, [authenticated, unknownWords]);
+  }, [authenticated, setProfileWordsList, callbackProfileWords]);
 
   useEffect(() => {
     // Compare user sentence and profile words
@@ -159,7 +164,7 @@ function Main() {
         </div>
       </div>
       {authenticated && unknownWords.length > 0 && (
-        <button className="add-to-profile-list" onClick={handleAddProfileWords}>
+        <button className="add-to-profile-list" onClick={callbackProfileWords}>
           +
         </button>
       )}

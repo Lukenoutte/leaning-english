@@ -38,7 +38,10 @@ export default function HeaderAndFooter(props) {
             <Link to="/sign_up">Sign up</Link>
           </>
         ) : (
+          <>
+          <Link to="/profile">Profile</Link>
           <button onClick={handleLogout}>Logout</button>
+          </>
         )}
       </Drawer>
     );
