@@ -68,7 +68,7 @@ const verifyToken = async (arg) => {
 
 const addWords = async (arg) => {
   const id = JSON.parse(localStorage.getItem("id"));
-
+  console.log(arg.validWords);
   let response = await myApi({
     url: "/projects/add_unknown_words",
     method: "post",

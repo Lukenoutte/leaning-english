@@ -1,4 +1,10 @@
-import React, { useState, useRef, useEffect, useContext, useCallback } from "react";
+import React, {
+  useState,
+  useRef,
+  useEffect,
+  useContext,
+  useCallback,
+} from "react";
 import HeaderAndFotter from "../components/headerAndFooter";
 import ChooseLanguage from "../components/chooseLanguage";
 import SentenceSliced from "../components/sentenceSliced";
@@ -13,7 +19,6 @@ import { MainContext } from "../context/MainContext";
 function Main() {
   const [languageSelectValue, setLanguageToSelectValue] = useState("pt-br");
 
- 
   const inputPhrase = useRef(null);
 
   const { authenticated } = useContext(AuthContext);
@@ -29,7 +34,7 @@ function Main() {
     showPopUp,
     setShowPopUp,
     profileWordsList,
-    setProfileWordsList
+    setProfileWordsList,
   } = useContext(MainContext);
 
   function handleButtonSplitPhrase() {
@@ -57,20 +62,24 @@ function Main() {
     inputPhrase.current.value = "";
   }
 
-  const callbackProfileWords = useCallback( async () => {
+  const callbackAddProfileWords = useCallback(async () => {
+   
     let validWords = unknownWords.filter(
-      (word) => translatedWords[word].length > 0
-    );
-    if (validWords.length > 0) {
-      
-      const response = await addWords({validWords});
-      if (response.status === 200) {
-        setShowPopUp(true);
+      (word) =>{return  translatedWords[word]}
         
+    );
+      console.log(validWords)
+    if (validWords && validWords.length > 0) {
+     
+      const response = await addWords({ validWords });
+
+      if (response.status && response.status === 200) {
+        setShowPopUp(true);
+        setUnknownWords([]);
       }
-      console.log("callback");
     }
-  },[unknownWords, translatedWords, setShowPopUp]);
+
+  }, [unknownWords, setShowPopUp, setUnknownWords, translatedWords]);
 
   useEffect(() => {
     // API CALL to translate selected word
@@ -94,14 +103,14 @@ function Main() {
     if (authenticated) {
       const wordsList = async () => {
         const words = await getWords();
-        if (words.status === 200) {
+        if (words.status && words.status === 200) {
           setProfileWordsList(words.data);
-          console.log(words);
         }
       };
       wordsList();
     }
-  }, [authenticated, setProfileWordsList, callbackProfileWords]);
+    console.log("test2")
+  }, [authenticated, setProfileWordsList, unknownWords]);
 
   useEffect(() => {
     // Compare user sentence and profile words
@@ -164,7 +173,10 @@ function Main() {
         </div>
       </div>
       {authenticated && unknownWords.length > 0 && (
-        <button className="add-to-profile-list" onClick={callbackProfileWords}>
+        <button
+          className="add-to-profile-list"
+          onClick={callbackAddProfileWords}
+        >
           +
         </button>
       )}
