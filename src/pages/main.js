@@ -1,10 +1,4 @@
-import React, {
-  useState,
-  useRef,
-  useEffect,
-  useContext,
-  useCallback,
-} from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
 import HeaderAndFotter from "../components/headerAndFooter";
 import ChooseLanguage from "../components/chooseLanguage";
 import SentenceSliced from "../components/sentenceSliced";
@@ -18,7 +12,7 @@ import { MainContext } from "../context/MainContext";
 
 function Main() {
   const [languageSelectValue, setLanguageToSelectValue] = useState("pt-br");
-
+  const [addedNewWords, setAddedNewWords] = useState(false);
   const inputPhrase = useRef(null);
 
   const { authenticated } = useContext(AuthContext);
@@ -40,6 +34,7 @@ function Main() {
   function handleButtonSplitPhrase() {
     let currentPhrase = inputPhrase.current.value;
     if (currentPhrase !== "") {
+      setSameWordsFromProfile([]);
       setSentence(currentPhrase.split(" "));
     }
   }
@@ -62,24 +57,26 @@ function Main() {
     inputPhrase.current.value = "";
   }
 
-  const callbackAddProfileWords = useCallback(async () => {
-   
-    let validWords = unknownWords.filter(
-      (word) =>{return  translatedWords[word]}
-        
-    );
-      console.log(validWords)
+  async function callbackAddProfileWords() {
+    let validWords = unknownWords.filter((word) => {
+      return translatedWords[word];
+    });
+ 
     if (validWords && validWords.length > 0) {
-     
       const response = await addWords({ validWords });
 
       if (response.status && response.status === 200) {
         setShowPopUp(true);
         setUnknownWords([]);
+
+        if (addedNewWords) {
+          setAddedNewWords(false);
+        } else {
+          setAddedNewWords(true);
+        }
       }
     }
-
-  }, [unknownWords, setShowPopUp, setUnknownWords, translatedWords]);
+  }
 
   useEffect(() => {
     // API CALL to translate selected word
@@ -100,17 +97,21 @@ function Main() {
 
   useEffect(() => {
     // Get unknown words profile list from my api
-    if (authenticated) {
-      const wordsList = async () => {
-        const words = await getWords();
-        if (words.status && words.status === 200) {
-          setProfileWordsList(words.data);
-        }
-      };
-      wordsList();
+    function getWordsListFromApi() {
+      if (authenticated) {
+        const wordsList = async () => {
+          const words = await getWords();
+          if (words.status && words.status === 200) {
+            setProfileWordsList(words.data);
+          }
+        };
+        wordsList();
+      }
+      
     }
-    console.log("test2")
-  }, [authenticated, setProfileWordsList, unknownWords]);
+
+    getWordsListFromApi();
+  }, [authenticated, setProfileWordsList, addedNewWords]);
 
   useEffect(() => {
     // Compare user sentence and profile words
