@@ -28,7 +28,8 @@ function MainProvider({ children }) {
         setShowPopUp,
         
         profileWordsList,
-        setProfileWordsList
+        setProfileWordsList,
+   
       }}
     >
       {children}

@@ -12,7 +12,7 @@ export default function SentenceSliced(props) {
   } = useContext(MainContext);
 
   function handleClickWord(word) {
-    let newWord = word.replace(/[.,?!;:\s]/g, "");
+    let newWord = word.replace(/[.,?!;:\s]/g, "").toLowerCase();
 
     if (!unknownWords.includes(newWord) && !sameWordsFromProfile.includes(newWord) ) {
       setUnknownWords((oldArray) => [...oldArray, newWord]);

@@ -28,7 +28,7 @@ function Main() {
     showPopUp,
     setShowPopUp,
     profileWordsList,
-    setProfileWordsList,
+    setProfileWordsList
   } = useContext(MainContext);
 
   function handleButtonSplitPhrase() {
@@ -57,7 +57,7 @@ function Main() {
     inputPhrase.current.value = "";
   }
 
-  async function callbackAddProfileWords() {
+  async function addProfileWords() {
     let validWords = unknownWords.filter((word) => {
       return translatedWords[word];
     });
@@ -149,6 +149,14 @@ function Main() {
     }
   }, [sameWordsFromProfile, languageSelectValue, setTranslatedWords]);
 
+  useEffect(() => {
+    // Clear main on login and logout
+    handleClickButtonClear();
+ 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [authenticated]);
+
+
   return (
     <HeaderAndFotter>
       <div className="main-tool global-wrapper">
@@ -176,7 +184,7 @@ function Main() {
       {authenticated && unknownWords.length > 0 && (
         <button
           className="add-to-profile-list"
-          onClick={callbackAddProfileWords}
+          onClick={addProfileWords}
         >
           +
         </button>

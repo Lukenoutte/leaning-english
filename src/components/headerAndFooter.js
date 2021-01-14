@@ -11,6 +11,9 @@ export default function HeaderAndFooter(props) {
   const { authenticated, handleLogout } = useContext(AuthContext);
   const [drawerIsOpen, setDrawerIsOpen] = useState(false);
 
+
+
+
   const handleDrawer = () => {
     if (drawerIsOpen) {
       setDrawerIsOpen(false);

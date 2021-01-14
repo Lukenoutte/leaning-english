@@ -1,10 +1,13 @@
 import React, { createContext, useState, useEffect } from "react";
 import { myApi, verifyToken } from "../services";
 import history from "../history";
+
 const AuthContext = createContext();
+
 
 function AuthProvider({ children }) {
   const [authenticated, setAuthenticated] = useState(false);
+
 
   useEffect(() => {
     async function tokenVerification() {
@@ -29,6 +32,7 @@ function AuthProvider({ children }) {
     setAuthenticated(false);
     localStorage.removeItem("token");
     myApi.defaults.headers.autorization = undefined;
+   
     history.push("/login");
   }
 
@@ -39,6 +43,7 @@ function AuthProvider({ children }) {
     localStorage.setItem("token", JSON.stringify(token));
     localStorage.setItem("id", JSON.stringify(id));
     myApi.defaults.headers.autorization = `Bearer ${token}`;
+  
     history.push("/");
   }
 
