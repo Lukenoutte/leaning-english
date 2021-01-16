@@ -9,6 +9,10 @@ function MainProvider({ children }) {
   const [showPopUp, setShowPopUp] = useState(false);
   const [profileWordsList, setProfileWordsList] = useState([]);
 
+  function cleanWord(word){
+    return word.replace(/[.,?!;:\s]/g, "").toLowerCase();
+  }
+
   return (
     <MainContext.Provider
       value={{
@@ -29,7 +33,7 @@ function MainProvider({ children }) {
         
         profileWordsList,
         setProfileWordsList,
-   
+        cleanWord
       }}
     >
       {children}

@@ -4,7 +4,7 @@ import "../styles/login.css";
 import { Link } from "react-router-dom";
 import { login } from "../services";
 import { AuthContext } from "../context/AuthContext";
-
+import Loading from "../components/loading";
 
 function Login() {
   const inputEmail = useRef("");
@@ -13,18 +13,20 @@ function Login() {
   const [loginFail, setLoginFail] = useState(false);
   const [loginFailMessage, setLoginFailMessage] = useState("");
   const { handleLogin } = useContext(AuthContext);
+  const [isLoading, setIsloading] = useState(false);
 
   const loginFunc = async (event) => {
     event.preventDefault();
     let email = (inputEmail.current.value).replace(/\s/g, "");
     let pass = inputPass.current.value;
+    
 
     if (email === "" || pass === "") {
       setEmptyInput(true);
       setLoginFailMessage("Ops, Empty field!");
       return;
     }
-
+    setIsloading(true);
     let response = await login({ email, pass });
 
     if (response) {
@@ -34,6 +36,7 @@ function Login() {
         setLoginFailMessage(response.data.error);
 
         setLoginFail(true);
+        setIsloading(false);
       }
     } else {
       setLoginFail(true);
@@ -66,8 +69,10 @@ function Login() {
       <div className="login global-wrapper">
         <div className="center-container">
           <div className="inputs-wrapper shadow-light styled-buttons">
-            <ErrorMessage />
-
+            <div className="wrapper-response">
+            {!isLoading && (<ErrorMessage />)}
+            {isLoading && (<Loading/>)}
+            </div>
             <h1>Login</h1>
 
             <input
@@ -86,6 +91,8 @@ function Login() {
             />
             <Link to="/">Forgot password?</Link>
             <button onClick={(e) => loginFunc(e)}>Login</button>
+            
+            
           </div>
         </div>
       </div>

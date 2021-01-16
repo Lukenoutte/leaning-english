@@ -119,8 +119,8 @@ function Main() {
       const wordsFound = profileWordsList.filter(
         (element) =>
           sentence
-            .map((word) => word.replace(/[.,?!;:\s]/g, ""))
-            .indexOf(element) !== -1
+            .map((word) => word.replace(/[.,?!;:\s]/g, "").toLowerCase())
+            .indexOf(element.toLowerCase()) !== -1
       );
 
       setSameWordsFromProfile((oldArray) =>

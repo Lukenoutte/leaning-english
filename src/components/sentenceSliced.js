@@ -8,11 +8,12 @@ export default function SentenceSliced(props) {
     unknownWords,
     setUnknownWords,
     sameWordsFromProfile,  
-    sentence
+    sentence, 
+    cleanWord
   } = useContext(MainContext);
 
   function handleClickWord(word) {
-    let newWord = word.replace(/[.,?!;:\s]/g, "").toLowerCase();
+    let newWord = cleanWord(word);
 
     if (!unknownWords.includes(newWord) && !sameWordsFromProfile.includes(newWord) ) {
       setUnknownWords((oldArray) => [...oldArray, newWord]);
@@ -20,7 +21,7 @@ export default function SentenceSliced(props) {
   }
 
   function handleClassWord(word) {
-    let clearWord = word.replace(/[.,?!;:\s]/g, "");
+    let clearWord = cleanWord(word);
 
     if (unknownWords.includes(clearWord)) {
       return "word-hightlight";

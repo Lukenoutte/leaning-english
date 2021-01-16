@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import HeaderAndFotter from "../components/headerAndFooter";
 import "../styles/sign_up.css";
+import Loading from "../components/loading";
 
 import { signUp } from "../services";
 
@@ -13,6 +14,7 @@ function SignUp() {
   const [passError, setDifferentPass] = useState(false);
   const [signUpFailMessage, setSignUpFailMessage] = useState("");
   const [signUpFail, setSignUpFail] = useState(false);
+  const [isLoading, setIsloading] = useState(false);
 
   const HandleSignUp = async (event) => {
     event.preventDefault();
@@ -33,7 +35,6 @@ function SignUp() {
       return;
     }
 
-    
     if (pass.length < 6 && confirmPass.length < 6) {
       setDifferentPass(true);
       setSignUpFail(true);
@@ -41,20 +42,22 @@ function SignUp() {
       return;
     }
 
+    setIsloading(true);
     let response = await signUp({ name, email, pass, confirmPass });
 
     if (response) {
       console.log(response);
       if (response.status === 200) {
-        console.log("OK")
+        console.log("OK");
       } else if (response.status === 400) {
         setSignUpFailMessage(response.data.error);
 
         setSignUpFail(true);
       }
-    }else {
+    } else {
       setSignUpFail(true);
       setSignUpFailMessage("Somenthing wrong :(");
+      setIsloading(false);
     }
   };
 
@@ -85,7 +88,10 @@ function SignUp() {
       <div className="sign-up global-wrapper">
         <div className="center-container">
           <div className="inputs-wrapper shadow-light styled-buttons">
-            <ErrorMessage/>
+            <div className="wrapper-response">
+              {!isLoading && <ErrorMessage />}
+              {isLoading && <Loading />}
+            </div>
             <h1>Sign Up</h1>
             <input
               type="text"
