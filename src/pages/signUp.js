@@ -1,21 +1,35 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useContext } from "react";
 import HeaderAndFotter from "../components/headerAndFooter";
 import "../styles/sign_up.css";
 import Loading from "../components/loading";
-
-import { signUp } from "../services";
+import { AuthContext } from "../context/AuthContext";
+import { signUp, login } from "../services";
+import history from "../history";
 
 function SignUp() {
   const inputName = useRef("");
   const inputEmail = useRef("");
   const inputPass = useRef("");
   const inputConfirmPass = useRef("");
-  const [emptyInput, setPassError] = useState(false);
-  const [passError, setDifferentPass] = useState(false);
+  const [allInputError, setAllInputError] = useState(false);
+  const [passInputError, setPassInputError] = useState(false);
   const [signUpFailMessage, setSignUpFailMessage] = useState("");
   const [signUpFail, setSignUpFail] = useState(false);
   const [isLoading, setIsloading] = useState(false);
+  const { handleLogin } = useContext(AuthContext);
 
+  async function loginAfterSignUp(arg){
+    let loginResponse = await login({ email: arg.email, pass: arg.pass });
+
+    if (loginResponse) {
+      if (loginResponse.status === 200) {
+        handleLogin({ response: loginResponse });
+      } else if (loginResponse.status === 400) {
+        history.push("/login");
+      }
+    }
+  }
+   
   const HandleSignUp = async (event) => {
     event.preventDefault();
     let name = inputName.current.value;
@@ -24,35 +38,40 @@ function SignUp() {
     let confirmPass = inputConfirmPass.current.value;
 
     if (name === "" || email === "" || pass === "" || confirmPass === "") {
-      setPassError(true);
+      setAllInputError(true);
       setSignUpFailMessage("Ops, Empty field!");
       return;
     }
 
     if (pass !== confirmPass) {
-      setDifferentPass(true);
+      setPassInputError(true);
       setSignUpFailMessage("Ops, passwords don't match!");
       return;
+    }else{
+      setPassInputError(false);
     }
 
     if (pass.length < 6 && confirmPass.length < 6) {
-      setDifferentPass(true);
+      setPassInputError(true);
       setSignUpFail(true);
       setSignUpFailMessage("Ops, passwords too small!");
       return;
+    }else{
+      setPassInputError(false);
     }
 
     setIsloading(true);
-    let response = await signUp({ name, email, pass, confirmPass });
+    let signUpResponse = await signUp({ name, email, pass, confirmPass });
 
-    if (response) {
-      console.log(response);
-      if (response.status === 200) {
-        console.log("OK");
-      } else if (response.status === 400) {
-        setSignUpFailMessage(response.data.error);
-
+    if (signUpResponse) {
+      
+      if (signUpResponse.status === 200) {
+        loginAfterSignUp({email, pass});
+      } else if (signUpResponse.status === 400) {
+        setSignUpFailMessage(signUpResponse.data.error);
+        setIsloading(false);
         setSignUpFail(true);
+        setAllInputError(true);
       }
     } else {
       setSignUpFail(true);
@@ -62,17 +81,17 @@ function SignUp() {
   };
 
   const inputClass = (ref, isPassInput) => {
-    if (emptyInput && ref.current.value === "") {
+    if (allInputError) {
       return "input-error";
     }
 
-    if (passError && isPassInput) return "input-error";
+    if (passInputError && isPassInput) return "input-error";
 
     return "";
   };
 
   const ErrorMessage = () => {
-    if (signUpFail || emptyInput) {
+    if (signUpFail || allInputError) {
       return (
         <div className="empty-input-error">
           <p>{signUpFailMessage}</p>
