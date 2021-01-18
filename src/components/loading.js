@@ -3,7 +3,7 @@ import "./styles/loading.css";
 
 export default function Loading() {
   return (
-    <div class="lds-facebook">
+    <div className="lds-facebook">
       <div></div>
       <div></div>
       <div></div>

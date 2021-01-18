@@ -97,7 +97,7 @@ function Main() {
 
   useEffect(() => {
     // Get unknown words profile list from my api
-    function getWordsListFromApi() {
+
       if (authenticated) {
         const wordsList = async () => {
           const words = await getWords();
@@ -108,9 +108,9 @@ function Main() {
         wordsList();
       }
       
-    }
+    
 
-    getWordsListFromApi();
+  
   }, [authenticated, setProfileWordsList, addedNewWords]);
 
   useEffect(() => {

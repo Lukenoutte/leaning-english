@@ -1,8 +1,7 @@
 import React, { useContext } from "react";
-import { ReactComponent as CloseIcon } from "../assets/icons/closeIcon.svg";
 import "./styles/words_and_translations.css";
 import { MainContext } from "../context/MainContext";
-
+import WordContainer from "./wordContainer";
 export default function WordsAndTranslation(props) {
   const {
     translatedWords,
@@ -70,24 +69,16 @@ export default function WordsAndTranslation(props) {
         }
 
         divList.push(
-          <div
-            className={
-              args.isProfileWord
-                ? "unknown-words shadow-light profile-word"
-                : "unknown-words shadow-light"
-            }
+          <WordContainer
             key={word}
+            isProfileWord={args.isProfileWord}
+            onCloseButtonClicked={() => removeOneWordHighlighted(word)}
           >
             <p>
               <span className="unknown-word">{word.toUpperCase()}</span>
               {" -" + waitTranslation}
             </p>
-            {!args.isProfileWord && (
-              <button onClick={() => removeOneWordHighlighted(word)}>
-                <CloseIcon className="close-icon" />
-              </button>
-            )}
-          </div>
+          </WordContainer>
         );
         return divList;
       });
