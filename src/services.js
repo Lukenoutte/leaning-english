@@ -10,11 +10,9 @@ const myApi = require("axios").create({
   },
 });
 
-
 const microsoftApi = require("axios").default;
 
 const login = async (arg) => {
-
   let response = await myApi({
     url: "/auth/authenticate",
     method: "post",
@@ -68,14 +66,14 @@ const verifyToken = async (arg) => {
 
 const addWords = async (arg) => {
   const id = JSON.parse(localStorage.getItem("id"));
-  console.log(arg.validWords);
+
   let response = await myApi({
     url: "/projects/add_unknown_words",
     method: "post",
     data: {
       id: id,
       unkownWords: arg.validWords,
-    }, 
+    },
   }).catch((err) => {
     return err.response;
   });
@@ -90,8 +88,8 @@ const userInformations = async () => {
     url: "/projects/user_informations",
     method: "post",
     data: {
-      id: id,      
-    }, 
+      id: id,
+    },
   }).catch((err) => {
     return err.response;
   });
@@ -99,9 +97,9 @@ const userInformations = async () => {
   if (response && response.data) {
     return { data: response.data, status: response.status };
   }
-  
+
   return response;
-}
+};
 
 const getWords = async () => {
   const id = JSON.parse(localStorage.getItem("id"));
@@ -110,8 +108,8 @@ const getWords = async () => {
     url: "/projects/list_words",
     method: "post",
     data: {
-      id: id,      
-    }, 
+      id: id,
+    },
   }).catch((err) => {
     return err.response;
   });
@@ -119,33 +117,61 @@ const getWords = async () => {
   if (response && response.data) {
     return { data: response.data, status: response.status };
   }
+
+  return response;
+};
+
+const removeWord = async (arg) => {
+  const id = JSON.parse(localStorage.getItem("id"));
+
+  let response = await myApi({
+    url: "/projects/remove_unknown_words",
+    method: "post",
+    data: {
+      id: id,
+      unkownWords: arg.word,
+    },
+  }).catch((err) => {
+    return err.response;
+  });
   
+  if (response && response.data) {
+    return { data: response.data, status: response.status };
+  }
+
   return response;
 };
 
 const postMicrosoftApi = async (arg) => {
-
-  let response = await microsoftApi(
-    {
-      baseURL: urlMicrosoftApi,
-      url: "/dictionary/lookup",
-      method: "post",
-      headers: {
-        "Ocp-Apim-Subscription-Key": keyMicrosoftApi,
-        "Content-type": "application/json",
-        "X-ClientTraceId": uuidv4().toString(),
-      },
-      params: {
-        "api-version": "3.0",
-        from: "en",
-        to: arg.languageSelectValue,
-      },
-      data: [{ text: arg.data }],
-      responseType: "json",
-    }
-  );
+  let response = await microsoftApi({
+    baseURL: urlMicrosoftApi,
+    url: "/dictionary/lookup",
+    method: "post",
+    headers: {
+      "Ocp-Apim-Subscription-Key": keyMicrosoftApi,
+      "Content-type": "application/json",
+      "X-ClientTraceId": uuidv4().toString(),
+    },
+    params: {
+      "api-version": "3.0",
+      from: "en",
+      to: arg.languageSelectValue,
+    },
+    data: [{ text: arg.data }],
+    responseType: "json",
+  });
 
   return response;
-}
+};
 
-export { login, signUp, verifyToken, addWords, getWords, myApi, postMicrosoftApi, userInformations};
+export {
+  login,
+  signUp,
+  verifyToken,
+  addWords,
+  getWords,
+  myApi,
+  postMicrosoftApi,
+  userInformations,
+  removeWord,
+};

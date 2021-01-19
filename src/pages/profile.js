@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import HeaderAndFotter from "../components/headerAndFooter";
 import { userInformations } from "../services";
-import { getWords } from "../services";
+import { getWords, removeWord} from "../services";
 import { MainContext } from "../context/MainContext";
 import WordContainer from "../components/wordContainer";
 import { AuthContext } from "../context/AuthContext";
@@ -12,12 +12,26 @@ export default function Profile() {
   const [userInfo, setUserInfo] = useState([]);
   const { setProfileWordsList, profileWordsList } = useContext(MainContext);
   const { authenticated } = useContext(AuthContext);
+  const [isRemovedWord, setIsRemovedWord] = useState(false);
+
+  async function removeWordsFromProfile(word) {
+    const response = await removeWord({word});
+
+    if (response.status && response.status === 200) {
+        
+          if (isRemovedWord) {
+            setIsRemovedWord(false);
+          } else {
+            setIsRemovedWord(true);
+          }
+        }
+  }
 
   function listWordsFromProfile() {
     let divList = [];
     profileWordsList.map((word) =>
       divList.push(
-        <WordContainer isProfileWord={false} key={word}>          
+        <WordContainer isProfileWord={false} key={word} onCloseButtonClicked={() => removeWordsFromProfile(word)}>          
           <p>{word.toUpperCase()}</p>
         </WordContainer>
       )
@@ -46,7 +60,7 @@ export default function Profile() {
       };
       wordsList();
     }
-  }, [setProfileWordsList, authenticated]);
+  }, [setProfileWordsList, authenticated, isRemovedWord]);
 
   return (
     <HeaderAndFotter>
