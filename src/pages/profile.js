@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import HeaderAndFotter from "../components/headerAndFooter";
 import { userInformations } from "../services";
-import { getWords, removeWord} from "../services";
+import { getWords, removeWord } from "../services";
 import { MainContext } from "../context/MainContext";
 import WordContainer from "../components/wordContainer";
 import { AuthContext } from "../context/AuthContext";
@@ -15,23 +15,26 @@ export default function Profile() {
   const [isRemovedWord, setIsRemovedWord] = useState(false);
 
   async function removeWordsFromProfile(word) {
-    const response = await removeWord({word});
+    const response = await removeWord({ word });
 
     if (response.status && response.status === 200) {
-        
-          if (isRemovedWord) {
-            setIsRemovedWord(false);
-          } else {
-            setIsRemovedWord(true);
-          }
-        }
+      if (isRemovedWord) {
+        setIsRemovedWord(false);
+      } else {
+        setIsRemovedWord(true);
+      }
+    }
   }
 
   function listWordsFromProfile() {
     let divList = [];
     profileWordsList.map((word) =>
       divList.push(
-        <WordContainer isProfileWord={false} key={word} onCloseButtonClicked={() => removeWordsFromProfile(word)}>          
+        <WordContainer
+          isProfileWord={false}
+          key={word}
+          onCloseButtonClicked={() => removeWordsFromProfile(word)}
+        >
           <p>{word.toUpperCase()}</p>
         </WordContainer>
       )
@@ -66,11 +69,28 @@ export default function Profile() {
     <HeaderAndFotter>
       <div className="profile global-wrapper">
         <div className="center-container">
-         
-          {profileWordsList && profileWordsList.length > 0?listWordsFromProfile().map((div) => {
-            return div;
-          }):(<Loading/>)}
-        
+        <h1 className="unknown-title">Profile</h1>
+          {profileWordsList && profileWordsList.length > 0 && userInfo.data ? (
+            <>
+              <div className="user-info  shadow-light">
+                <p>Name: {userInfo.data.name}</p>
+              </div>
+              <div className="user-info  shadow-light">
+                <p>Email: {userInfo.data.email}</p>
+              </div>
+
+              <h2 className="unknown-title">Unkown Words:</h2>
+              <div className="words-list-profile">
+              {listWordsFromProfile().map((div) => {
+                return div;
+              })}
+              </div>
+              {profileWordsList.length === 0 && (<p className="any-word-p">Any word founded :(</p> )}
+            </>
+          ) : (
+            <Loading />
+          )}
+          {console.log(userInfo)}
         </div>
       </div>
     </HeaderAndFotter>
