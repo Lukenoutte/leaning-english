@@ -90,7 +90,7 @@ export default function Profile() {
           ) : (
             <Loading />
           )}
-          {console.log(userInfo)}
+          
         </div>
       </div>
     </HeaderAndFotter>

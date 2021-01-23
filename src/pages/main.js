@@ -63,7 +63,7 @@ function Main() {
     );
 
     if (validWords && validWords.length > 0) {
-      console.log(validWords)
+      
       const response = await addWords({ validWords });
 
       if (response.status && response.status === 200) {

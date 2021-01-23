@@ -68,7 +68,7 @@ function Login() {
   return (
     <HeaderAndFotter>      
       <div className="login global-wrapper">
-        <div className="center-container">
+        <div className="center-container-two">
           <div className="inputs-wrapper shadow-light styled-buttons">
             <div className="wrapper-response">
             {!isLoading && (<ErrorMessage />)}
@@ -90,7 +90,7 @@ function Login() {
               ref={inputPass}
               className={InputClass(inputPass)}
             />
-            <Link to="/">Forgot password?</Link>
+            <Link to="/forgot_pass">Forgot password?</Link>
             <button onClick={(e) => loginFunc(e)}>Login</button>
             
             

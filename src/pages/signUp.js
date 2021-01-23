@@ -13,6 +13,7 @@ function SignUp() {
   const inputConfirmPass = useRef("");
   const [allInputError, setAllInputError] = useState(false);
   const [passInputError, setPassInputError] = useState(false);
+  const [emailInputError, setEmailInputError] = useState(false);
   const [signUpFailMessage, setSignUpFailMessage] = useState("");
   const [signUpFail, setSignUpFail] = useState(false);
   const [isLoading, setIsloading] = useState(false);
@@ -62,8 +63,12 @@ function SignUp() {
       }
 
       if(!validateEmail(arg.email)){
-        console.log("Email error");
+        setSignUpFail(true);
+        setSignUpFailMessage("Try another e-mail!");
+        setEmailInputError(true)
         return false;
+      }else{
+        setEmailInputError(false);
       }
 
       return true;
@@ -98,12 +103,13 @@ function SignUp() {
     }
   };
 
-  const inputClass = (ref, isPassInput) => {
+  const inputClass = (input) => {
     if (allInputError) {
       return "input-error";
     }
 
-    if (passInputError && isPassInput) return "input-error";
+    if (passInputError && input === "pass") return "input-error";
+    if (emailInputError && input === "email") return "input-error";
 
     return "";
   };
@@ -123,7 +129,7 @@ function SignUp() {
   return (
     <HeaderAndFotter>
       <div className="sign-up global-wrapper">
-        <div className="center-container">
+        <div className="center-container-two">
           <div className="inputs-wrapper shadow-light styled-buttons">
             <div className="wrapper-response">
               {!isLoading && <ErrorMessage />}
@@ -134,25 +140,25 @@ function SignUp() {
               type="text"
               placeholder="Name"
               ref={inputName}
-              className={inputClass(inputName)}
+              className={inputClass()}
             />
             <input
               type="text"
               placeholder="E-mail"
               ref={inputEmail}
-              className={inputClass(inputEmail)}
+              className={inputClass("email")}
             />
             <input
               type="password"
               placeholder="Password"
               ref={inputPass}
-              className={inputClass(inputPass, true)}
+              className={inputClass("pass")}
             />
             <input
               type="password"
               placeholder="Confirm Password"
               ref={inputConfirmPass}
-              className={inputClass(inputConfirmPass, true)}
+              className={inputClass("pass")}
             />
             <button onClick={(e) => HandleSignUp(e)}>Start</button>
           </div>
