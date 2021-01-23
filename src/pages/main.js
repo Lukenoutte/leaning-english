@@ -28,7 +28,7 @@ function Main() {
     showPopUp,
     setShowPopUp,
     profileWordsList,
-    setProfileWordsList
+    setProfileWordsList,
   } = useContext(MainContext);
 
   function handleButtonSplitPhrase() {
@@ -58,11 +58,12 @@ function Main() {
   }
 
   async function addProfileWords() {
-    let validWords = unknownWords.filter((word) => {
-      return translatedWords[word];
-    });
- 
+    let validWords = unknownWords.filter((word) => 
+      translatedWords[word] && translatedWords[word].length > 0
+    );
+
     if (validWords && validWords.length > 0) {
+      console.log(validWords)
       const response = await addWords({ validWords });
 
       if (response.status && response.status === 200) {
@@ -98,19 +99,15 @@ function Main() {
   useEffect(() => {
     // Get unknown words profile list from my api
 
-      if (authenticated) {
-        const wordsList = async () => {
-          const words = await getWords();
-          if (words.status && words.status === 200) {
-            setProfileWordsList(words.data);
-          }
-        };
-        wordsList();
-      }
-      
-    
-
-  
+    if (authenticated) {
+      const wordsList = async () => {
+        const words = await getWords();
+        if (words.status && words.status === 200) {
+          setProfileWordsList(words.data);
+        }
+      };
+      wordsList();
+    }
   }, [authenticated, setProfileWordsList, addedNewWords]);
 
   useEffect(() => {
@@ -152,10 +149,9 @@ function Main() {
   useEffect(() => {
     // Clear main on login and logout
     handleClickButtonClear();
- 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [authenticated]);
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [authenticated]);
 
   return (
     <HeaderAndFotter>
@@ -182,10 +178,7 @@ function Main() {
         </div>
       </div>
       {authenticated && unknownWords.length > 0 && (
-        <button
-          className="add-to-profile-list"
-          onClick={addProfileWords}
-        >
+        <button className="add-to-profile-list" onClick={addProfileWords}>
           +
         </button>
       )}

@@ -29,6 +29,45 @@ function SignUp() {
       }
     }
   }
+
+  function validateEmail(email) 
+    {
+        var re = /\S+@\S+\.\S+/;
+        return re.test(email);
+    }
+
+    function inputsValidation(arg){
+
+      if (arg.name === "" || arg.email === "" || arg.pass === "" || arg.confirmPass === "") {
+        setAllInputError(true);
+        setSignUpFailMessage("Ops, Empty field!");
+        return false;
+      }
+  
+      if (arg.pass !== arg.confirmPass) {
+        setPassInputError(true);
+        setSignUpFailMessage("Ops, passwords don't match!");
+        return false;
+      }else{
+        setPassInputError(false);
+      }
+  
+      if (arg.pass.length < 6 && arg.confirmPass.length < 6) {
+        setPassInputError(true);
+        setSignUpFail(true);
+        setSignUpFailMessage("Ops, passwords too small!");
+        return false;
+      }else{
+        setPassInputError(false);
+      }
+
+      if(!validateEmail(arg.email)){
+        console.log("Email error");
+        return false;
+      }
+
+      return true;
+    }
    
   const HandleSignUp = async (event) => {
     event.preventDefault();
@@ -37,28 +76,7 @@ function SignUp() {
     let pass = inputPass.current.value;
     let confirmPass = inputConfirmPass.current.value;
 
-    if (name === "" || email === "" || pass === "" || confirmPass === "") {
-      setAllInputError(true);
-      setSignUpFailMessage("Ops, Empty field!");
-      return;
-    }
-
-    if (pass !== confirmPass) {
-      setPassInputError(true);
-      setSignUpFailMessage("Ops, passwords don't match!");
-      return;
-    }else{
-      setPassInputError(false);
-    }
-
-    if (pass.length < 6 && confirmPass.length < 6) {
-      setPassInputError(true);
-      setSignUpFail(true);
-      setSignUpFailMessage("Ops, passwords too small!");
-      return;
-    }else{
-      setPassInputError(false);
-    }
+    if(!inputsValidation({name, email, pass, confirmPass})) return;
 
     setIsloading(true);
     let signUpResponse = await signUp({ name, email, pass, confirmPass });
