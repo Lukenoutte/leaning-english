@@ -105,11 +105,11 @@ function SignUp() {
 
   const inputClass = (input) => {
     if (allInputError) {
-      return "input-error";
+      return "g-input-error";
     }
 
-    if (passInputError && input === "pass") return "input-error";
-    if (emailInputError && input === "email") return "input-error";
+    if (passInputError && input === "pass") return "g-input-error";
+    if (emailInputError && input === "email") return "g-input-error";
 
     return "";
   };
@@ -117,7 +117,7 @@ function SignUp() {
   const ErrorMessage = () => {
     if (signUpFail || allInputError) {
       return (
-        <div className="empty-input-error">
+        <div className="g-empty-input-error">
           <p>{signUpFailMessage}</p>
         </div>
       );
@@ -129,9 +129,9 @@ function SignUp() {
   return (
     <HeaderAndFotter>
       <div className="sign-up global-wrapper">
-        <div className="center-container-two">
-          <div className="inputs-wrapper shadow-light styled-buttons">
-            <div className="wrapper-response">
+        <div className="g-center-container-two">
+          <div className="g-inputs-wrapper g-shadow-light g-styled-buttons">
+            <div className="g-wrapper-response">
               {!isLoading && <ErrorMessage />}
               {isLoading && <Loading />}
             </div>

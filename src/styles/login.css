@@ -1,18 +1,18 @@
-.login .inputs-wrapper button{
+.login .g-inputs-wrapper button{
     width: 150px;
 }
 
-.login .inputs-wrapper h1{
+.login .g-inputs-wrapper h1{
 
 margin-bottom: 20px;
 }
 
 
-.login .inputs-wrapper{
+.login .g-inputs-wrapper{
   padding-bottom: 120px;
 }
   
-.inputs-wrapper a{
+.g-inputs-wrapper a{
   margin-top: 10px;
   text-decoration: none;
   color: var(--secundary-color);

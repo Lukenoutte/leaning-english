@@ -47,7 +47,7 @@ function Login() {
 
   const InputClass = (ref) => {
     if (loginFail || (emptyInput && ref.current.value === "")) {
-      return "input-error";
+      return "g-input-error";
     }
 
     return "";
@@ -56,7 +56,7 @@ function Login() {
   const ErrorMessage = () => {
     if (loginFail || emptyInput) {
       return (
-        <div className="empty-input-error">
+        <div className="g-empty-input-error">
           <p>{loginFailMessage}</p>
         </div>
       );
@@ -68,9 +68,9 @@ function Login() {
   return (
     <HeaderAndFotter>      
       <div className="login global-wrapper">
-        <div className="center-container-two">
-          <div className="inputs-wrapper shadow-light styled-buttons">
-            <div className="wrapper-response">
+        <div className="g-center-container-two">
+          <div className="g-inputs-wrapper g-shadow-light g-styled-buttons">
+            <div className="g-wrapper-response">
             {!isLoading && (<ErrorMessage />)}
             {isLoading && (<Loading/>)}
             </div>

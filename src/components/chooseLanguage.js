@@ -4,13 +4,13 @@ import "./styles/choose_language.css";
 export default function ChooseLanguage(props) {
   return (
     <div className="choose-language-wrapper">
-      <div className="from-container shadow-light">
+      <div className="from-container g-shadow-light">
         <span>From: </span>
         <select name="language">
           <option value="en">English</option>
         </select>
       </div>
-      <div className="to-container shadow-light">
+      <div className="to-container g-shadow-light">
         <span>To: </span>
         <select
           name="languages"

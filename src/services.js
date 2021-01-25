@@ -164,6 +164,26 @@ const postMicrosoftApi = async (arg) => {
   return response;
 };
 
+const sendToken = async (arg) => {
+  
+  let response = await myApi({
+    url: "/forgot_password",
+    method: "post",
+    data: {
+    email: arg.email
+    },
+  }).catch((err) => {
+    return err.response;
+  });
+  
+  if (response && response.data) {
+    return { data: response.data, status: response.status };
+  }
+
+  return response;
+};
+
+
 export {
   login,
   signUp,
@@ -174,4 +194,5 @@ export {
   postMicrosoftApi,
   userInformations,
   removeWord,
+  sendToken
 };

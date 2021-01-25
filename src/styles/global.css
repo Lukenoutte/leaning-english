@@ -33,12 +33,12 @@ select {
   color: var(--main-font-color);
 }
 
-.center-container {
+.g-center-container {
   width: 60%;
   max-width: 2000px;
   padding-bottom: 30px;
 }
-.center-container-two {
+.g-center-container-two {
   width: 60%;
   max-width: 2000px;
   padding-bottom: 30px;
@@ -52,7 +52,7 @@ select {
   justify-content: center;
 }
 
-.shadow-light {
+.g-shadow-light {
   -webkit-box-shadow: 0px 0px 12px -9px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 0px 0px 12px -9px rgba(0, 0, 0, 0.75);
   box-shadow: 0px 0px 12px -9px rgba(0, 0, 0, 0.75);
@@ -79,7 +79,7 @@ input:focus {
   border: 2px solid var(--secundary-color);
 }
 
-.inputs-wrapper {
+.g-inputs-wrapper {
   background-color: var(--white-color);
   border-radius: 15px;
   display: flex;
@@ -92,7 +92,17 @@ input:focus {
   position: relative;
 }
 
-.styled-buttons button {
+.g-inputs-wrapper button {
+  background: var(--secundary-color);
+  color: var(--white-color);
+  margin-top: 20px;
+}
+
+.g-inputs-wrapper button:hover {
+  background: var(--secundary-hover);
+}
+
+.g-styled-buttons button {
   min-height: 50px;
  
   min-width: 85px;
@@ -103,32 +113,24 @@ input:focus {
   cursor: pointer;
 }
 
-.inputs-wrapper button {
-  background: var(--secundary-color);
-  color: var(--white-color);
-  margin-top: 20px;
-}
 
-.inputs-wrapper button:hover {
-  background: var(--secundary-hover);
-}
 
-.empty-input-error {
+.g-empty-input-error {
   background-color: var(--secundary-color);
   padding: 5px 50px;
   border-radius: 15px;
   margin-bottom: 10px;
 }
 
-.empty-input-error p {
+.g-empty-input-error p {
   color: var(--white-color);
 }
 
-.input-error {
+.g-input-error {
   border: 2px solid var(--secundary-color);
 }
 
-.wrapper-response {
+.g-wrapper-response {
   height: 70px;
 }
 
@@ -143,16 +145,16 @@ input:focus {
     width: 90%;
   }
 
-  .inputs-wrapper {
+  .g-inputs-wrapper {
     padding: 30px;
     width: 100%;
   }
 }
 
 @media (max-width: 768px) {
-  .center-container,
+  .g-center-container,
   .center-container-header,
-  .center-container-two {
+  .g-center-container-two {
     width: 90% !important;
   }
 }

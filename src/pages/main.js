@@ -156,13 +156,13 @@ function Main() {
   return (
     <HeaderAndFotter>
       <div className="main-tool global-wrapper">
-        <div className="center-container">
+        <div className="g-center-container">
           <ChooseLanguage
             valueSelected={languageSelectValue}
             functionSelect={ChangeLanguage}
           />
 
-          <div className="input-and-button shadow-light styled-buttons">
+          <div className="input-and-button g-shadow-light g-styled-buttons">
             <h1> Copy and paste some sentence or text in english:</h1>
 
             <input ref={inputPhrase} type="text" />

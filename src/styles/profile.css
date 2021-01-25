@@ -15,7 +15,7 @@
     margin-top: 20px;
 }
 
-.profile .center-container{
+.profile .g-center-container{
     display: flex;
     flex-direction: column;
     justify-content: center;

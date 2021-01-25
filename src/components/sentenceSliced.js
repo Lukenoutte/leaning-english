@@ -37,7 +37,7 @@ export default function SentenceSliced(props) {
   return (
     <>
       {sentence.length > 0 && (
-        <div className="phrase-wrapper shadow-light">
+        <div className="phrase-wrapper g-shadow-light">
           {sentence.map((word, index) => {
             return (
               <button

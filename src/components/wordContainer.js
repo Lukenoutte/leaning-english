@@ -7,8 +7,8 @@ export default function WordContainer(props) {
     <div
       className={
         props.isProfileWord
-          ? "unknown-words shadow-light profile-word"
-          : "unknown-words shadow-light"
+          ? "unknown-words g-shadow-light profile-word"
+          : "unknown-words g-shadow-light"
       }
     >
       {props.children}

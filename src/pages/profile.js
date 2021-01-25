@@ -68,14 +68,14 @@ export default function Profile() {
   return (
     <HeaderAndFotter>
       <div className="profile global-wrapper">
-        <div className="center-container">
+        <div className="g-center-container">
         <h1 className="unknown-title">Profile</h1>
           {profileWordsList && userInfo.data ? (
             <>
-              <div className="user-info  shadow-light">
+              <div className="user-info  g-shadow-light">
                 <p><b>Name:</b> {userInfo.data.name}</p>
               </div>
-              <div className="user-info  shadow-light">
+              <div className="user-info  g-shadow-light">
                 <p><b>Email:</b> {userInfo.data.email}</p>
               </div>
 
