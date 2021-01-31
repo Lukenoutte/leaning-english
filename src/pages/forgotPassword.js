@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import HeaderAndFotter from "../components/headerAndFooter";
 import "../styles/forgot_pass.css";
-import { sendToken } from "../services";
+import { sendTokenToEmail } from "../services";
 
 export default function ForgotPassword() {
   const inputEmail = useRef("");
@@ -24,7 +24,7 @@ export default function ForgotPassword() {
       return;
     }
 
-    let response = await sendToken({email});
+    let response = await sendTokenToEmail({email});
     console.log(response);
   }
 

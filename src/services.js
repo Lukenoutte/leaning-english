@@ -164,10 +164,10 @@ const postMicrosoftApi = async (arg) => {
   return response;
 };
 
-const sendToken = async (arg) => {
+const sendTokenToEmail = async (arg) => {
   
   let response = await myApi({
-    url: "/forgot_password",
+    url: "/auth/forgot_password",
     method: "post",
     data: {
     email: arg.email
@@ -194,5 +194,5 @@ export {
   postMicrosoftApi,
   userInformations,
   removeWord,
-  sendToken
+  sendTokenToEmail
 };
