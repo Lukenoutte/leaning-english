@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import HeaderAndFotter from "../components/headerAndFooter";
 import "../styles/forgot_pass.css";
 import { sendTokenToEmail } from "../services";
+import history from "../history";
 
 export default function ForgotPassword() {
   const inputEmail = useRef("");
@@ -26,6 +27,10 @@ export default function ForgotPassword() {
 
     let response = await sendTokenToEmail({email});
     console.log(response);
+
+    if(response.status && response.status === 200){
+      history.push("/code_forgot_pass");
+    }
   }
 
   const inputClass = () => {
