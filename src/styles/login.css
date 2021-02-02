@@ -1,36 +1,31 @@
-.login .g-inputs-wrapper button{
-    width: 150px;
+.login .g-inputs-wrapper button {
+  width: 150px;
 }
 
-.login .g-inputs-wrapper h1{
-
-margin-bottom: 20px;
+.login .g-inputs-wrapper h1 {
+  margin-bottom: 20px;
 }
 
-
-.login .g-inputs-wrapper{
+.login .g-inputs-wrapper {
   padding-bottom: 120px;
 }
-  
-.g-inputs-wrapper a{
+
+.g-inputs-wrapper a {
   margin-top: 10px;
   text-decoration: none;
   color: var(--secundary-color);
 }
 
-#pass-input{
-    margin-top: 20px;
+#pass-input {
+  margin-top: 20px;
 }
 
-.login .global-wrapper{
-max-height: 500px;
+.login .global-wrapper {
+  max-height: 500px;
 }
 
-@media(max-width:768px){
-
-  .empty-input-error{
- 
+@media (max-width: 768px) {
+  .empty-input-error {
     padding: 5px 15px;
   }
-
 }
