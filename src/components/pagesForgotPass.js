@@ -20,12 +20,23 @@ export default function ForgotPassword(props) {
             </div>
             <h2 className="title-recover">{props.title}</h2>
             <p className="description-forgot-pass">{props.subtitle}</p>
+
             <input
-              type="text"
+              type={props.inputType}
               placeholder={props.placeholder}
               className={inputClass()}
-              ref={props.inputEmail}
+              ref={props.inputRef}
             />
+
+            {props.extraInput && (
+              <input
+                type={props.inputType}
+                placeholder={props.extraPlaceholder}
+                className={inputClass() + " extra-input"}
+                ref={props.extraInputRef}
+              />
+            )}
+            
             <button
               onClick={(e) => props.handleButtonSend(e)}
               className="button-send"

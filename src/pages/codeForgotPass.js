@@ -1,50 +1,43 @@
 import React, { useRef, useState } from "react";
-import { sendTokenToEmail } from "../services";
 import history from "../history";
 import PagesForgotPass from "../components/pagesForgotPass";
 
 export default function ForgotPassword() {
-  const inputEmail = useRef("");
+  const inputRef = useRef("");
   const [emailInputError, setEmailInputError] = useState(false);
-  const [isLoading, setIsloading] = useState(false);
 
-  function validateEmail(email) {
-    var re = /\S+@\S+\.\S+/;
-    return re.test(email);
+  function validateCode(code) {
+    if (code.length === 40) {
+      return true;
+    }
+    return false;
   }
 
   async function handleButtonSend(event) {
     event.preventDefault();
-    console.log("test");
-    let email = inputEmail.current.value;
+    let email = inputRef.current.value;
 
-    if (!validateEmail(email)) {
+    if (!validateCode(email)) {
       setEmailInputError(true);
       return;
     }
 
-    setIsloading(true);
+    history.push("/change_pass");
 
-    let response = await sendTokenToEmail({ email });
-    console.log(response);
-
-    if (response.status && response.status === 200) {
-      history.push("/code_forgot_pass");
-    } else {
-      setIsloading(false);
-    }
+    
   }
 
   return (
     <PagesForgotPass
-      isLoading={isLoading}
+      
       handleButtonSend={handleButtonSend}
       title="We sent a code!"
       subtitle="Check your e-mail box."
       placeholder="Code"
       emailInputError={emailInputError}
       buttonText={"Send"}
-      inputEmail={inputEmail}
+      inputRef={inputRef}
+      inputType="text"
     ></PagesForgotPass>
   );
 }

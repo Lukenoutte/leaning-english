@@ -4,7 +4,7 @@ import history from "../history";
 import PagesForgotPass from "../components/pagesForgotPass";
 
 export default function ForgotPassword() {
-  const inputEmail = useRef("");
+  const inputRef = useRef("");
   const [emailInputError, setEmailInputError] = useState(false);
   const [isLoading, setIsloading] = useState(false);
 
@@ -16,7 +16,7 @@ export default function ForgotPassword() {
   async function handleButtonSend(event) {
     event.preventDefault();
     console.log("test");
-    let email = inputEmail.current.value;
+    let email = inputRef.current.value;
 
     if (!validateEmail(email)) {
       setEmailInputError(true);
@@ -44,7 +44,8 @@ export default function ForgotPassword() {
       placeholder="E-mail"
       emailInputError={emailInputError}
       buttonText={"Send me"}
-      inputEmail={inputEmail}
+      inputRef={inputRef}
+      inputType="text"
     ></PagesForgotPass>
   );
 }
