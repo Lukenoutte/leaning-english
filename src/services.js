@@ -184,6 +184,27 @@ const sendTokenToEmail = async (arg) => {
 };
 
 
+const resetPass = async (arg) => {
+  
+  let response = await myApi({
+    url: "/auth/reset_password",
+    method: "post",
+    data: {
+    email: arg.email,
+    token: arg.token,
+    password: arg.password
+    },
+  }).catch((err) => {
+    return err.response;
+  });
+  
+  if (response && response.data) {
+    return { data: response.data, status: response.status };
+  }
+
+  return response;
+};
+
 export {
   login,
   signUp,
@@ -194,5 +215,6 @@ export {
   postMicrosoftApi,
   userInformations,
   removeWord,
-  sendTokenToEmail
+  sendTokenToEmail,
+  resetPass
 };

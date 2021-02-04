@@ -8,6 +8,7 @@ function MainProvider({ children }) {
   const [sentence, setSentence] = useState([]);
   const [showPopUp, setShowPopUp] = useState(false);
   const [profileWordsList, setProfileWordsList] = useState([]);
+  const [recoverPassInfo, setRecoverPassInfo] = useState({});
 
   function cleanWord(word){
     return word.replace(/[.,?!;:\s]/g, "").toLowerCase();
@@ -33,7 +34,9 @@ function MainProvider({ children }) {
         
         profileWordsList,
         setProfileWordsList,
-        cleanWord
+        cleanWord,
+        recoverPassInfo, 
+        setRecoverPassInfo
       }}
     >
       {children}

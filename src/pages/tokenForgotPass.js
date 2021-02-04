@@ -1,13 +1,15 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useContext } from "react";
 import history from "../history";
 import PagesForgotPass from "../components/pagesForgotPass";
+import { MainContext } from "../context/MainContext";
 
-export default function ForgotPassword() {
+export default function TokenForgotPass() {
   const inputRef = useRef("");
-  const [emailInputError, setEmailInputError] = useState(false);
+  const [codeInputError, setCodeInputError] = useState(false);
+  const { setRecoverPassInfo } = useContext(MainContext);
 
-  function validateCode(code) {
-    if (code.length === 40) {
+  function validateCode(token) {
+    if (token.length === 40) {
       return true;
     }
     return false;
@@ -15,13 +17,17 @@ export default function ForgotPassword() {
 
   async function handleButtonSend(event) {
     event.preventDefault();
-    let email = inputRef.current.value;
+    let token = inputRef.current.value;
 
-    if (!validateCode(email)) {
-      setEmailInputError(true);
+    if (!validateCode(token)) {
+      setCodeInputError(true);
       return;
     }
 
+    var obj = {};
+    obj["token"] = token;
+
+    setRecoverPassInfo((oldArray) => ({ ...oldArray, ...obj }));
     history.push("/change_pass");
 
     
@@ -34,7 +40,7 @@ export default function ForgotPassword() {
       title="We sent a code!"
       subtitle="Check your e-mail box."
       placeholder="Code"
-      emailInputError={emailInputError}
+      emailInputError={codeInputError}
       buttonText={"Send"}
       inputRef={inputRef}
       inputType="text"

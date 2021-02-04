@@ -1,12 +1,14 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useContext } from "react";
 import { sendTokenToEmail } from "../services";
 import history from "../history";
 import PagesForgotPass from "../components/pagesForgotPass";
+import { MainContext } from "../context/MainContext";
 
 export default function ForgotPassword() {
   const inputRef = useRef("");
   const [emailInputError, setEmailInputError] = useState(false);
   const [isLoading, setIsloading] = useState(false);
+  const { setRecoverPassInfo } = useContext(MainContext);
 
   function validateEmail(email) {
     var re = /\S+@\S+\.\S+/;
@@ -15,7 +17,7 @@ export default function ForgotPassword() {
 
   async function handleButtonSend(event) {
     event.preventDefault();
-    console.log("test");
+
     let email = inputRef.current.value;
 
     if (!validateEmail(email)) {
@@ -26,10 +28,14 @@ export default function ForgotPassword() {
     setIsloading(true);
 
     let response = await sendTokenToEmail({ email });
-    console.log(response);
+
 
     if (response.status && response.status === 200) {
-      history.push("/code_forgot_pass");
+      var obj = {};
+      obj["email"] = email;
+  
+      setRecoverPassInfo((oldArray) => ({ ...oldArray, ...obj }));
+      history.push("/token_forgot_pass");
     } else {
       setIsloading(false);
     }

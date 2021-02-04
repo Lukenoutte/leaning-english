@@ -1,13 +1,15 @@
-import React, { useRef, useState } from "react";
-import { sendTokenToEmail } from "../services";
+import React, { useRef, useState, useContext } from "react";
+import { resetPass } from "../services";
 import history from "../history";
 import PagesForgotPass from "../components/pagesForgotPass";
+import { MainContext } from "../context/MainContext";
 
 export default function ForgotPassword() {
   const inputRef = useRef("");
   const inputPassExtra = useRef("");
-  const [emailInputError, setEmailInputError] = useState(false);
+  const [inputError, setInputError] = useState(false);
   const [isLoading, setIsloading] = useState(false);
+  const { recoverPassInfo } = useContext(MainContext);
 
   function validatePass(arg) {
     if ((arg.pass === "") || (arg.confirmPass === "")) return false;
@@ -25,11 +27,20 @@ export default function ForgotPassword() {
     let confirmPass = inputPassExtra.current.value;
     console.log(pass, confirmPass);
     if (!validatePass({ pass, confirmPass })) {
-      setEmailInputError(true);
+      setInputError(true);
       return;
     }
 
-    history.push("/change_pass");
+    setIsloading(true);
+
+    let response = await resetPass({email: recoverPassInfo.email, password: pass, token: recoverPassInfo.token});
+
+    if (response.status && response.status === 200) {
+      console.log(response);
+      setIsloading(false);
+    } else {
+      setIsloading(false);
+    }
   }
 
   return (
@@ -39,7 +50,7 @@ export default function ForgotPassword() {
       title="Choose a new password!"
       subtitle="Try something new."
       placeholder="Password"
-      emailInputError={emailInputError}
+      emailInputError={inputError}
       buttonText={"Send"}
       inputRef={inputRef}
       extraInput={true}

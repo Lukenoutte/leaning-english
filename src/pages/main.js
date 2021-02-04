@@ -47,7 +47,7 @@ function Main() {
 
   function clearUnkownAndTranslated() {
     setUnknownWords([]);
-    setTranslatedWords([]);
+    setTranslatedWords({});
     setSameWordsFromProfile([]);
   }
 
