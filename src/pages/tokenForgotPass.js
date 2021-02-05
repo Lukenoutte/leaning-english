@@ -2,11 +2,13 @@ import React, { useRef, useState, useContext } from "react";
 import history from "../history";
 import PagesForgotPass from "../components/pagesForgotPass";
 import { MainContext } from "../context/MainContext";
+import { verifyResetToken } from "../services";
 
 export default function TokenForgotPass() {
   const inputRef = useRef("");
   const [codeInputError, setCodeInputError] = useState(false);
-  const { setRecoverPassInfo } = useContext(MainContext);
+  const { setRecoverPassInfo, recoverPassInfo } = useContext(MainContext);
+  const [isLoading, setIsloading] = useState(false);
 
   function validateCode(token) {
     if (token.length === 40) {
@@ -23,19 +25,25 @@ export default function TokenForgotPass() {
       setCodeInputError(true);
       return;
     }
+    setIsloading(true);
+    const response = await verifyResetToken({email: recoverPassInfo.email, token: token});
 
+    if (response.status && response.status === 200) {
     var obj = {};
     obj["token"] = token;
 
     setRecoverPassInfo((oldArray) => ({ ...oldArray, ...obj }));
     history.push("/change_pass");
-
+    } else{
+      setCodeInputError(true);
+      setIsloading(false);
+    }
     
   }
 
   return (
     <PagesForgotPass
-      
+      isLoading={isLoading}
       handleButtonSend={handleButtonSend}
       title="We sent a code!"
       subtitle="Check your e-mail box."

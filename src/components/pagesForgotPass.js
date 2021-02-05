@@ -18,7 +18,7 @@ export default function ForgotPassword(props) {
             <div className="g-wrapper-response">
               {props.isLoading && <Loading />}
             </div>
-            <h2 className="title-recover">{props.title}</h2>
+            <h3 className="title-recover">{props.title}</h3>
             <p className="description-forgot-pass">{props.subtitle}</p>
 
             <input

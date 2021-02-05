@@ -183,6 +183,28 @@ const sendTokenToEmail = async (arg) => {
   return response;
 };
 
+const verifyResetToken = async (arg) => {
+  
+  let response = await myApi({
+    url: "/auth/verify_token_recover",
+    method: "post",
+    data: {
+    email: arg.email,
+    token: arg.token,
+    },
+  }).catch((err) => {
+    return err.response;
+  });
+  
+  if (response && response.data) {
+    return { data: response.data, status: response.status };
+  }
+
+  return response;
+};
+
+
+
 
 const resetPass = async (arg) => {
   
@@ -205,6 +227,8 @@ const resetPass = async (arg) => {
   return response;
 };
 
+
+
 export {
   login,
   signUp,
@@ -216,5 +240,6 @@ export {
   userInformations,
   removeWord,
   sendTokenToEmail,
-  resetPass
+  resetPass,
+  verifyResetToken,
 };

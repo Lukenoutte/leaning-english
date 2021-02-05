@@ -38,6 +38,7 @@ export default function ForgotPassword() {
       history.push("/token_forgot_pass");
     } else {
       setIsloading(false);
+      setEmailInputError(true);
     }
   }
 
