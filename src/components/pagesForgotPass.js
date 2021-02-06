@@ -5,9 +5,21 @@ import Loading from "../components/loading";
 
 export default function ForgotPassword(props) {
   const inputClass = () => {
-    if (props.emailInputError) return "g-input-error";
+    if (props.inputError) return "g-input-error";
 
     return "";
+  };
+
+  const ErrorMessage = () => {
+    if (props.inputError) {
+      return (
+        <div className="g-empty-input-error">
+          <p>{props.failMessage}</p>
+        </div>
+      );
+    }
+
+    return false;
   };
 
   return (
@@ -17,6 +29,7 @@ export default function ForgotPassword(props) {
           <div className="g-inputs-wrapper g-shadow-light g-styled-buttons">
             <div className="g-wrapper-response">
               {props.isLoading && <Loading />}
+              {!props.isLoading && (<ErrorMessage />)}
             </div>
             <h3 className="title-recover">{props.title}</h3>
             <p className="description-forgot-pass">{props.subtitle}</p>

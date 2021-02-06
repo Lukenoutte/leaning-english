@@ -10,22 +10,38 @@ export default function ForgotPassword() {
   const [inputError, setInputError] = useState(false);
   const [isLoading, setIsloading] = useState(false);
   const { recoverPassInfo } = useContext(MainContext);
+  const [failMessage, setfailMessage] = useState("");
 
   function validatePass(arg) {
-    if ((arg.pass === "") || (arg.confirmPass === "")) return false;
+    if (arg.pass === "" || arg.confirmPass === "") {
+      setfailMessage("Empty input!");
+      return false;
+    }
 
-    if ((arg.pass.length < 6) && (arg.confirmPass.length < 6)) return false;
+    if (arg.pass !== arg.confirmPass) {
+      setfailMessage("Different passwords!");
+      return false;
+    }
 
-    if (arg.pass === arg.confirmPass) return true;
+    if (arg.pass.length < 6 && arg.confirmPass.length < 6) {
+      setfailMessage("Password too short!");
+      return false;
+    }
 
-    return false;
+
+
+    return true;
   }
 
   async function handleButtonSend(event) {
     event.preventDefault();
     let pass = inputRef.current.value;
     let confirmPass = inputPassExtra.current.value;
-    console.log(pass, confirmPass);
+
+    if(!recoverPassInfo.email || !recoverPassInfo.token){
+      history.push("/forgot_pass");
+    }
+
     if (!validatePass({ pass, confirmPass })) {
       setInputError(true);
       return;
@@ -33,11 +49,18 @@ export default function ForgotPassword() {
 
     setIsloading(true);
 
-    let response = await resetPass({email: recoverPassInfo.email, password: pass, token: recoverPassInfo.token});
+
+
+    let response = await resetPass({
+      email: recoverPassInfo.email,
+      password: pass,
+      token: recoverPassInfo.token,
+    });
 
     if (response.status && response.status === 200) {
-      console.log(response);
       setIsloading(false);
+      setInputError(false);
+      history.push("/login");
     } else {
       setIsloading(false);
     }
@@ -50,13 +73,14 @@ export default function ForgotPassword() {
       title="Choose a new password!"
       subtitle="Try something new."
       placeholder="Password"
-      emailInputError={inputError}
+      inputError={inputError}
       buttonText={"Send"}
       inputRef={inputRef}
       extraInput={true}
       extraPlaceholder="Confirm Password"
       inputType="password"
       extraInputRef={inputPassExtra}
+      failMessage={failMessage}
     ></PagesForgotPass>
   );
 }

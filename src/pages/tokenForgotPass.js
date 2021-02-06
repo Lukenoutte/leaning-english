@@ -9,6 +9,7 @@ export default function TokenForgotPass() {
   const [codeInputError, setCodeInputError] = useState(false);
   const { setRecoverPassInfo, recoverPassInfo } = useContext(MainContext);
   const [isLoading, setIsloading] = useState(false);
+  const [failMessage, setfailMessage] = useState("");
 
   function validateCode(token) {
     if (token.length === 40) {
@@ -21,8 +22,13 @@ export default function TokenForgotPass() {
     event.preventDefault();
     let token = inputRef.current.value;
 
+    if(!recoverPassInfo.email){
+      history.push("/forgot_pass");
+    }
+    
     if (!validateCode(token)) {
       setCodeInputError(true);
+      setfailMessage("Invalid token")
       return;
     }
     setIsloading(true);
@@ -35,6 +41,11 @@ export default function TokenForgotPass() {
     setRecoverPassInfo((oldArray) => ({ ...oldArray, ...obj }));
     history.push("/change_pass");
     } else{
+      if(response.data.error){
+        setfailMessage(response.data.error);
+      }else{
+        setfailMessage("Invalid Token");
+      }
       setCodeInputError(true);
       setIsloading(false);
     }
@@ -48,10 +59,11 @@ export default function TokenForgotPass() {
       title="We sent a code!"
       subtitle="Check your e-mail box."
       placeholder="Code"
-      emailInputError={codeInputError}
+      inputError={codeInputError}
       buttonText={"Send"}
       inputRef={inputRef}
       inputType="text"
+      failMessage={failMessage}
     ></PagesForgotPass>
   );
 }

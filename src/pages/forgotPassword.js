@@ -9,6 +9,7 @@ export default function ForgotPassword() {
   const [emailInputError, setEmailInputError] = useState(false);
   const [isLoading, setIsloading] = useState(false);
   const { setRecoverPassInfo } = useContext(MainContext);
+  const [failMessage, setfailMessage] = useState("");
 
   function validateEmail(email) {
     var re = /\S+@\S+\.\S+/;
@@ -22,6 +23,7 @@ export default function ForgotPassword() {
 
     if (!validateEmail(email)) {
       setEmailInputError(true);
+      setfailMessage("Invalid E-mail");
       return;
     }
 
@@ -37,6 +39,13 @@ export default function ForgotPassword() {
       setRecoverPassInfo((oldArray) => ({ ...oldArray, ...obj }));
       history.push("/token_forgot_pass");
     } else {
+
+      if(response.data.error){
+        setfailMessage(response.data.error);
+      }else{
+        setfailMessage("Invalid E-mail");
+      }
+
       setIsloading(false);
       setEmailInputError(true);
     }
@@ -49,10 +58,11 @@ export default function ForgotPassword() {
       title="Recover Password"
       subtitle="Don't worry, we will send a recover code."
       placeholder="E-mail"
-      emailInputError={emailInputError}
+      inputError={emailInputError}
       buttonText={"Send me"}
       inputRef={inputRef}
       inputType="text"
+      failMessage={failMessage}
     ></PagesForgotPass>
   );
 }
