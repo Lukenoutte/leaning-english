@@ -25,3 +25,9 @@
 .words-list-profile{
     width: 100%;
 }
+
+.loading-corner{
+    position: fixed;
+    right: 15px;
+    bottom: 0;
+}

@@ -12,17 +12,17 @@ export default function Profile() {
   const [userInfo, setUserInfo] = useState([]);
   const { setProfileWordsList, profileWordsList } = useContext(MainContext);
   const { authenticated } = useContext(AuthContext);
-  const [isRemovedWord, setIsRemovedWord] = useState(false);
+ 
+  const [isLoadingCorner, setIsLoadingCorner] = useState(false);
 
   async function removeWordsFromProfile(word) {
+    setIsLoadingCorner(true);
     const response = await removeWord({ word });
 
     if (response.status && response.status === 200) {
-      if (isRemovedWord) {
-        setIsRemovedWord(false);
-      } else {
-        setIsRemovedWord(true);
-      }
+      setIsLoadingCorner(false);
+    } else {
+      setIsLoadingCorner(false);
     }
   }
 
@@ -63,34 +63,44 @@ export default function Profile() {
       };
       wordsList();
     }
-  }, [setProfileWordsList, authenticated, isRemovedWord]);
+  }, [setProfileWordsList, authenticated, isLoadingCorner]);
 
   return (
     <HeaderAndFotter>
       <div className="profile global-wrapper">
         <div className="g-center-container">
-        <h1 className="unknown-title">Profile</h1>
+          <h1 className="unknown-title">Profile</h1>
           {profileWordsList && userInfo.data ? (
             <>
               <div className="user-info  g-shadow-light">
-                <p><b>Name:</b> {userInfo.data.name}</p>
+                <p>
+                  <b>Name:</b> {userInfo.data.name}
+                </p>
               </div>
               <div className="user-info  g-shadow-light">
-                <p><b>Email:</b> {userInfo.data.email}</p>
+                <p>
+                  <b>Email:</b> {userInfo.data.email}
+                </p>
               </div>
 
               <h2 className="unknown-title">Unkown Words:</h2>
               <div className="words-list-profile">
-              {listWordsFromProfile().map((div) => {
-                return div;
-              })}
+                {listWordsFromProfile().map((div) => {
+                  return div;
+                })}
               </div>
-              {profileWordsList.length === 0 && (<p className="any-word-p">Any word founded :(</p> )}
+              {profileWordsList.length === 0 && (
+                <p className="any-word-p">Any word founded :(</p>
+              )}
             </>
           ) : (
             <Loading />
           )}
-          
+          {isLoadingCorner && (
+            <div className="loading-corner">
+              <Loading />
+            </div>
+          )}
         </div>
       </div>
     </HeaderAndFotter>

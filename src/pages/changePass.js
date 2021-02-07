@@ -14,7 +14,7 @@ export default function ForgotPassword() {
 
   function validatePass(arg) {
     if (arg.pass === "" || arg.confirmPass === "") {
-      setfailMessage("Empty input!");
+      setfailMessage("Empty field!");
       return false;
     }
 
