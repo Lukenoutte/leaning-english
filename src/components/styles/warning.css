@@ -1,0 +1,30 @@
+.warning h1{
+    margin-bottom: 40px;
+    color: var(--secundary-color);
+}
+
+.warning p{
+    margin-bottom: 10px;
+    font-size: 17px;
+}
+
+
+.warning a{
+    background: var(--secundary-color);
+    color: var(--white-color);
+    min-height: 50px; 
+    min-width: 85px;
+    border-radius: 15px;
+    outline: none;
+    border: none;
+    font-weight: bolder;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 30px;
+}
+
+.warning a:hover{
+    background: var(--secundary-hover);
+}

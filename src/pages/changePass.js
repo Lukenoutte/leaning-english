@@ -60,7 +60,7 @@ export default function ForgotPassword() {
     if (response.status && response.status === 200) {
       setIsloading(false);
       setInputError(false);
-      history.push("/login");
+      history.push("/change_pass_sucess");
     } else {
       setIsloading(false);
     }

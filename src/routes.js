@@ -7,6 +7,8 @@ import Profile from "./pages/profile";
 import ForgotPass from "./pages/forgotPassword";
 import TokenForgotPass from "./pages/tokenForgotPass";
 import ChangePass from "./pages/changePass";
+import Welcome from "./pages/welcomePage";
+import ChangePassSucess from "./pages/changePassSucess";
 
 function Routes() {
   return (
@@ -18,6 +20,8 @@ function Routes() {
       <Route path="/forgot_pass" component={ForgotPass} />
       <Route path="/token_forgot_pass" component={TokenForgotPass} />
       <Route path="/change_pass" component={ChangePass} />
+      <Route path="/welcome" component={Welcome} />
+      <Route path="/change_pass_sucess" component={ChangePassSucess} />
     </Switch>
   );
 }

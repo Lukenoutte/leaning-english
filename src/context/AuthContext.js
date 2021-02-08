@@ -44,7 +44,7 @@ function AuthProvider({ children }) {
     localStorage.setItem("id", JSON.stringify(id));
     myApi.defaults.headers.autorization = `Bearer ${token}`;
   
-    history.push("/");
+    history.push("/welcome");
   }
 
   return (
