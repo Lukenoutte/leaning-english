@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { login } from "../services";
 import { AuthContext } from "../context/AuthContext";
 import Loading from "../components/loading";
-
+import history from "../history";
 
 function Login() {
   const inputEmail = useRef("");
@@ -33,6 +33,7 @@ function Login() {
     if (response) {
       if (response.status === 200) {
         handleLogin({response});
+        history.push("/");
       } else if (response.status === 400) {
         setLoginFailMessage(response.data.error);
 

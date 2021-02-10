@@ -3,7 +3,7 @@ import HeaderAndFotter from "../components/headerAndFooter";
 import "../styles/sign_up.css";
 import Loading from "../components/loading";
 import { AuthContext } from "../context/AuthContext";
-import { signUp, login } from "../services";
+import { signUp, login} from "../services";
 import history from "../history";
 
 function SignUp() {
@@ -25,6 +25,7 @@ function SignUp() {
     if (loginResponse) {
       if (loginResponse.status === 200) {
         handleLogin({ response: loginResponse });
+        history.push("/welcome");
       } else if (loginResponse.status === 400) {
         history.push("/login");
       }

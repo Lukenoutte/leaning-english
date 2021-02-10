@@ -242,4 +242,5 @@ export {
   sendTokenToEmail,
   resetPass,
   verifyResetToken,
+ 
 };

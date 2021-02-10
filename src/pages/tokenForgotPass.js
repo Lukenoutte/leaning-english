@@ -6,13 +6,13 @@ import { verifyResetToken } from "../services";
 
 export default function TokenForgotPass() {
   const inputRef = useRef("");
-  const [codeInputError, setCodeInputError] = useState(false);
+  const [tokenInputError, setCodeInputError] = useState(false);
   const { setRecoverPassInfo, recoverPassInfo } = useContext(MainContext);
   const [isLoading, setIsloading] = useState(false);
   const [failMessage, setfailMessage] = useState("");
 
   function validateCode(token) {
-    if (token.length === 40) {
+    if (token.length === 4) {
       return true;
     }
     return false;
@@ -56,10 +56,10 @@ export default function TokenForgotPass() {
     <PagesForgotPass
       isLoading={isLoading}
       handleButtonSend={handleButtonSend}
-      title="We sent a code!"
+      title="We sent a Token!"
       subtitle="Check your e-mail box."
       placeholder="Code"
-      inputError={codeInputError}
+      inputError={tokenInputError}
       buttonText={"Send"}
       inputRef={inputRef}
       inputType="text"
