@@ -12,7 +12,7 @@ export default function Profile() {
   const [userInfo, setUserInfo] = useState([]);
   const { setProfileWordsList, profileWordsList } = useContext(MainContext);
   const { authenticated } = useContext(AuthContext);
- 
+
   const [isLoadingCorner, setIsLoadingCorner] = useState(false);
 
   async function removeWordsFromProfile(word) {
@@ -69,6 +69,7 @@ export default function Profile() {
     <HeaderAndFotter>
       <div className="profile global-wrapper">
         <div className="g-center-container">
+          <button className="edit-profile">Edit</button>
           <h1 className="unknown-title">Profile</h1>
           {profileWordsList && userInfo.data ? (
             <>
@@ -82,7 +83,7 @@ export default function Profile() {
                   <b>Email:</b> {userInfo.data.email}
                 </p>
               </div>
-
+ 
               <h2 className="unknown-title">Unkown Words:</h2>
               <div className="words-list-profile">
                 {listWordsFromProfile().map((div) => {

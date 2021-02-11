@@ -37,6 +37,7 @@ select {
   width: 60%;
   max-width: 2000px;
   padding-bottom: 30px;
+  position: relative;
 }
 .g-center-container-two {
   width: 60%;
@@ -93,25 +94,22 @@ input:focus {
   position: relative;
 }
 
-.g-inputs-wrapper button {
-  background: var(--secundary-color);
-  color: var(--white-color);
-  margin-top: 20px;
-}
-
-.g-inputs-wrapper button:hover {
+.g-styled-buttons button:hover {
   background: var(--secundary-hover);
 }
 
 .g-styled-buttons button {
-  min-height: 50px;
- 
+  background: var(--secundary-color);
+  color: var(--white-color);
+  margin-top: 20px;
+  min-height: 50px; 
   min-width: 85px;
   border-radius: 15px;
   outline: none;
   border: none;
   font-weight: bolder;
   cursor: pointer;
+  padding:  0 20px;
 }
 
 
