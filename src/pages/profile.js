@@ -7,6 +7,7 @@ import WordContainer from "../components/wordContainer";
 import { AuthContext } from "../context/AuthContext";
 import Loading from "../components/loading";
 import "../styles/profile.css";
+import { Link } from "react-router-dom";
 
 export default function Profile() {
   const [userInfo, setUserInfo] = useState([]);
@@ -69,7 +70,7 @@ export default function Profile() {
     <HeaderAndFotter>
       <div className="profile global-wrapper">
         <div className="g-center-container">
-          <button className="edit-profile">Edit</button>
+          <Link to="/edit_profile" className="edit-profile">Edit</Link>
           <h1 className="unknown-title">Profile</h1>
           {profileWordsList && userInfo.data ? (
             <>

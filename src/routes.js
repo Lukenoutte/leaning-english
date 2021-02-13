@@ -9,6 +9,7 @@ import TokenForgotPass from "./pages/tokenForgotPass";
 import ChangePass from "./pages/changePass";
 import Welcome from "./pages/welcomePage";
 import ChangePassSucess from "./pages/changePassSucess";
+import EditProfile from "./pages/editProfile";
 
 function Routes() {
   return (
@@ -22,6 +23,7 @@ function Routes() {
       <Route path="/change_pass" component={ChangePass} />
       <Route path="/welcome" component={Welcome} />
       <Route path="/change_pass_sucess" component={ChangePassSucess} />
+      <Route path="/edit_profile" component={EditProfile} />
     </Switch>
   );
 }
