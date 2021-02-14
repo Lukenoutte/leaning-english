@@ -65,12 +65,12 @@ export default function HeaderAndFooter(props) {
           <MyDrawer />
 
           {!authenticated ? (
-            <div className="login-and-sign-up">
+            <div className="login-and-sign-up link-header">
               <Link to="/login">Login</Link>
               <Link to="/sign_up">Sign Up</Link>
             </div>
           ) : (
-            <div className="logout-and-profile">
+            <div className="logout-and-profile link-header">
               <Link to="/profile">Profile</Link>
               <button className="logout-button" onClick={handleLogout}>
                 {" "}

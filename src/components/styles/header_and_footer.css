@@ -73,8 +73,18 @@ footer a {
   flex-direction: row;
 }
 
-.login-and-sign-up a {
+.link-header a {
   margin-left: 20px;
+  border: 2px solid var(--secundary-color);
+  padding: 7px;
+  border-radius: 15px;
+  height: 35px;
+  font-size: 15px;
+}
+
+.link-header a:hover {
+  color: var(--white-color);
+  background-color: var(--secundary-color);
 }
 
 .drawer-button {

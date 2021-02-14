@@ -70,7 +70,7 @@ export default function Profile() {
     <HeaderAndFotter>
       <div className="profile global-wrapper">
         <div className="g-center-container">
-          <Link to="/edit_profile" className="edit-profile">Edit</Link>
+        <Link to="/edit_profile" className="edit-profile">Edit</Link>
           <h1 className="unknown-title">Profile</h1>
           {profileWordsList && userInfo.data ? (
             <>
