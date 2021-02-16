@@ -54,7 +54,7 @@ function EditProfile() {
                 />
               </div>
               <div className="p-and-input" >
-                <p>E-mail:</p>
+                <p>Email:</p>
                 <input
                   type="text"
                   onChange={(e) => setEmailInput(e.target.value)}
