@@ -81,7 +81,7 @@ export default function HeaderAndFooter(props) {
         </div>
       </header>
       <main>{props.children}</main>
-      <footer className="shadow-light">
+      <footer className="g-shadow-light">
         <p>
           Developed by{" "}
           <a
