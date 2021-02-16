@@ -1,17 +1,16 @@
-import React, { useRef, useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import HeaderAndFotter from "../components/headerAndFooter";
 import "../styles/edit_profile.css";
-import Loading from "../components/loading";
+//import Loading from "../components/loading";
 import history from "../history";
 import { editUserInfo, userInformations } from "../services";
 import { AuthContext } from "../context/AuthContext";
 
 function EditProfile() {
-  const inputEmail = useRef("");
-  const inputPass = useRef("");
-  const [emptyInput, setEmptyInput] = useState(false);
-  const [isLoading, setIsloading] = useState(false);
-  const [userInfo, setUserInfo] = useState([]);
+  //const inputEmail = useRef("");
+ // const inputPass = useRef("");
+  //const [emptyInput, setEmptyInput] = useState(false);
+  //const [isLoading, setIsloading] = useState(false);
   const [nameInput, setNameInput] = useState("");
   const [emailInput, setEmailInput] = useState("");
   const { authenticated } = useContext(AuthContext);
@@ -21,7 +20,7 @@ function EditProfile() {
       async function getUserInfo() {
         const response = await userInformations();
         if (response.data) {
-          setUserInfo(response.data);
+         
           setNameInput(response.data.name);
           setEmailInput(response.data.email);
         }
