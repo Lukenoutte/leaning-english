@@ -2,6 +2,8 @@
 
 Aprenda uma nova lingua utilizando essa ferramenta para destacar e traduzir palavras que você não conhece!
 
+💻 Site demo: https://surligner.netlify.app
+
 ## 🚀 Tecnologias
 
 - React js
