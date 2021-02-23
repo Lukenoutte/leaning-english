@@ -1,21 +1,23 @@
-import React,{ useContext } from "react";
+import React, { useContext } from "react";
 import "./styles/sentence_sliced.css";
 import { MainContext } from "../context/MainContext";
 
-export default function SentenceSliced(props) {
-
+export default function SentenceSliced() {
   const {
     unknownWords,
     setUnknownWords,
-    sameWordsFromProfile,  
-    sentence, 
-    cleanWord
+    sameWordsFromProfile,
+    sentence,
+    cleanWord,
   } = useContext(MainContext);
 
   function handleClickWord(word) {
     let newWord = cleanWord(word);
 
-    if (!unknownWords.includes(newWord) && !sameWordsFromProfile.includes(newWord) ) {
+    if (
+      !unknownWords.includes(newWord) &&
+      !sameWordsFromProfile.includes(newWord)
+    ) {
       setUnknownWords((oldArray) => [...oldArray, newWord]);
     }
   }

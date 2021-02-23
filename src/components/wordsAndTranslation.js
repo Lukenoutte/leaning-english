@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import "./styles/words_and_translations.css";
 import { MainContext } from "../context/MainContext";
 import WordContainer from "./wordContainer";
-export default function WordsAndTranslation(props) {
+export default function WordsAndTranslation() {
   const {
     translatedWords,
     setTranslatedWords,
@@ -11,6 +11,8 @@ export default function WordsAndTranslation(props) {
     sameWordsFromProfile,
     setSameWordsFromProfile,
   } = useContext(MainContext);
+
+
 
   function removeOneWordHighlighted(target) {
     setUnknownWords(unknownWords.filter((word) => word !== target));

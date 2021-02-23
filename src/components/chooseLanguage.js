@@ -2,6 +2,9 @@ import React from "react";
 import "./styles/choose_language.css";
 
 export default function ChooseLanguage(props) {
+  
+  const { valueSelected, functionSelect } = props;
+
   return (
     <div className="choose-language-wrapper">
       <div className="from-container g-shadow-light">
@@ -14,8 +17,8 @@ export default function ChooseLanguage(props) {
         <span>To: </span>
         <select
           name="languages"
-          value={props.valueSelected}
-          onChange={(e) => props.functionSelect(e)}
+          value={valueSelected}
+          onChange={(e) => functionSelect(e)}
         >
           <option value="pt-br">Portuguese (BR)</option>
           <option value="fr">French</option>

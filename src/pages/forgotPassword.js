@@ -31,18 +31,16 @@ export default function ForgotPassword() {
 
     let response = await sendTokenToEmail({ email });
 
-
-    if (response.status && response.status === 200) {
+    if (response && response.status === 200) {
       var obj = {};
       obj["email"] = email;
-  
+
       setRecoverPassInfo((oldArray) => ({ ...oldArray, ...obj }));
       history.push("/token_forgot_pass");
     } else {
-
-      if(response.data.error){
+      if (response && response.data.error) {
         setfailMessage(response.data.error);
-      }else{
+      } else {
         setfailMessage("Invalid E-mail");
       }
 
@@ -50,19 +48,33 @@ export default function ForgotPassword() {
       setEmailInputError(true);
     }
   }
+  
+  const inputClassError = () => {
+    if (emailInputError) return "g-input-error";
+
+    return "";
+  };
+  
+  const FirstInput = () => {
+    return <input type="text" placeholder={"E-mail"} ref={inputRef} className={inputClassError()}/>;
+  };
+
+  
 
   return (
     <PagesForgotPass
       isLoading={isLoading}
-      handleButtonSend={handleButtonSend}
-      title="Recover Password"
-      subtitle="Don't worry, we will send a recover code."
-      placeholder="E-mail"
-      inputError={emailInputError}
-      buttonText={"Send me"}
-      inputRef={inputRef}
-      inputType="text"
-      failMessage={failMessage}
+
+      labels={{
+        title: "Recover Password",
+        subtitle: "Don't worry, we will send a recover code.",
+      }}
+
+      handleErrors={{ input: emailInputError, message: failMessage }}
+
+      FirstInput={FirstInput}
+
+      button={{ text: "Send me", function: handleButtonSend }}
     ></PagesForgotPass>
   );
 }

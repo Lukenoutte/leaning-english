@@ -22,48 +22,58 @@ export default function TokenForgotPass() {
     event.preventDefault();
     let token = inputRef.current.value;
 
-    if(!recoverPassInfo.email){
+    if (!recoverPassInfo.email) {
       history.push("/forgot_pass");
     }
-    
+
     if (!validateCode(token)) {
       setCodeInputError(true);
-      setfailMessage("Invalid token")
+      setfailMessage("Invalid token");
       return;
     }
     setIsloading(true);
-    const response = await verifyResetToken({email: recoverPassInfo.email, token: token});
+    const response = await verifyResetToken({
+      email: recoverPassInfo.email,
+      token: token,
+    });
 
     if (response.status && response.status === 200) {
-    var obj = {};
-    obj["token"] = token;
+      var obj = {};
+      obj["token"] = token;
 
-    setRecoverPassInfo((oldArray) => ({ ...oldArray, ...obj }));
-    history.push("/change_pass");
-    } else{
-      if(response.data.error){
+      setRecoverPassInfo((oldArray) => ({ ...oldArray, ...obj }));
+      history.push("/change_pass");
+    } else {
+      if (response.data.error) {
         setfailMessage(response.data.error);
-      }else{
+      } else {
         setfailMessage("Invalid Token");
       }
       setCodeInputError(true);
       setIsloading(false);
     }
-    
   }
+
+  const inputClassError = () => {
+    if (tokenInputError) return "g-input-error";
+
+    return "";
+  };
+  
+  const FirstInput = () => {
+    return (<input type="text" placeholder={"Code"} ref={inputRef} className={inputClassError()}/>);
+  };
 
   return (
     <PagesForgotPass
       isLoading={isLoading}
-      handleButtonSend={handleButtonSend}
-      title="We sent a Token!"
-      subtitle="Check your e-mail box."
-      placeholder="Code"
-      inputError={tokenInputError}
-      buttonText={"Send"}
-      inputRef={inputRef}
-      inputType="text"
-      failMessage={failMessage}
+      labels={{
+        title: "We sent a Token!",
+        subtitle: "Check your e-mail box.",
+      }}
+      FirstInput={FirstInput}
+      button={{ text: "Send", function: handleButtonSend }}
+      handleErrors={{ input: tokenInputError, message: failMessage }}
     ></PagesForgotPass>
   );
 }

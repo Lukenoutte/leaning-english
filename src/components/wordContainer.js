@@ -3,17 +3,19 @@ import "./styles/word_container.css";
 import { ReactComponent as CloseIcon } from "../assets/icons/closeIcon.svg";
 
 export default function WordContainer(props) {
+  const { isProfileWord, onCloseButtonClicked } = props;
+  
   return (
     <div
       className={
-        props.isProfileWord
+        isProfileWord
           ? "unknown-words g-shadow-light profile-word"
           : "unknown-words g-shadow-light"
       }
     >
       {props.children}
-      {!props.isProfileWord && (
-        <button onClick={props.onCloseButtonClicked}>
+      {!isProfileWord && (
+        <button onClick={onCloseButtonClicked}>
           <CloseIcon className="close-icon" />
         </button>
       )}

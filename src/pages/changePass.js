@@ -28,8 +28,6 @@ export default function ForgotPassword() {
       return false;
     }
 
-
-
     return true;
   }
 
@@ -38,7 +36,7 @@ export default function ForgotPassword() {
     let pass = inputRef.current.value;
     let confirmPass = inputPassExtra.current.value;
 
-    if(!recoverPassInfo.email || !recoverPassInfo.token){
+    if (!recoverPassInfo.email || !recoverPassInfo.token) {
       history.push("/forgot_pass");
     }
 
@@ -48,8 +46,6 @@ export default function ForgotPassword() {
     }
 
     setIsloading(true);
-
-
 
     let response = await resetPass({
       email: recoverPassInfo.email,
@@ -66,21 +62,39 @@ export default function ForgotPassword() {
     }
   }
 
+  const inputClassError = () => {
+    if (inputError) return "g-input-error";
+
+    return "";
+  };
+  
+
+  const FirstInput = () => {
+    return <input type="password" placeholder={"Password"} ref={inputRef} className={inputClassError()} />;
+  };
+
+  const SecondInput = () => {
+    return (
+      <input
+        type="password"
+        placeholder={"Confirm Password"}
+        ref={inputPassExtra}
+        className={inputClassError() + " extra-input"}
+      />
+    );
+  };
+
   return (
     <PagesForgotPass
       isLoading={isLoading}
-      handleButtonSend={handleButtonSend}
-      title="Choose a new password!"
-      subtitle="Try something new."
-      placeholder="Password"
-      inputError={inputError}
-      buttonText={"Send"}
-      inputRef={inputRef}
-      extraInput={true}
-      extraPlaceholder="Confirm Password"
-      inputType="password"
-      extraInputRef={inputPassExtra}
-      failMessage={failMessage}
+      labels={{
+        title: "Choose a new password!",
+        subtitle: "Try something new.",
+      }}
+      button={{ text: "Send", function: handleButtonSend }}
+      FirstInput={FirstInput}
+      handleErrors={{ input: inputError, message: failMessage }}
+      SecondInput={SecondInput}
     ></PagesForgotPass>
   );
 }

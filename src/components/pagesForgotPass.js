@@ -4,17 +4,20 @@ import "./styles/forgot_pass.css";
 import Loading from "../components/loading";
 
 export default function ForgotPassword(props) {
-  const inputClass = () => {
-    if (props.inputError) return "g-input-error";
-
-    return "";
-  };
+  const {
+    isLoading,
+    FirstInput,
+    button,
+    handleErrors,
+    labels,
+    SecondInput
+  } = props;
 
   const ErrorMessage = () => {
-    if (props.inputError) {
+    if (handleErrors.input) {
       return (
         <div className="g-empty-input-error">
-          <p>{props.failMessage}</p>
+          <p>{handleErrors.message}</p>
         </div>
       );
     }
@@ -28,33 +31,23 @@ export default function ForgotPassword(props) {
         <div className="g-center-container-two">
           <div className="g-inputs-wrapper g-shadow-light g-styled-buttons">
             <div className="g-wrapper-response">
-              {props.isLoading && <Loading />}
-              {!props.isLoading && (<ErrorMessage />)}
+              {isLoading && <Loading />}
+              {!isLoading && <ErrorMessage />}
             </div>
-            <h3 className="title-recover">{props.title}</h3>
-            <p className="description-forgot-pass">{props.subtitle}</p>
+            <h3 className="title-recover">{labels.title}</h3>
+            <p className="description-forgot-pass">{labels.subtitle}</p>
 
-            <input
-              type={props.inputType}
-              placeholder={props.placeholder}
-              className={inputClass()}
-              ref={props.inputRef}
-            />
+            <FirstInput/>
 
-            {props.extraInput && (
-              <input
-                type={props.inputType}
-                placeholder={props.extraPlaceholder}
-                className={inputClass() + " extra-input"}
-                ref={props.extraInputRef}
-              />
+            {SecondInput && (
+              <SecondInput />
             )}
-            
+
             <button
-              onClick={(e) => props.handleButtonSend(e)}
+              onClick={(e) => button.function(e)}
               className="button-send"
             >
-              {props.buttonText}
+              {button.text}
             </button>
           </div>
         </div>
