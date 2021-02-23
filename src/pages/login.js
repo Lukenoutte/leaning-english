@@ -31,10 +31,11 @@ function Login() {
     let response = await login({ email, pass });
 
     if (response) {
+      
       if (response.status === 200) {
         handleLogin({response});
         history.push("/");
-      } else if (response.status === 400) {
+      } else {
         setLoginFailMessage(response.data.error);
 
         setLoginFail(true);
@@ -43,6 +44,7 @@ function Login() {
     } else {
       setLoginFail(true);
       setLoginFailMessage("Somenthing wrong :(");
+      setIsloading(false);
     }
   };
 
