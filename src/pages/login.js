@@ -20,7 +20,7 @@ function Login() {
     event.preventDefault();
     let email = (inputEmail.current.value).replace(/\s/g, "");
     let pass = inputPass.current.value;
-    
+
 
     if (email === "" || pass === "") {
       setEmptyInput(true);
@@ -31,12 +31,16 @@ function Login() {
     let response = await login({ email, pass });
 
     if (response) {
-      
+
       if (response.status === 200) {
-        handleLogin({response});
+        handleLogin({ response });
         history.push("/");
       } else {
-        setLoginFailMessage(response.data.error);
+        if (response.data.error) {
+          setLoginFailMessage(response.data.error);
+        } else {
+          setLoginFailMessage("Somenthing wrong :(");
+        }
 
         setLoginFail(true);
         setIsloading(false);
@@ -69,13 +73,13 @@ function Login() {
   };
 
   return (
-    <HeaderAndFotter>      
+    <HeaderAndFotter>
       <div className="login global-wrapper">
         <div className="g-center-container-two">
           <div className="g-inputs-wrapper g-shadow-light g-styled-buttons">
             <div className="g-wrapper-response">
-            {!isLoading && (<ErrorMessage />)}
-            {isLoading && (<Loading/>)}
+              {!isLoading && (<ErrorMessage />)}
+              {isLoading && (<Loading />)}
             </div>
             <h1>Login</h1>
 
@@ -95,8 +99,8 @@ function Login() {
             />
             <Link to="/forgot_pass">Forgot password?</Link>
             <button onClick={(e) => loginFunc(e)}>Login</button>
-            
-            
+
+
           </div>
         </div>
       </div>

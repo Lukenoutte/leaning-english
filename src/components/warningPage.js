@@ -5,18 +5,18 @@ import "./styles/warning.css";
 import { Link } from "react-router-dom";
 
 export default function WarningPage(props) {
-  const {title, text, linkDestination, buttonText} = props;
+  const {button, labels } = props;
 
   return (
     <HeaderAndFotter>
       <div className="warning global-wrapper">
         <div className="g-center-container-two">
           <div className="g-inputs-wrapper g-shadow-light g-styled-buttons">
-            <h1>{title}</h1>
+            <h1>{labels.title}</h1>
 
-            <p> {text} </p>
+            <p> {labels.text} </p>
 
-            <Link to={linkDestination}>{buttonText}</Link>
+            <Link to={button.link}>{button.text}</Link>
           </div>
         </div>
       </div>

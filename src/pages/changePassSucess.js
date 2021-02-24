@@ -5,10 +5,8 @@ import WarningPage from "../components/warningPage";
 export default function ChangePassSucess() {
   return (
     <WarningPage
-      title="Great!"
-      text="You have changed your password!"
-      linkDestination="/login"
-      buttonText="Continue"
+      labels={{title:"Great!", text:"You have changed your password!"}}
+      button={{link:"/login", text:"Continue"}}
     ></WarningPage>
   );
 }

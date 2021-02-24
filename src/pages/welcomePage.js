@@ -10,10 +10,8 @@ export default function WelcomePage() {
     <>
     {authenticated? 
     (<WarningPage
-      title="Welcome!"
-      text="Now you can store unknown words and improve your learning!"
-      linkDestination="/"
-      buttonText="Continue"
+      labels={{title:"Welcome!", text:"Now you can store unknown words and improve your learning!"}}
+      button={{link:"/", text:"Continue"}}
     ></WarningPage>):(
       <NotFound/>
     )
