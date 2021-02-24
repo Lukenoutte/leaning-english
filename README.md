@@ -18,7 +18,7 @@ Antes de iniciar, você precisa ter [Git](https://git-scm.com) e [Node](https://
 ```bash
 $ git clone https://github.com/Lukenoutte/surligner-learning-english.git
 ```
-1. Crie uma arquivo .env na raiz com as variáveis "REACT_APP_KEY" e "REACT_APP_ENDPOINT" e adicione os dados fornecidos pela API da Microsoft.
+1. Crie uma arquivo .env na raiz com as variáveis "REACT_APP_KEY" e "REACT_APP_ENDPOINT_MICROSOFT" e adicione os dados fornecidos pela API da Microsoft.
 
 ### 
 
