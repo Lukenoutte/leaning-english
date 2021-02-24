@@ -15,7 +15,7 @@ export default function WordContainer(props) {
     >
       {props.children}
       {!isProfileWord && (
-        <button onClick={onCloseButtonClicked}>
+        <button onClick={onCloseButtonClicked} className="close-button">
           <CloseIcon className="close-icon" />
         </button>
       )}

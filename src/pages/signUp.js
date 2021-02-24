@@ -3,7 +3,7 @@ import HeaderAndFotter from "../components/headerAndFooter";
 import "../styles/sign_up.css";
 import Loading from "../components/loading";
 import { AuthContext } from "../context/AuthContext";
-import { signUp, login} from "../services/myApi/auth";
+import { signUp, login } from "../services/myApi/auth";
 import history from "../history";
 
 function SignUp() {
@@ -17,9 +17,9 @@ function SignUp() {
   const [signUpFailMessage, setSignUpFailMessage] = useState("");
   const [signUpFail, setSignUpFail] = useState(false);
   const [isLoading, setIsloading] = useState(false);
-  const { handleLogin } = useContext(AuthContext);
+  const { handleLogin, authenticated } = useContext(AuthContext);
 
-  async function loginAfterSignUp(arg){
+  async function loginAfterSignUp(arg) {
     let loginResponse = await login({ email: arg.email, pass: arg.pass });
 
     if (loginResponse) {
@@ -32,49 +32,48 @@ function SignUp() {
     }
   }
 
-  function validateEmail(email) 
-    {
-        var re = /\S+@\S+\.\S+/;
-        return re.test(email);
+  function validateEmail(email) {
+    var re = /\S+@\S+\.\S+/;
+    return re.test(email);
+  }
+
+  function inputsValidation(arg) {
+
+    if (arg.name === "" || arg.email === "" || arg.pass === "" || arg.confirmPass === "") {
+      setAllInputError(true);
+      setSignUpFailMessage("Ops, Empty field!");
+      return false;
     }
 
-    function inputsValidation(arg){
-
-      if (arg.name === "" || arg.email === "" || arg.pass === "" || arg.confirmPass === "") {
-        setAllInputError(true);
-        setSignUpFailMessage("Ops, Empty field!");
-        return false;
-      }
-  
-      if (arg.pass !== arg.confirmPass) {
-        setPassInputError(true);
-        setSignUpFailMessage("Ops, passwords don't match!");
-        return false;
-      }else{
-        setPassInputError(false);
-      }
-  
-      if (arg.pass.length < 6 && arg.confirmPass.length < 6) {
-        setPassInputError(true);
-        setSignUpFail(true);
-        setSignUpFailMessage("Ops, passwords too small!");
-        return false;
-      }else{
-        setPassInputError(false);
-      }
-
-      if(!validateEmail(arg.email)){
-        setSignUpFail(true);
-        setSignUpFailMessage("Try another e-mail!");
-        setEmailInputError(true)
-        return false;
-      }else{
-        setEmailInputError(false);
-      }
-
-      return true;
+    if (arg.pass !== arg.confirmPass) {
+      setPassInputError(true);
+      setSignUpFailMessage("Ops, passwords don't match!");
+      return false;
+    } else {
+      setPassInputError(false);
     }
-   
+
+    if (arg.pass.length < 6 && arg.confirmPass.length < 6) {
+      setPassInputError(true);
+      setSignUpFail(true);
+      setSignUpFailMessage("Ops, passwords too small!");
+      return false;
+    } else {
+      setPassInputError(false);
+    }
+
+    if (!validateEmail(arg.email)) {
+      setSignUpFail(true);
+      setSignUpFailMessage("Try another e-mail!");
+      setEmailInputError(true)
+      return false;
+    } else {
+      setEmailInputError(false);
+    }
+
+    return true;
+  }
+
   const HandleSignUp = async (event) => {
     event.preventDefault();
     let name = inputName.current.value;
@@ -82,15 +81,15 @@ function SignUp() {
     let pass = inputPass.current.value;
     let confirmPass = inputConfirmPass.current.value;
 
-    if(!inputsValidation({name, email, pass, confirmPass})) return;
+    if (!inputsValidation({ name, email, pass, confirmPass })) return;
 
     setIsloading(true);
     let signUpResponse = await signUp({ name, email, pass, confirmPass });
 
     if (signUpResponse) {
-      
+
       if (signUpResponse.status === 200) {
-        loginAfterSignUp({email, pass});
+        loginAfterSignUp({ email, pass });
       } else if (signUpResponse.status === 400) {
         setSignUpFailMessage(signUpResponse.data.error);
         setIsloading(false);
@@ -129,6 +128,7 @@ function SignUp() {
 
   return (
     <HeaderAndFotter>
+      {authenticated && history.push("/")}
       <div className="sign-up global-wrapper">
         <div className="g-center-container-two">
           <div className="g-inputs-wrapper g-shadow-light g-styled-buttons">

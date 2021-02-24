@@ -47,6 +47,10 @@
     justify-content: center;
 }
 
+.edit-profile:hover{
+  background: var(--secundary-hover);
+}
+
 .config-icon{
   width: 20px;
   height: 20px;

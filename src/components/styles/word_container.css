@@ -34,6 +34,11 @@
   
   }
 
+  .unknown-words button:hover {
+    background: var(--secundary-hover);
+  }
+
   .profile-word {
     background: var(--secundary-light) !important;
   }
+

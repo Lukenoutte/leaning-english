@@ -8,7 +8,7 @@ import { AuthContext } from "../context/AuthContext";
 
 function EditProfile() {
   //const inputEmail = useRef("");
- // const inputPass = useRef("");
+  // const inputPass = useRef("");
   //const [emptyInput, setEmptyInput] = useState(false);
   //const [isLoading, setIsloading] = useState(false);
   const [nameInput, setNameInput] = useState("");
@@ -20,7 +20,7 @@ function EditProfile() {
       async function getUserInfo() {
         const response = await userInformations();
         if (response.data) {
-         
+
           setNameInput(response.data.name);
           setEmailInput(response.data.email);
         }
@@ -32,13 +32,14 @@ function EditProfile() {
 
   async function handleSave() {
     const response = await editUserInfo({ name: nameInput, email: emailInput });
-    if(response.status && response.status === 200){
-        history.push("/profile");
+    if (response.status && response.status === 200) {
+      history.push("/profile");
     }
   }
 
   return (
     <HeaderAndFotter>
+      {!authenticated && history.push("/")}
       <div className="edit-profile-wrapper global-wrapper">
         <div className="g-center-container-two">
           <div className="g-inputs-wrapper g-shadow-light g-styled-buttons">

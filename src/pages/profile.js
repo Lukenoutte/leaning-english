@@ -9,6 +9,7 @@ import Loading from "../components/loading";
 import "../styles/profile.css";
 import { Link } from "react-router-dom";
 import { ReactComponent as ConfigIcon } from "../assets/icons/configIcon.svg";
+import history from "../history";
 
 export default function Profile() {
   const [userInfo, setUserInfo] = useState([]);
@@ -69,6 +70,7 @@ export default function Profile() {
 
   return (
     <HeaderAndFotter>
+      {!authenticated && history.push("/")}
       <div className="profile global-wrapper">
         <div className="g-center-container">
         <Link to="/edit_profile" className="edit-profile"><ConfigIcon className="config-icon"/></Link>

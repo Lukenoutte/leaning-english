@@ -13,7 +13,7 @@ function Login() {
   const [emptyInput, setEmptyInput] = useState(false);
   const [loginFail, setLoginFail] = useState(false);
   const [loginFailMessage, setLoginFailMessage] = useState("");
-  const { handleLogin } = useContext(AuthContext);
+  const { handleLogin, authenticated } = useContext(AuthContext);
   const [isLoading, setIsloading] = useState(false);
 
   const loginFunc = async (event) => {
@@ -74,6 +74,7 @@ function Login() {
 
   return (
     <HeaderAndFotter>
+      {authenticated && history.push("/")}
       <div className="login global-wrapper">
         <div className="g-center-container-two">
           <div className="g-inputs-wrapper g-shadow-light g-styled-buttons">

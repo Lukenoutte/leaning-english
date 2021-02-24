@@ -37,12 +37,21 @@ footer {
   margin-right: 10px;
 }
 
+.main-icon:hover {
+  fill: var(--secundary-hover);
+}
+
+
 .icon-and-name a {
   display: flex;
   align-items: center;
   text-decoration: none;
   color: var(--secundary-color);
   width: fit-content;
+}
+
+.icon-and-name a:hover {
+  color:  var(--secundary-hover);
 }
 
 .icon-and-name-drawer {
@@ -123,6 +132,10 @@ footer a {
   width: 27px;
   height: 27px;
   fill: var(--secundary-color);
+}
+
+.logout-icon:hover {
+  fill: var(--secundary-hover);
 }
 
 .logout-button {

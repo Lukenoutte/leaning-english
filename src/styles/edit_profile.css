@@ -1,5 +1,5 @@
 .edit-profile-wrapper .p-and-input{
-    margin-top: 20px;
+    margin-top: 10px;
     width: 80%;
 }
 
@@ -9,7 +9,7 @@
 
 
 .edit-profile-wrapper .p-and-input p{
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     font-weight: bold;
     color: var(--secundary-color);
 }

@@ -54,7 +54,7 @@ export default function HeaderAndFooter(props) {
     <>
       <header className="g-shadow-light">
         <div className="center-container-header icon-and-name">
-          <Link to="/">
+          <Link to="/" >
             <MainIcon className="main-icon" /> Surligner
           </Link>
 
