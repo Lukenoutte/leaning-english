@@ -3,6 +3,8 @@ import { v4 as uuidv4 } from "uuid";
 const urlMicrosoftApi = process.env.REACT_APP_ENDPOINT_MICROSOFT;
 const keyMicrosoftApi = process.env.REACT_APP_KEY;
 
+const microsoftApi = require("axios").default;
+
 const postMicrosoftApi = async (arg) => {
     let response = await microsoftApi({
       baseURL: urlMicrosoftApi,
