@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect } from "react";
-import { myApi, verifyToken } from "../services";
+import { verifyToken } from "../services/myApi/auth";
+import  myApi from "../services/myApi/apiConfig";
 import history from "../history";
 
 const AuthContext = createContext();

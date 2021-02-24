@@ -2,7 +2,7 @@ import React, { useRef, useState, useContext } from "react";
 import history from "../history";
 import PagesForgotPass from "../components/pagesForgotPass";
 import { MainContext } from "../context/MainContext";
-import { verifyResetToken } from "../services";
+import { verifyResetToken } from "../services/myApi/resetPass";
 
 export default function TokenForgotPass() {
   const inputRef = useRef("");

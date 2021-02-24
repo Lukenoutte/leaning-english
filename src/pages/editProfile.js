@@ -3,7 +3,7 @@ import HeaderAndFotter from "../components/headerAndFooter";
 import "../styles/edit_profile.css";
 //import Loading from "../components/loading";
 import history from "../history";
-import { editUserInfo, userInformations } from "../services";
+import { editUserInfo, userInformations } from "../services/myApi/userInfo";
 import { AuthContext } from "../context/AuthContext";
 
 function EditProfile() {

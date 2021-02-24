@@ -3,7 +3,7 @@ import HeaderAndFotter from "../components/headerAndFooter";
 import "../styles/sign_up.css";
 import Loading from "../components/loading";
 import { AuthContext } from "../context/AuthContext";
-import { signUp, login} from "../services";
+import { signUp, login} from "../services/myApi/auth";
 import history from "../history";
 
 function SignUp() {

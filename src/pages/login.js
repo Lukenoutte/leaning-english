@@ -2,7 +2,7 @@ import React, { useRef, useState, useContext } from "react";
 import HeaderAndFotter from "../components/headerAndFooter";
 import "../styles/login.css";
 import { Link } from "react-router-dom";
-import { login } from "../services";
+import { login } from "../services/myApi/auth";
 import { AuthContext } from "../context/AuthContext";
 import Loading from "../components/loading";
 import history from "../history";

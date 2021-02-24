@@ -6,7 +6,8 @@ import PopUp from "../components/popUp";
 import WordsAndTranslations from "../components/wordsAndTranslation";
 import "../styles/main.css";
 
-import { addWords, getWords, postMicrosoftApi } from "../services";
+import  postMicrosoftApi from "../services/microsoftApi";
+import { addWords, getWords} from "../services/myApi/words";
 import { AuthContext } from "../context/AuthContext";
 import { MainContext } from "../context/MainContext";
 

@@ -1,13 +1,14 @@
 import React, { useEffect, useState, useContext } from "react";
 import HeaderAndFotter from "../components/headerAndFooter";
-import { userInformations } from "../services";
-import { getWords, removeWord } from "../services";
+import { userInformations } from "../services/myApi/userInfo";
+import { getWords, removeWord } from "../services/myApi/words";
 import { MainContext } from "../context/MainContext";
 import WordContainer from "../components/wordContainer";
 import { AuthContext } from "../context/AuthContext";
 import Loading from "../components/loading";
 import "../styles/profile.css";
 import { Link } from "react-router-dom";
+import { ReactComponent as ConfigIcon } from "../assets/icons/configIcon.svg";
 
 export default function Profile() {
   const [userInfo, setUserInfo] = useState([]);
@@ -70,7 +71,7 @@ export default function Profile() {
     <HeaderAndFotter>
       <div className="profile global-wrapper">
         <div className="g-center-container">
-        <Link to="/edit_profile" className="edit-profile">Edit</Link>
+        <Link to="/edit_profile" className="edit-profile"><ConfigIcon className="config-icon"/></Link>
           <h1 className="unknown-title">Profile</h1>
           {profileWordsList && userInfo.data ? (
             <>

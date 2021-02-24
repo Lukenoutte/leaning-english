@@ -1,5 +1,5 @@
 import React, { useRef, useState, useContext } from "react";
-import { sendTokenToEmail } from "../services";
+import { sendTokenToEmail } from "../services/myApi/resetPass";
 import history from "../history";
 import PagesForgotPass from "../components/pagesForgotPass";
 import { MainContext } from "../context/MainContext";
