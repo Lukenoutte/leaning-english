@@ -6,6 +6,7 @@ import { login } from "../services/myApi/auth";
 import { AuthContext } from "../context/AuthContext";
 import Loading from "../components/loading";
 import history from "../history";
+import { ErrorBoundary } from 'react-error-boundary'
 
 function Login() {
   const inputEmail = useRef("");
@@ -73,39 +74,41 @@ function Login() {
   };
 
   return (
-    <HeaderAndFotter>
-      {authenticated && history.push("/")}
-      <div className="login global-wrapper">
-        <div className="g-center-container-two">
-          <div className="g-inputs-wrapper g-shadow-light g-styled-buttons">
-            <div className="g-wrapper-response">
-              {!isLoading && (<ErrorMessage />)}
-              {isLoading && (<Loading />)}
+    <ErrorBoundary>
+      <HeaderAndFotter>
+        {authenticated && history.push("/")}
+        <div className="login global-wrapper">
+          <div className="g-center-container-two">
+            <div className="g-inputs-wrapper g-shadow-light g-styled-buttons">
+              <div className="g-wrapper-response">
+                {!isLoading && (<ErrorMessage />)}
+                {isLoading && (<Loading />)}
+              </div>
+              <h1>Login</h1>
+
+              <input
+                type="text"
+                placeholder="E-mail"
+                ref={inputEmail}
+                className={InputClass(inputEmail)}
+              />
+
+              <input
+                id="pass-input"
+                type="password"
+                placeholder="Password"
+                ref={inputPass}
+                className={InputClass(inputPass)}
+              />
+              <Link to="/forgot_pass">Forgot password?</Link>
+              <button onClick={loginFunc}>Login</button>
+
+
             </div>
-            <h1>Login</h1>
-
-            <input
-              type="text"
-              placeholder="E-mail"
-              ref={inputEmail}
-              className={InputClass(inputEmail)}
-            />
-
-            <input
-              id="pass-input"
-              type="password"
-              placeholder="Password"
-              ref={inputPass}
-              className={InputClass(inputPass)}
-            />
-            <Link to="/forgot_pass">Forgot password?</Link>
-            <button onClick={(e) => loginFunc(e)}>Login</button>
-
-
           </div>
         </div>
-      </div>
-    </HeaderAndFotter>
+      </HeaderAndFotter>
+    </ErrorBoundary>
   );
 }
 
