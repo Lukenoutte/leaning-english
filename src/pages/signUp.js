@@ -86,21 +86,23 @@ function SignUp() {
     setIsloading(true);
     let signUpResponse = await signUp({ name, email, pass, confirmPass });
 
-    if (signUpResponse) {
 
-      if (signUpResponse.status === 200) {
-        loginAfterSignUp({ email, pass });
-      } else if (signUpResponse.status === 400) {
-        setSignUpFailMessage(signUpResponse.data.error);
-        setIsloading(false);
-        setSignUpFail(true);
-        setAllInputError(true);
-      }
+
+    if (signUpResponse && signUpResponse.status && signUpResponse.status === 200) {
+      loginAfterSignUp({ email, pass });
     } else {
-      setSignUpFail(true);
-      setSignUpFailMessage("Somenthing wrong :(");
+
+      if (signUpResponse && signUpResponse.data.error) {
+        setSignUpFailMessage(signUpResponse.data.error);
+      } else {
+        setSignUpFailMessage("Somenthing wrong :(");
+      }
+
       setIsloading(false);
+      setSignUpFail(true);
+      setAllInputError(true);
     }
+
   };
 
   const inputClass = (input) => {

@@ -6,7 +6,7 @@ import { login } from "../services/myApi/auth";
 import { AuthContext } from "../context/AuthContext";
 import Loading from "../components/loading";
 import history from "../history";
-import { ErrorBoundary } from 'react-error-boundary'
+
 
 function Login() {
   const inputEmail = useRef("");
@@ -31,26 +31,20 @@ function Login() {
     setIsloading(true);
     let response = await login({ email, pass });
 
-    if (response) {
-
-      if (response.status === 200) {
-        handleLogin({ response });
-        history.push("/");
-      } else {
-        if (response.data.error) {
-          setLoginFailMessage(response.data.error);
-        } else {
-          setLoginFailMessage("Somenthing wrong :(");
-        }
-
-        setLoginFail(true);
-        setIsloading(false);
-      }
+    if (response && response.status && response.status === 200) {
+      handleLogin({ response });
+      history.push("/");
     } else {
+      if (response && response.data.error) {
+        setLoginFailMessage(response.data.error);
+      } else {
+        setLoginFailMessage("Somenthing wrong :(");
+      }
+
       setLoginFail(true);
-      setLoginFailMessage("Somenthing wrong :(");
       setIsloading(false);
     }
+
   };
 
   const InputClass = (ref) => {
@@ -74,9 +68,9 @@ function Login() {
   };
 
   return (
-    <ErrorBoundary>
-      <HeaderAndFotter>
-        {authenticated && history.push("/")}
+
+    <HeaderAndFotter>
+      {!authenticated ? (
         <div className="login global-wrapper">
           <div className="g-center-container-two">
             <div className="g-inputs-wrapper g-shadow-light g-styled-buttons">
@@ -106,9 +100,9 @@ function Login() {
 
             </div>
           </div>
-        </div>
-      </HeaderAndFotter>
-    </ErrorBoundary>
+        </div>) : history.push("/")}
+    </HeaderAndFotter>
+
   );
 }
 
