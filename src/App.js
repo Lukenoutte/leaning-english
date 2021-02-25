@@ -5,12 +5,16 @@ import { AuthProvider } from "./context/AuthContext";
 import { MainProvider } from "./context/MainContext";
 import history from "./history";
 import { Router } from "react-router-dom";
+import HeaderAndFotter from "./components/headerAndFooter";
+
 function App() {
   return (
     <AuthProvider>
       <MainProvider>
         <Router history={history}>
-          <Routes />
+          <HeaderAndFotter>
+            <Routes />
+          </HeaderAndFotter>
         </Router>
       </MainProvider>
     </AuthProvider>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import HeaderAndFotter from "../components/headerAndFooter";
+
 import { userInformations } from "../services/myApi/userInfo";
 import { getWords, removeWord } from "../services/myApi/words";
 import { MainContext } from "../context/MainContext";
@@ -71,46 +71,46 @@ export default function Profile() {
 
   return (
     <NeedAuth needAuth={true}>
-      <HeaderAndFotter>
 
-        <div className="profile global-wrapper">
-          <div className="g-center-container">
-            <Link to="/edit_profile" className="edit-profile"><ConfigIcon className="config-icon" /></Link>
-            <h1 className="unknown-title">Profile</h1>
-            {profileWordsList && userInfo.data ? (
-              <>
-                <div className="user-info  g-shadow-light">
-                  <p>
-                    <b>Name:</b> {userInfo.data.name}
-                  </p>
-                </div>
-                <div className="user-info  g-shadow-light">
-                  <p>
-                    <b>Email:</b> {userInfo.data.email}
-                  </p>
-                </div>
 
-                <h2 className="unknown-title">Unkown Words:</h2>
-                <div className="words-list-profile">
-                  {listWordsFromProfile().map((div) => {
-                    return div;
-                  })}
-                </div>
-                {profileWordsList.length === 0 && (
-                  <p className="any-word-p">Any word founded :(</p>
-                )}
-              </>
-            ) : (
-                <Loading />
-              )}
-            {isLoadingCorner && (
-              <div className="loading-corner">
-                <Loading />
+      <div className="profile global-wrapper">
+        <div className="g-center-container">
+          <Link to="/edit_profile" className="edit-profile"><ConfigIcon className="config-icon" /></Link>
+          <h1 className="unknown-title">Profile</h1>
+          {profileWordsList && userInfo.data ? (
+            <>
+              <div className="user-info  g-shadow-light">
+                <p>
+                  <b>Name:</b> {userInfo.data.name}
+                </p>
               </div>
+              <div className="user-info  g-shadow-light">
+                <p>
+                  <b>Email:</b> {userInfo.data.email}
+                </p>
+              </div>
+
+              <h2 className="unknown-title">Unkown Words:</h2>
+              <div className="words-list-profile">
+                {listWordsFromProfile().map((div) => {
+                  return div;
+                })}
+              </div>
+              {profileWordsList.length === 0 && (
+                <p className="any-word-p">Any word founded :(</p>
+              )}
+            </>
+          ) : (
+              <Loading />
             )}
-          </div>
+          {isLoadingCorner && (
+            <div className="loading-corner">
+              <Loading />
+            </div>
+          )}
         </div>
-      </HeaderAndFotter>
+      </div>
+
     </NeedAuth>
   );
 }

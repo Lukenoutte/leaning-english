@@ -1,5 +1,5 @@
 import React, { useRef, useState, useContext } from "react";
-import HeaderAndFotter from "../components/headerAndFooter";
+
 import "../styles/login.css";
 import { Link } from "react-router-dom";
 import { login } from "../services/myApi/auth";
@@ -70,40 +70,40 @@ function Login() {
 
   return (
     <NeedAuth needAuth={false}>
-      <HeaderAndFotter>
-
-        (<div className="login global-wrapper">
-          <div className="g-center-container-two">
-            <div className="g-inputs-wrapper g-shadow-light g-styled-buttons">
-              <div className="g-wrapper-response">
-                {!isLoading && (<ErrorMessage />)}
-                {isLoading && (<Loading />)}
-              </div>
-              <h1>Login</h1>
-
-              <input
-                type="text"
-                placeholder="E-mail"
-                ref={inputEmail}
-                className={InputClass(inputEmail)}
-              />
-
-              <input
-                id="pass-input"
-                type="password"
-                placeholder="Password"
-                ref={inputPass}
-                className={InputClass(inputPass)}
-              />
-              <Link to="/forgot_pass">Forgot password?</Link>
-              <button onClick={loginFunc}>Login</button>
 
 
+      (<div className="login global-wrapper">
+        <div className="g-center-container-two">
+          <div className="g-inputs-wrapper g-shadow-light g-styled-buttons">
+            <div className="g-wrapper-response">
+              {!isLoading && (<ErrorMessage />)}
+              {isLoading && (<Loading />)}
             </div>
+            <h1>Login</h1>
+
+            <input
+              type="text"
+              placeholder="E-mail"
+              ref={inputEmail}
+              className={InputClass(inputEmail)}
+            />
+
+            <input
+              id="pass-input"
+              type="password"
+              placeholder="Password"
+              ref={inputPass}
+              className={InputClass(inputPass)}
+            />
+            <Link to="/forgot_pass">Forgot password?</Link>
+            <button onClick={loginFunc}>Login</button>
+
+
           </div>
         </div>
+      </div>
 
-      </HeaderAndFotter>
+
     </NeedAuth>
   );
 }

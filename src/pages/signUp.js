@@ -1,5 +1,5 @@
 import React, { useRef, useState, useContext } from "react";
-import HeaderAndFotter from "../components/headerAndFooter";
+
 import "../styles/sign_up.css";
 import Loading from "../components/loading";
 import { AuthContext } from "../context/AuthContext";
@@ -131,7 +131,7 @@ function SignUp() {
 
   return (
     <NeedAuth needAuth={false}>
-      <HeaderAndFotter>
+
         <div className="sign-up global-wrapper">
           <div className="g-center-container-two">
             <div className="g-inputs-wrapper g-shadow-light g-styled-buttons">
@@ -168,7 +168,7 @@ function SignUp() {
             </div>
           </div>
         </div>
-      </HeaderAndFotter>
+
     </NeedAuth>
   );
 }

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import HeaderAndFotter from "../components/headerAndFooter";
+
 import "../styles/edit_profile.css";
 //import Loading from "../components/loading";
 import history from "../history";
@@ -36,7 +36,7 @@ function EditProfile() {
 
   return (
     <NeedAuth needAuth={true}>
-      <HeaderAndFotter>
+
         <div className="edit-profile-wrapper global-wrapper">
           <div className="g-center-container-two">
             <div className="g-inputs-wrapper g-shadow-light g-styled-buttons">
@@ -63,7 +63,7 @@ function EditProfile() {
             </div>
           </div>
         </div>
-      </HeaderAndFotter>
+      
     </NeedAuth>
   );
 }

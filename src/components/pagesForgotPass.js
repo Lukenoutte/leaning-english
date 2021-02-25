@@ -1,5 +1,5 @@
 import React from "react";
-import HeaderAndFotter from "../components/headerAndFooter";
+
 import "./styles/forgot_pass.css";
 import Loading from "../components/loading";
 
@@ -26,7 +26,7 @@ export default function ForgotPassword(props) {
   };
 
   return (
-    <HeaderAndFotter>
+    
       <div className="forgot-pass global-wrapper">
         <div className="g-center-container-two">
           <div className="g-inputs-wrapper g-shadow-light g-styled-buttons">
@@ -52,6 +52,6 @@ export default function ForgotPassword(props) {
           </div>
         </div>
       </div>
-    </HeaderAndFotter>
+
   );
 }

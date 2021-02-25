@@ -1,13 +1,12 @@
 import React, { useState, useRef, useEffect, useContext } from "react";
-import HeaderAndFotter from "../components/headerAndFooter";
 import ChooseLanguage from "../components/chooseLanguage";
 import SentenceSliced from "../components/sentenceSliced";
 import PopUp from "../components/popUp";
 import WordsAndTranslations from "../components/wordsAndTranslation";
 import "../styles/main.css";
 
-import  postMicrosoftApi from "../services/microsoftApi";
-import { addWords, getWords} from "../services/myApi/words";
+import postMicrosoftApi from "../services/microsoftApi";
+import { addWords, getWords } from "../services/myApi/words";
 import { AuthContext } from "../context/AuthContext";
 import { MainContext } from "../context/MainContext";
 
@@ -59,12 +58,12 @@ function Main() {
   }
 
   async function addProfileWords() {
-    let validWords = unknownWords.filter((word) => 
+    let validWords = unknownWords.filter((word) =>
       translatedWords[word] && translatedWords[word].length > 0
     );
 
     if (validWords && validWords.length > 0) {
-      
+
       const response = await addWords({ validWords });
 
       if (response.status && response.status === 200) {
@@ -155,7 +154,7 @@ function Main() {
   }, [authenticated]);
 
   return (
-    <HeaderAndFotter>
+    <>
       <div className="main-tool global-wrapper">
         <div className="g-center-container">
           <ChooseLanguage
@@ -185,7 +184,7 @@ function Main() {
       )}
 
       {showPopUp && <PopUp message={"You add a new word to your list!"} />}
-    </HeaderAndFotter>
+    </>
   );
 }
 
