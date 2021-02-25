@@ -8,10 +8,8 @@ export default function NotFound() {
   return (
     
    <WarningPage
-      title="Ops!"
-      text="Something wrong!"
-      linkDestination="/"
-      buttonText="Continue"
+      labels={{title:"Ops!", text:"Something wrong!"}}
+      button={{link:"/", text:"Continue"}}
     ></WarningPage>
   
   );  

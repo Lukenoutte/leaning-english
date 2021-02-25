@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import Login from "./pages/login";
 import Main from "./pages/main";
 import SignUp from "./pages/signUp";
@@ -10,6 +10,7 @@ import ChangePass from "./pages/changePass";
 import Welcome from "./pages/welcomePage";
 import ChangePassSucess from "./pages/changePassSucess";
 import EditProfile from "./pages/editProfile";
+import NotFound from "./components/notFound";
 
 function Routes() {
   return (
@@ -24,6 +25,8 @@ function Routes() {
       <Route path="/welcome" component={Welcome} />
       <Route path="/change_pass_sucess" component={ChangePassSucess} />
       <Route path="/edit_profile" component={EditProfile} />
+      <Route path='/404' component={NotFound} />
+      <Redirect from='*' to='/404' />
     </Switch>
   );
 }

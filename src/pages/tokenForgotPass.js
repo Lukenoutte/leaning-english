@@ -3,6 +3,7 @@ import history from "../history";
 import PagesForgotPass from "../components/pagesForgotPass";
 import { MainContext } from "../context/MainContext";
 import { verifyResetToken } from "../services/myApi/resetPass";
+import NeedAuth from "../components/needAuth";
 
 export default function TokenForgotPass() {
   const inputRef = useRef("");
@@ -59,21 +60,23 @@ export default function TokenForgotPass() {
 
     return "";
   };
-  
+
   const FirstInput = () => {
-    return (<input type="text" placeholder={"Code"} ref={inputRef} className={inputClassError()}/>);
+    return (<input type="text" placeholder={"Code"} ref={inputRef} className={inputClassError()} />);
   };
 
   return (
-    <PagesForgotPass
-      isLoading={isLoading}
-      labels={{
-        title: "We sent a Token!",
-        subtitle: "Check your e-mail box.",
-      }}
-      FirstInput={FirstInput}
-      button={{ text: "Send", function: handleButtonSend }}
-      handleErrors={{ input: tokenInputError, message: failMessage }}
-    ></PagesForgotPass>
+    <NeedAuth needAuth={false}>
+      <PagesForgotPass
+        isLoading={isLoading}
+        labels={{
+          title: "We sent a Token!",
+          subtitle: "Check your e-mail box.",
+        }}
+        FirstInput={FirstInput}
+        button={{ text: "Send", function: handleButtonSend }}
+        handleErrors={{ input: tokenInputError, message: failMessage }}
+      ></PagesForgotPass>
+    </NeedAuth>
   );
 }

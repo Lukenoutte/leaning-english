@@ -9,7 +9,8 @@ import Loading from "../components/loading";
 import "../styles/profile.css";
 import { Link } from "react-router-dom";
 import { ReactComponent as ConfigIcon } from "../assets/icons/configIcon.svg";
-import history from "../history";
+import NeedAuth from "../components/needAuth";
+
 
 export default function Profile() {
   const [userInfo, setUserInfo] = useState([]);
@@ -69,45 +70,47 @@ export default function Profile() {
   }, [setProfileWordsList, authenticated, isLoadingCorner]);
 
   return (
-    <HeaderAndFotter>
-      {!authenticated && history.push("/")}
-      <div className="profile global-wrapper">
-        <div className="g-center-container">
-        <Link to="/edit_profile" className="edit-profile"><ConfigIcon className="config-icon"/></Link>
-          <h1 className="unknown-title">Profile</h1>
-          {profileWordsList && userInfo.data ? (
-            <>
-              <div className="user-info  g-shadow-light">
-                <p>
-                  <b>Name:</b> {userInfo.data.name}
-                </p>
-              </div>
-              <div className="user-info  g-shadow-light">
-                <p>
-                  <b>Email:</b> {userInfo.data.email}
-                </p>
-              </div>
- 
-              <h2 className="unknown-title">Unkown Words:</h2>
-              <div className="words-list-profile">
-                {listWordsFromProfile().map((div) => {
-                  return div;
-                })}
-              </div>
-              {profileWordsList.length === 0 && (
-                <p className="any-word-p">Any word founded :(</p>
+    <NeedAuth needAuth={true}>
+      <HeaderAndFotter>
+
+        <div className="profile global-wrapper">
+          <div className="g-center-container">
+            <Link to="/edit_profile" className="edit-profile"><ConfigIcon className="config-icon" /></Link>
+            <h1 className="unknown-title">Profile</h1>
+            {profileWordsList && userInfo.data ? (
+              <>
+                <div className="user-info  g-shadow-light">
+                  <p>
+                    <b>Name:</b> {userInfo.data.name}
+                  </p>
+                </div>
+                <div className="user-info  g-shadow-light">
+                  <p>
+                    <b>Email:</b> {userInfo.data.email}
+                  </p>
+                </div>
+
+                <h2 className="unknown-title">Unkown Words:</h2>
+                <div className="words-list-profile">
+                  {listWordsFromProfile().map((div) => {
+                    return div;
+                  })}
+                </div>
+                {profileWordsList.length === 0 && (
+                  <p className="any-word-p">Any word founded :(</p>
+                )}
+              </>
+            ) : (
+                <Loading />
               )}
-            </>
-          ) : (
-            <Loading />
-          )}
-          {isLoadingCorner && (
-            <div className="loading-corner">
-              <Loading />
-            </div>
-          )}
+            {isLoadingCorner && (
+              <div className="loading-corner">
+                <Loading />
+              </div>
+            )}
+          </div>
         </div>
-      </div>
-    </HeaderAndFotter>
+      </HeaderAndFotter>
+    </NeedAuth>
   );
 }

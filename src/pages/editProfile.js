@@ -5,12 +5,9 @@ import "../styles/edit_profile.css";
 import history from "../history";
 import { editUserInfo, userInformations } from "../services/myApi/userInfo";
 import { AuthContext } from "../context/AuthContext";
+import NeedAuth from "../components/needAuth";
 
 function EditProfile() {
-  //const inputEmail = useRef("");
-  // const inputPass = useRef("");
-  //const [emptyInput, setEmptyInput] = useState(false);
-  //const [isLoading, setIsloading] = useState(false);
   const [nameInput, setNameInput] = useState("");
   const [emailInput, setEmailInput] = useState("");
   const { authenticated } = useContext(AuthContext);
@@ -38,35 +35,36 @@ function EditProfile() {
   }
 
   return (
-    <HeaderAndFotter>
-      {!authenticated && history.push("/")}
-      <div className="edit-profile-wrapper global-wrapper">
-        <div className="g-center-container-two">
-          <div className="g-inputs-wrapper g-shadow-light g-styled-buttons">
-            <h1>Profile</h1>
-            <>
-              <div className="p-and-input">
-                <p>Name:</p>
-                <input
-                  type="text"
-                  onChange={(e) => setNameInput(e.target.value)}
-                  value={nameInput}
-                />
-              </div>
-              <div className="p-and-input" >
-                <p>Email:</p>
-                <input
-                  type="text"
-                  onChange={(e) => setEmailInput(e.target.value)}
-                  value={emailInput}
-                />
-              </div>
-              <button onClick={handleSave}>Save</button>
-            </>
+    <NeedAuth needAuth={true}>
+      <HeaderAndFotter>
+        <div className="edit-profile-wrapper global-wrapper">
+          <div className="g-center-container-two">
+            <div className="g-inputs-wrapper g-shadow-light g-styled-buttons">
+              <h1>Profile</h1>
+              <>
+                <div className="p-and-input">
+                  <p>Name:</p>
+                  <input
+                    type="text"
+                    onChange={(e) => setNameInput(e.target.value)}
+                    value={nameInput}
+                  />
+                </div>
+                <div className="p-and-input" >
+                  <p>Email:</p>
+                  <input
+                    type="text"
+                    onChange={(e) => setEmailInput(e.target.value)}
+                    value={emailInput}
+                  />
+                </div>
+                <button onClick={handleSave}>Save</button>
+              </>
+            </div>
           </div>
         </div>
-      </div>
-    </HeaderAndFotter>
+      </HeaderAndFotter>
+    </NeedAuth>
   );
 }
 

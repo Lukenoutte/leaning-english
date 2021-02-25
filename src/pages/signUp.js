@@ -5,6 +5,7 @@ import Loading from "../components/loading";
 import { AuthContext } from "../context/AuthContext";
 import { signUp, login } from "../services/myApi/auth";
 import history from "../history";
+import NeedAuth from "../components/needAuth";
 
 function SignUp() {
   const inputName = useRef("");
@@ -17,7 +18,7 @@ function SignUp() {
   const [signUpFailMessage, setSignUpFailMessage] = useState("");
   const [signUpFail, setSignUpFail] = useState(false);
   const [isLoading, setIsloading] = useState(false);
-  const { handleLogin, authenticated } = useContext(AuthContext);
+  const { handleLogin} = useContext(AuthContext);
 
   async function loginAfterSignUp(arg) {
     let loginResponse = await login({ email: arg.email, pass: arg.pass });
@@ -129,45 +130,46 @@ function SignUp() {
   };
 
   return (
-    <HeaderAndFotter>
-      {authenticated && history.push("/")}
-      <div className="sign-up global-wrapper">
-        <div className="g-center-container-two">
-          <div className="g-inputs-wrapper g-shadow-light g-styled-buttons">
-            <div className="g-wrapper-response">
-              {!isLoading && <ErrorMessage />}
-              {isLoading && <Loading />}
+    <NeedAuth needAuth={false}>
+      <HeaderAndFotter>
+        <div className="sign-up global-wrapper">
+          <div className="g-center-container-two">
+            <div className="g-inputs-wrapper g-shadow-light g-styled-buttons">
+              <div className="g-wrapper-response">
+                {!isLoading && <ErrorMessage />}
+                {isLoading && <Loading />}
+              </div>
+              <h1>Sign Up</h1>
+              <input
+                type="text"
+                placeholder="Name"
+                ref={inputName}
+                className={inputClass()}
+              />
+              <input
+                type="text"
+                placeholder="E-mail"
+                ref={inputEmail}
+                className={inputClass("email")}
+              />
+              <input
+                type="password"
+                placeholder="Password"
+                ref={inputPass}
+                className={inputClass("pass")}
+              />
+              <input
+                type="password"
+                placeholder="Confirm Password"
+                ref={inputConfirmPass}
+                className={inputClass("pass")}
+              />
+              <button onClick={(e) => HandleSignUp(e)}>Start</button>
             </div>
-            <h1>Sign Up</h1>
-            <input
-              type="text"
-              placeholder="Name"
-              ref={inputName}
-              className={inputClass()}
-            />
-            <input
-              type="text"
-              placeholder="E-mail"
-              ref={inputEmail}
-              className={inputClass("email")}
-            />
-            <input
-              type="password"
-              placeholder="Password"
-              ref={inputPass}
-              className={inputClass("pass")}
-            />
-            <input
-              type="password"
-              placeholder="Confirm Password"
-              ref={inputConfirmPass}
-              className={inputClass("pass")}
-            />
-            <button onClick={(e) => HandleSignUp(e)}>Start</button>
           </div>
         </div>
-      </div>
-    </HeaderAndFotter>
+      </HeaderAndFotter>
+    </NeedAuth>
   );
 }
 

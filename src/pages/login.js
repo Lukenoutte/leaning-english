@@ -7,6 +7,7 @@ import { AuthContext } from "../context/AuthContext";
 import Loading from "../components/loading";
 import history from "../history";
 
+import NeedAuth from "../components/needAuth";
 
 function Login() {
   const inputEmail = useRef("");
@@ -14,7 +15,7 @@ function Login() {
   const [emptyInput, setEmptyInput] = useState(false);
   const [loginFail, setLoginFail] = useState(false);
   const [loginFailMessage, setLoginFailMessage] = useState("");
-  const { handleLogin, authenticated } = useContext(AuthContext);
+  const { handleLogin } = useContext(AuthContext);
   const [isLoading, setIsloading] = useState(false);
 
   const loginFunc = async (event) => {
@@ -68,10 +69,10 @@ function Login() {
   };
 
   return (
+    <NeedAuth needAuth={false}>
+      <HeaderAndFotter>
 
-    <HeaderAndFotter>
-      {!authenticated ? (
-        <div className="login global-wrapper">
+        (<div className="login global-wrapper">
           <div className="g-center-container-two">
             <div className="g-inputs-wrapper g-shadow-light g-styled-buttons">
               <div className="g-wrapper-response">
@@ -100,9 +101,10 @@ function Login() {
 
             </div>
           </div>
-        </div>) : history.push("/")}
-    </HeaderAndFotter>
+        </div>
 
+      </HeaderAndFotter>
+    </NeedAuth>
   );
 }
 

@@ -3,6 +3,7 @@ import { sendTokenToEmail } from "../services/myApi/resetPass";
 import history from "../history";
 import PagesForgotPass from "../components/pagesForgotPass";
 import { MainContext } from "../context/MainContext";
+import NeedAuth from "../components/needAuth";
 
 export default function ForgotPassword() {
   const inputRef = useRef("");
@@ -48,33 +49,35 @@ export default function ForgotPassword() {
       setEmailInputError(true);
     }
   }
-  
+
   const inputClassError = () => {
     if (emailInputError) return "g-input-error";
 
     return "";
   };
-  
+
   const FirstInput = () => {
-    return <input type="text" placeholder={"E-mail"} ref={inputRef} className={inputClassError()}/>;
+    return <input type="text" placeholder={"E-mail"} ref={inputRef} className={inputClassError()} />;
   };
 
-  
+
 
   return (
-    <PagesForgotPass
-      isLoading={isLoading}
+    <NeedAuth needAuth={false}>
+      <PagesForgotPass
+        isLoading={isLoading}
 
-      labels={{
-        title: "Recover Password",
-        subtitle: "Don't worry, we will send a recover code.",
-      }}
+        labels={{
+          title: "Recover Password",
+          subtitle: "Don't worry, we will send a recover code.",
+        }}
 
-      handleErrors={{ input: emailInputError, message: failMessage }}
+        handleErrors={{ input: emailInputError, message: failMessage }}
 
-      FirstInput={FirstInput}
+        FirstInput={FirstInput}
 
-      button={{ text: "Send me", function: handleButtonSend }}
-    ></PagesForgotPass>
+        button={{ text: "Send me", function: handleButtonSend }}
+      ></PagesForgotPass>
+    </NeedAuth>
   );
 }
