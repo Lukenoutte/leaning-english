@@ -5,18 +5,22 @@ import { MainContext } from "../../context/MainContext";
 export default function SentenceSliced() {
   const {
     unknownWords,
-    setUnknownWords,
     sameWordsFromProfile,
     sentence,
     cleanWord,
   } = useContext(MainContext);
 
+  const [unknownWordsValue, setUnknownWords] = unknownWords;
+  const [sameWordsFromProfileValue] = sameWordsFromProfile;
+  const [sentenceValue] = sentence;
+
+
   function handleClickWord(word) {
     let newWord = cleanWord(word);
 
     if (
-      !unknownWords.includes(newWord) &&
-      !sameWordsFromProfile.includes(newWord)
+      !unknownWordsValue.includes(newWord) &&
+      !sameWordsFromProfileValue.includes(newWord)
     ) {
       setUnknownWords((oldArray) => [...oldArray, newWord]);
     }
@@ -25,11 +29,11 @@ export default function SentenceSliced() {
   function handleClassWord(word) {
     let clearWord = cleanWord(word);
 
-    if (unknownWords.includes(clearWord)) {
+    if (unknownWordsValue.includes(clearWord)) {
       return "word-hightlight";
     }
 
-    if (sameWordsFromProfile.includes(clearWord)) {
+    if (sameWordsFromProfileValue.includes(clearWord)) {
       return "word-hightlight-profile";
     }
 
@@ -38,9 +42,9 @@ export default function SentenceSliced() {
 
   return (
     <>
-      {sentence.length > 0 && (
+      {sentenceValue.length > 0 && (
         <div className="phrase-wrapper g-shadow-light">
-          {sentence.map((word, index) => {
+          {sentenceValue.map((word, index) => {
             return (
               <button
                 className={handleClassWord(word)}

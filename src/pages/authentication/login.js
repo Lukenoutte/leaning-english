@@ -72,7 +72,7 @@ function Login() {
     <NeedAuth needAuth={false}>
 
 
-      (<div className="login global-wrapper">
+      <div className="login global-wrapper">
         <div className="g-center-container-two">
           <div className="g-inputs-wrapper g-shadow-light g-styled-buttons">
             <div className="g-wrapper-response">

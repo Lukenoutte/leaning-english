@@ -14,7 +14,8 @@ import NeedAuth from "../../components/utilities/needAuth";
 
 export default function Profile() {
   const [userInfo, setUserInfo] = useState([]);
-  const { setProfileWordsList, profileWordsList } = useContext(MainContext);
+  const { profileWordsList } = useContext(MainContext);
+  const [profileWordsListValue, setProfileWordsList] = profileWordsList;
   const { authenticated } = useContext(AuthContext);
 
   const [isLoadingCorner, setIsLoadingCorner] = useState(false);
@@ -32,7 +33,7 @@ export default function Profile() {
 
   function listWordsFromProfile() {
     let divList = [];
-    profileWordsList.map((word) =>
+    profileWordsListValue.map((word) =>
       divList.push(
         <WordContainer
           isProfileWord={false}
@@ -77,7 +78,7 @@ export default function Profile() {
         <div className="g-center-container">
           <Link to="/edit_profile" className="edit-profile"><ConfigIcon className="config-icon" /></Link>
           <h1 className="unknown-title">Profile</h1>
-          {profileWordsList && userInfo.data ? (
+          {profileWordsListValue && userInfo.data ? (
             <>
               <div className="user-info  g-shadow-light">
                 <p>
@@ -96,7 +97,7 @@ export default function Profile() {
                   return div;
                 })}
               </div>
-              {profileWordsList.length === 0 && (
+              {profileWordsListValue.length === 0 && (
                 <p className="any-word-p">Any word founded :(</p>
               )}
             </>

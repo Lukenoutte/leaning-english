@@ -10,6 +10,7 @@ export default function ForgotPassword() {
   const [inputError, setInputError] = useState(false);
   const [isLoading, setIsloading] = useState(false);
   const { recoverPassInfo } = useContext(MainContext);
+  const [ recoverPassInfoValue ] =  recoverPassInfo;
   const [failMessage, setfailMessage] = useState("");
 
   function validatePass(arg) {
@@ -36,7 +37,7 @@ export default function ForgotPassword() {
     let pass = inputRef.current.value;
     let confirmPass = inputPassExtra.current.value;
 
-    if (!recoverPassInfo.email || !recoverPassInfo.token) {
+    if (!recoverPassInfoValue.email || !recoverPassInfoValue.token) {
       history.push("/forgot_pass");
     }
 
@@ -48,9 +49,9 @@ export default function ForgotPassword() {
     setIsloading(true);
 
     let response = await resetPass({
-      email: recoverPassInfo.email,
+      email: recoverPassInfoValue.email,
       password: pass,
-      token: recoverPassInfo.token,
+      token: recoverPassInfoValue.token,
     });
 
     if (response.status && response.status === 200) {

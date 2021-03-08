@@ -8,7 +8,8 @@ import NeedAuth from "../../components/utilities/needAuth";
 export default function TokenForgotPass() {
   const inputRef = useRef("");
   const [tokenInputError, setCodeInputError] = useState(false);
-  const { setRecoverPassInfo, recoverPassInfo } = useContext(MainContext);
+  const { recoverPassInfo } = useContext(MainContext);
+  const [recoverPassInfoValue, setRecoverPassInfo] = recoverPassInfo;
   const [isLoading, setIsloading] = useState(false);
   const [failMessage, setfailMessage] = useState("");
 
@@ -23,7 +24,7 @@ export default function TokenForgotPass() {
     event.preventDefault();
     let token = inputRef.current.value;
 
-    if (!recoverPassInfo.email) {
+    if (!recoverPassInfoValue.email) {
       history.push("/forgot_pass");
     }
 
@@ -62,7 +63,14 @@ export default function TokenForgotPass() {
   };
 
   const FirstInput = () => {
-    return (<input type="text" placeholder={"Code"} ref={inputRef} className={inputClassError()} />);
+    return (
+      <input
+        type="text"
+        placeholder={"Code"}
+        ref={inputRef}
+        className={inputClassError()}
+      />
+    );
   };
 
   return (

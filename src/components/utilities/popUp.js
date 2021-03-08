@@ -3,13 +3,15 @@ import "./styles/pop_up.css";
 import { MainContext } from "../../context/MainContext";
 
 export default function PopUp(props) {
-  const { showPopUp, setShowPopUp } = useContext(MainContext);
+  const { showPopUp } = useContext(MainContext);
+  const [showPopUpValue, setShowPopUp ] = showPopUp;
+
 
   useEffect(() => {
-    if (showPopUp) {
+    if (showPopUpValue) {
       setTimeout(() => {setShowPopUp(false)}, 2000);
     }
-  }, [showPopUp, setShowPopUp]);
+  }, [showPopUpValue, setShowPopUp]);
 
   return (
     <div className="pop-up-wrapper">

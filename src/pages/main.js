@@ -1,35 +1,36 @@
-import React, { useState, useRef, useEffect, useContext } from "react";
+import React, { useRef, useEffect, useContext } from "react";
 import ChooseLanguage from "../components/chooseLanguage/chooseLanguage";
 import SentenceSliced from "../components/handleWords/sentenceSliced";
 import PopUp from "../components/utilities/popUp";
 import WordsAndTranslations from "../components/handleWords/wordsAndTranslation";
 import "../styles/main.css";
-
-import postMicrosoftApi from "../services/microsoftApi";
-import { addWords, getWords } from "../services/myApi/words";
+import { addWords  } from "../services/myApi/words";
 import { AuthContext } from "../context/AuthContext";
 import { MainContext } from "../context/MainContext";
+import HandleUserEffect from "../components/handleUserEffect/handleUserEffect";
 
 function Main() {
-  const [languageSelectValue, setLanguageToSelectValue] = useState("pt-br");
-  const [addedNewWords, setAddedNewWords] = useState(false);
   const inputPhrase = useRef(null);
 
   const { authenticated } = useContext(AuthContext);
+
   const {
     translatedWords,
-    setTranslatedWords,
     unknownWords,
-    setUnknownWords,
     sameWordsFromProfile,
-    setSameWordsFromProfile,
     sentence,
-    setSentence,
     showPopUp,
-    setShowPopUp,
-    profileWordsList,
-    setProfileWordsList,
+    languageSelect,
+    addedNewWords
   } = useContext(MainContext);
+
+  const [translatedWordsValue, setTranslatedWords] = translatedWords;
+  const [unknownWordsValue, setUnknownWords] = unknownWords;
+  const [showPopUpValue, setShowPopUp] = showPopUp;
+  const [languageSelectValue, setLanguageSelect] = languageSelect;
+  const [addedNewWordsValue, setAddedNewWords] = addedNewWords;
+  const setSameWordsFromProfile = sameWordsFromProfile[1];
+  const setSentence = sentence[1];
 
   function handleButtonSplitPhrase() {
     let currentPhrase = inputPhrase.current.value;
@@ -40,7 +41,7 @@ function Main() {
   }
 
   function ChangeLanguage(event) {
-    setLanguageToSelectValue(event.target.value);
+    setLanguageSelect(event.target.value);
 
     clearUnkownAndTranslated();
   }
@@ -58,19 +59,19 @@ function Main() {
   }
 
   async function addProfileWords() {
-    let validWords = unknownWords.filter((word) =>
-      translatedWords[word] && translatedWords[word].length > 0
+    let validWords = unknownWordsValue.filter(
+      (word) =>
+        translatedWordsValue[word] && translatedWordsValue[word].length > 0
     );
 
     if (validWords && validWords.length > 0) {
-
       const response = await addWords({ validWords });
 
       if (response.status && response.status === 200) {
         setShowPopUp(true);
         setUnknownWords([]);
 
-        if (addedNewWords) {
+        if (addedNewWordsValue) {
           setAddedNewWords(false);
         } else {
           setAddedNewWords(true);
@@ -78,73 +79,6 @@ function Main() {
       }
     }
   }
-
-  useEffect(() => {
-    // API CALL to translate selected word
-    if (unknownWords.length > 0) {
-      postMicrosoftApi({
-        languageSelectValue,
-        data: unknownWords[unknownWords.length - 1],
-      }).then(function (response) {
-        let newTranslations = response.data[0].translations;
-        var key = unknownWords[unknownWords.length - 1];
-        var obj = {};
-        obj[key] = newTranslations;
-
-        setTranslatedWords((oldArray) => ({ ...oldArray, ...obj }));
-      });
-    }
-  }, [unknownWords, languageSelectValue, setTranslatedWords]);
-
-  useEffect(() => {
-    // Get unknown words profile list from my api
-
-    if (authenticated) {
-      const wordsList = async () => {
-        const words = await getWords();
-        if (words.status && words.status === 200) {
-          setProfileWordsList(words.data);
-        }
-      };
-      wordsList();
-    }
-  }, [authenticated, setProfileWordsList, addedNewWords]);
-
-  useEffect(() => {
-    // Compare user sentence and profile words
-    if (authenticated && sentence.length > 0) {
-      const wordsFound = profileWordsList.filter(
-        (element) =>
-          sentence
-            .map((word) => word.replace(/[.,?!;:\s]/g, "").toLowerCase())
-            .indexOf(element.toLowerCase()) !== -1
-      );
-
-      setSameWordsFromProfile((oldArray) =>
-        oldArray.concat(wordsFound.filter((item) => oldArray.indexOf(item) < 0))
-      );
-    }
-  }, [authenticated, sentence, profileWordsList, setSameWordsFromProfile]);
-
-  useEffect(() => {
-    // API CALL only to translate words from profile
-    if (sameWordsFromProfile.length > 0) {
-      sameWordsFromProfile.map((word) =>
-        postMicrosoftApi({
-          languageSelectValue,
-          data: word,
-        }).then(function (response) {
-          let newTranslations = response.data[0].translations;
-
-          var key = word;
-          var obj = {};
-          obj[key] = newTranslations;
-
-          setTranslatedWords((oldArray) => ({ ...oldArray, ...obj }));
-        })
-      );
-    }
-  }, [sameWordsFromProfile, languageSelectValue, setTranslatedWords]);
 
   useEffect(() => {
     // Clear main on login and logout
@@ -177,13 +111,14 @@ function Main() {
           <WordsAndTranslations />
         </div>
       </div>
-      {authenticated && unknownWords.length > 0 && (
+      {authenticated && unknownWordsValue.length > 0 && (
         <button className="add-to-profile-list" onClick={addProfileWords}>
           +
         </button>
       )}
 
-      {showPopUp && <PopUp message={"You add a new word to your list!"} />}
+      {showPopUpValue && <PopUp message={"You add a new word to your list!"} />}
+      <HandleUserEffect/>
     </>
   );
 }

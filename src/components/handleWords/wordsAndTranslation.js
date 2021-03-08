@@ -5,32 +5,31 @@ import WordContainer from "../handleWords/wordContainer";
 export default function WordsAndTranslation() {
   const {
     translatedWords,
-    setTranslatedWords,
     unknownWords,
-    setUnknownWords,
     sameWordsFromProfile,
-    setSameWordsFromProfile,
   } = useContext(MainContext);
 
-
-
+  const [translatedWordsValue, setTranslatedWords] = translatedWords;
+  const [unknownWordsValue, setUnknownWords] = unknownWords;
+  const [ sameWordsFromProfileValue, setSameWordsFromProfile] = sameWordsFromProfile;
+  
   function removeOneWordHighlighted(target) {
-    setUnknownWords(unknownWords.filter((word) => word !== target));
+    setUnknownWords(unknownWordsValue.filter((word) => word !== target));
 
     setSameWordsFromProfile(
-      sameWordsFromProfile.filter((word) => word !== target)
+      sameWordsFromProfileValue.filter((word) => word !== target)
     );
 
-    if (translatedWords) {
-      delete translatedWords[target];
-      setTranslatedWords(translatedWords);
+    if (translatedWordsValue) {
+      delete translatedWordsValue[target];
+      setTranslatedWords(translatedWordsValue);
     }
   }
 
   function listWordsAndTranslations() {
     let divList = [];
 
-    let profileWordsAux = sameWordsFromProfile;
+    let profileWordsAux = sameWordsFromProfileValue;
 
     if (profileWordsAux && profileWordsAux.length > 0) {
       divList = selectedWord({
@@ -40,10 +39,10 @@ export default function WordsAndTranslation() {
       });
     }
 
-    if (unknownWords && unknownWords.length > 0) {
+    if (unknownWordsValue && unknownWordsValue.length > 0) {
       divList = selectedWord({
         divList,
-        arrayWords: unknownWords,
+        arrayWords: unknownWordsValue,
         isProfileWord: false,
       });
     }
@@ -58,13 +57,13 @@ export default function WordsAndTranslation() {
 
     if (myArray !== undefined) {
       myArray.map((word) => {
-        if (translatedWords[word] === undefined) {
+        if (translatedWordsValue[word] === undefined) {
           waitTranslation = " Loading...";
         } else {
-          if (translatedWords[word].length === 0) {
+          if (translatedWordsValue[word].length === 0) {
             waitTranslation = " No translations found :(";
           } else {
-            waitTranslation = translatedWords[word].map((objects) => {
+            waitTranslation = translatedWordsValue[word].map((objects) => {
               return "  " + objects.normalizedTarget;
             });
           }
@@ -90,7 +89,7 @@ export default function WordsAndTranslation() {
 
   return (
     <div className="unknown-words-container">
-      {unknownWords || sameWordsFromProfile
+      {unknownWordsValue || sameWordsFromProfileValue
         ? listWordsAndTranslations().map((div) => {
             return div;
           })

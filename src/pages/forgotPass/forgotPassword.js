@@ -9,7 +9,8 @@ export default function ForgotPassword() {
   const inputRef = useRef("");
   const [emailInputError, setEmailInputError] = useState(false);
   const [isLoading, setIsloading] = useState(false);
-  const { setRecoverPassInfo } = useContext(MainContext);
+  const { recoverPassInfo } = useContext(MainContext);
+  const setRecoverPassInfo = recoverPassInfo[1];
   const [failMessage, setfailMessage] = useState("");
 
   function validateEmail(email) {
@@ -57,25 +58,26 @@ export default function ForgotPassword() {
   };
 
   const FirstInput = () => {
-    return <input type="text" placeholder={"E-mail"} ref={inputRef} className={inputClassError()} />;
+    return (
+      <input
+        type="text"
+        placeholder={"E-mail"}
+        ref={inputRef}
+        className={inputClassError()}
+      />
+    );
   };
-
-
 
   return (
     <NeedAuth needAuth={false}>
       <PagesForgotPass
         isLoading={isLoading}
-
         labels={{
           title: "Recover Password",
           subtitle: "Don't worry, we will send a recover code.",
         }}
-
         handleErrors={{ input: emailInputError, message: failMessage }}
-
         FirstInput={FirstInput}
-
         button={{ text: "Send me", function: handleButtonSend }}
       ></PagesForgotPass>
     </NeedAuth>

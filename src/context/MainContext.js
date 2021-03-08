@@ -9,38 +9,37 @@ function MainProvider({ children }) {
   const [showPopUp, setShowPopUp] = useState(false);
   const [profileWordsList, setProfileWordsList] = useState([]);
   const [recoverPassInfo, setRecoverPassInfo] = useState({});
-
-  function cleanWord(word){
+  const [languageSelect, setLanguageToSelect] = useState("pt-br");
+  const [addedNewWords, setAddedNewWords] = useState(false);
+  function cleanWord(word) {
     return word.replace(/[.,?!;:\s]/g, "").toLowerCase();
   }
 
   return (
     <MainContext.Provider
       value={{
-        translatedWords,
-        setTranslatedWords,
+        translatedWords: [translatedWords, setTranslatedWords],
 
-        unknownWords,
-        setUnknownWords,
+        unknownWords: [unknownWords, setUnknownWords],
 
-        sameWordsFromProfile,
-        setSameWordsFromProfile,
+        sameWordsFromProfile: [sameWordsFromProfile, setSameWordsFromProfile],
 
-        sentence,
-        setSentence,
+        sentence: [sentence, setSentence],
+
+        showPopUp: [showPopUp, setShowPopUp],
+
+        profileWordsList: [profileWordsList, setProfileWordsList],
+
+        recoverPassInfo: [recoverPassInfo, setRecoverPassInfo],
+
+        languageSelect: [languageSelect, setLanguageToSelect],
         
-        showPopUp,
-        setShowPopUp,
-        
-        profileWordsList,
-        setProfileWordsList,
+        addedNewWords: [addedNewWords, setAddedNewWords],
+
         cleanWord,
-        recoverPassInfo, 
-        setRecoverPassInfo
       }}
     >
       {children}
-      
     </MainContext.Provider>
   );
 }
