@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import NotFound from "../warning/notFound";
+import LoadingCorner from "./loadingCorner";
 
 export default function NeedAuth(props) {
   const { authenticated, waitingApiResponse } = useContext(AuthContext);
@@ -11,8 +12,10 @@ export default function NeedAuth(props) {
       if ((needAuth && authenticated) | (!needAuth && !authenticated)) {
         return props.children;
       } else {
-        return <NotFound />;
+        return (<NotFound />);
       }
+    }else{
+      return (<LoadingCorner/>)
     }
   };
   return <>{authControl()}</>;

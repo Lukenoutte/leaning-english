@@ -6,6 +6,7 @@ import { MainContext } from "../../context/MainContext";
 import WordContainer from "../../components/handleWords/wordContainer";
 import { AuthContext } from "../../context/AuthContext";
 import Loading from "../../components/utilities/loading";
+import LoadingCorner from "../../components/utilities/loadingCorner";
 import "./styles/profile.css";
 import { Link } from "react-router-dom";
 import { ReactComponent as ConfigIcon } from "../../assets/icons/configIcon.svg";
@@ -105,9 +106,7 @@ export default function Profile() {
               <Loading />
             )}
           {isLoadingCorner && (
-            <div className="loading-corner">
-              <Loading />
-            </div>
+              < LoadingCorner/>
           )}
         </div>
       </div>

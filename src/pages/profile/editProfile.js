@@ -6,14 +6,17 @@ import history from "../../history";
 import { editUserInfo, userInformations } from "../../services/myApi/userInfo";
 import { AuthContext } from "../../context/AuthContext";
 import NeedAuth from "../../components/utilities/needAuth";
+import LoadingCorner from "../../components/utilities/loadingCorner";
 
 function EditProfile() {
   const [nameInput, setNameInput] = useState("");
   const [emailInput, setEmailInput] = useState("");
   const { authenticated } = useContext(AuthContext);
+  const [isLoadingCorner, setIsLoadingCorner] = useState(false);
 
   useEffect(() => {
     if (authenticated) {
+      setIsLoadingCorner(true);
       async function getUserInfo() {
         const response = await userInformations();
         if (response.data) {
@@ -23,7 +26,9 @@ function EditProfile() {
         }
       }
 
+
       getUserInfo();
+      setIsLoadingCorner(false);
     }
   }, [authenticated]);
 
@@ -62,6 +67,7 @@ function EditProfile() {
               </>
             </div>
           </div>
+          {isLoadingCorner && <LoadingCorner/>}
         </div>
       
     </NeedAuth>

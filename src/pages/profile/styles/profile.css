@@ -25,12 +25,6 @@
   width: 100%;
 }
 
-.loading-corner {
-  position: fixed;
-  right: 15px;
-  bottom: 0;
-}
-
 .edit-profile{
     position: absolute;
     right: 0;
