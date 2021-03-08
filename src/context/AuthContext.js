@@ -1,29 +1,29 @@
 import React, { createContext, useState, useEffect } from "react";
 import { verifyToken } from "../services/myApi/auth";
-import  myApi from "../services/myApi/apiConfig";
+import myApi from "../services/myApi/apiConfig";
 import history from "../history";
 
 const AuthContext = createContext();
 
-
 function AuthProvider({ children }) {
   const [authenticated, setAuthenticated] = useState(false);
-
+  const [waitingApiResponse, setWaitingApiResponse] = useState(false);
 
   useEffect(() => {
     async function tokenVerification() {
       const token = localStorage.getItem("token");
-
+      setWaitingApiResponse(true);
       if (token) {
         let status = await verifyToken({
           token: `Bearer ${JSON.parse(token)}`,
         });
-  
-        if(status && status.data.tokenStatus){
+
+        if (status && status.data.tokenStatus) {
           myApi.defaults.headers.autorization = `Bearer ${JSON.parse(token)}`;
-        setAuthenticated(true);
+          setAuthenticated(true);
         }
       }
+      setWaitingApiResponse(false);
     }
 
     tokenVerification();
@@ -33,7 +33,7 @@ function AuthProvider({ children }) {
     setAuthenticated(false);
     localStorage.removeItem("token");
     myApi.defaults.headers.autorization = undefined;
-   
+
     history.push("/login");
   }
 
@@ -47,7 +47,15 @@ function AuthProvider({ children }) {
   }
 
   return (
-    <AuthContext.Provider value={{ authenticated, setAuthenticated, handleLogout, handleLogin }}>
+    <AuthContext.Provider
+      value={{
+        authenticated,
+        setAuthenticated,
+        handleLogout,
+        handleLogin,
+        waitingApiResponse,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

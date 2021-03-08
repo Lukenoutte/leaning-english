@@ -58,7 +58,7 @@ function Main() {
     inputPhrase.current.value = "";
   }
 
-  async function addProfileWords() {
+  async function addProfileWords() { // API call to add new word on profile
     let validWords = unknownWordsValue.filter(
       (word) =>
         translatedWordsValue[word] && translatedWordsValue[word].length > 0

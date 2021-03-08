@@ -8,11 +8,10 @@ import { AuthContext } from "../../context/AuthContext";
 import { Drawer } from "@material-ui/core";
 
 export default function HeaderAndFooter(props) {
-  const { authenticated, handleLogout } = useContext(AuthContext);
+  const { authenticated, handleLogout, waitingApiResponse } = useContext(
+    AuthContext
+  );
   const [drawerIsOpen, setDrawerIsOpen] = useState(false);
-
-
-
 
   const handleDrawer = () => {
     if (drawerIsOpen) {
@@ -42,11 +41,31 @@ export default function HeaderAndFooter(props) {
           </>
         ) : (
           <>
-          <Link to="/profile">Profile</Link>
-          <button onClick={handleLogout}>Logout</button>
+            <Link to="/profile">Profile</Link>
+            <button onClick={handleLogout}>Logout</button>
           </>
         )}
       </Drawer>
+    );
+  };
+
+  const LoginAndSignUp = () => {
+    return (
+      <div className="login-and-sign-up link-header">
+        <Link to="/login">Login</Link>
+        <Link to="/sign_up">Sign Up</Link>
+      </div>
+    );
+  };
+
+  const ProfileAndSignOut = () => {
+    return (
+      <div className="logout-and-profile link-header">
+        <Link to="/profile">Profile</Link>
+        <button className="logout-button" onClick={handleLogout}>
+          <LogoutIcon className="logout-icon" />{" "}
+        </button>
+      </div>
     );
   };
 
@@ -54,7 +73,7 @@ export default function HeaderAndFooter(props) {
     <>
       <header className="g-shadow-light">
         <div className="center-container-header icon-and-name">
-          <Link to="/" >
+          <Link to="/">
             <MainIcon className="main-icon" /> Surligner
           </Link>
 
@@ -64,21 +83,7 @@ export default function HeaderAndFooter(props) {
 
           <MyDrawer />
 
-          {!authenticated ? (
-            <div className="login-and-sign-up link-header">
-              <Link to="/login">Login</Link>
-              <Link to="/sign_up">Sign Up</Link>
-            </div>
-          ) : (
-      
-      <div className="logout-and-profile link-header">
-              <Link to="/profile">Profile</Link>
-              <button className="logout-button" onClick={handleLogout}>
-                {" "}
-                <LogoutIcon className="logout-icon" />{" "}
-              </button>
-            </div>
-          )}
+          {!waitingApiResponse?(!authenticated ? <LoginAndSignUp /> : <ProfileAndSignOut />):<></>}
         </div>
       </header>
       <main>{props.children}</main>
