@@ -1,10 +1,10 @@
 import React, { useContext, useState } from "react";
 import "./styles/header_and_footer.css";
-import { ReactComponent as MainIcon } from "../assets/icons/mainIcon.svg";
-import { ReactComponent as MenuIcon } from "../assets/icons/menuIcon.svg";
-import { ReactComponent as LogoutIcon } from "../assets/icons/logoutIcon.svg";
+import { ReactComponent as MainIcon } from "../../assets/icons/mainIcon.svg";
+import { ReactComponent as MenuIcon } from "../../assets/icons/menuIcon.svg";
+import { ReactComponent as LogoutIcon } from "../../assets/icons/logoutIcon.svg";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../context/AuthContext";
+import { AuthContext } from "../../context/AuthContext";
 import { Drawer } from "@material-ui/core";
 
 export default function HeaderAndFooter(props) {
@@ -70,7 +70,8 @@ export default function HeaderAndFooter(props) {
               <Link to="/sign_up">Sign Up</Link>
             </div>
           ) : (
-            <div className="logout-and-profile link-header">
+      
+      <div className="logout-and-profile link-header">
               <Link to="/profile">Profile</Link>
               <button className="logout-button" onClick={handleLogout}>
                 {" "}

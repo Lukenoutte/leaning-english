@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect, useContext } from "react";
-import ChooseLanguage from "../components/chooseLanguage";
-import SentenceSliced from "../components/sentenceSliced";
-import PopUp from "../components/popUp";
-import WordsAndTranslations from "../components/wordsAndTranslation";
+import ChooseLanguage from "../components/chooseLanguage/chooseLanguage";
+import SentenceSliced from "../components/handleWords/sentenceSliced";
+import PopUp from "../components/utilities/popUp";
+import WordsAndTranslations from "../components/handleWords/wordsAndTranslation";
 import "../styles/main.css";
 
 import postMicrosoftApi from "../services/microsoftApi";

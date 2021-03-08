@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import "./styles/pop_up.css";
-import { MainContext } from "../context/MainContext";
+import { MainContext } from "../../context/MainContext";
 
 export default function PopUp(props) {
   const { showPopUp, setShowPopUp } = useContext(MainContext);

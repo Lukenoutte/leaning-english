@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
 
-import "../styles/edit_profile.css";
+import "./styles/edit_profile.css";
 //import Loading from "../components/loading";
-import history from "../history";
-import { editUserInfo, userInformations } from "../services/myApi/userInfo";
-import { AuthContext } from "../context/AuthContext";
-import NeedAuth from "../components/needAuth";
+import history from "../../history";
+import { editUserInfo, userInformations } from "../../services/myApi/userInfo";
+import { AuthContext } from "../../context/AuthContext";
+import NeedAuth from "../../components/utilities/needAuth";
 
 function EditProfile() {
   const [nameInput, setNameInput] = useState("");

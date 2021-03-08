@@ -1,7 +1,7 @@
 import React from "react";
 
 import "./styles/forgot_pass.css";
-import Loading from "../components/loading";
+import Loading from "../../components/utilities/loading";
 
 export default function ForgotPassword(props) {
   const {

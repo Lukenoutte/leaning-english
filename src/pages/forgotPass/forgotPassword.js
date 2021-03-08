@@ -1,9 +1,9 @@
 import React, { useRef, useState, useContext } from "react";
-import { sendTokenToEmail } from "../services/myApi/resetPass";
-import history from "../history";
-import PagesForgotPass from "../components/pagesForgotPass";
-import { MainContext } from "../context/MainContext";
-import NeedAuth from "../components/needAuth";
+import { sendTokenToEmail } from "../../services/myApi/resetPass";
+import history from "../../history";
+import PagesForgotPass from "../../components/forgotPass/pagesForgotPass";
+import { MainContext } from "../../context/MainContext";
+import NeedAuth from "../../components/utilities/needAuth";
 
 export default function ForgotPassword() {
   const inputRef = useRef("");

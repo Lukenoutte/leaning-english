@@ -1,5 +1,5 @@
 import React from "react";
-import WarningPage from "./warningPage";
+import WarningPage from "../warning/warningPage";
 
 
 export default function NotFound() {

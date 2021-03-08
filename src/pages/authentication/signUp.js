@@ -1,11 +1,11 @@
 import React, { useRef, useState, useContext } from "react";
 
-import "../styles/sign_up.css";
-import Loading from "../components/loading";
-import { AuthContext } from "../context/AuthContext";
-import { signUp, login } from "../services/myApi/auth";
-import history from "../history";
-import NeedAuth from "../components/needAuth";
+import "./styles/sign_up.css";
+import Loading from "../../components/utilities/loading";
+import { AuthContext } from "../../context/AuthContext";
+import { signUp, login } from "../../services/myApi/auth";
+import history from "../../history";
+import NeedAuth from "../../components/utilities/needAuth";
 
 function SignUp() {
   const inputName = useRef("");

@@ -1,6 +1,6 @@
 import React from "react";
-import WarningPage from "../components/warningPage";
-import NeedAuth from "../components/needAuth";
+import WarningPage from "../components/warning/warningPage";
+import NeedAuth from "../components/utilities/needAuth";
 
 export default function WelcomePage() {
 

@@ -1,6 +1,6 @@
 import React from "react";
 import "./styles/word_container.css";
-import { ReactComponent as CloseIcon } from "../assets/icons/closeIcon.svg";
+import { ReactComponent as CloseIcon } from "../../assets/icons/closeIcon.svg";
 
 export default function WordContainer(props) {
   const { isProfileWord, onCloseButtonClicked } = props;

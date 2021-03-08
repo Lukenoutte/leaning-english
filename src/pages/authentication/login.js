@@ -1,13 +1,13 @@
 import React, { useRef, useState, useContext } from "react";
 
-import "../styles/login.css";
+import "./styles/login.css";
 import { Link } from "react-router-dom";
-import { login } from "../services/myApi/auth";
-import { AuthContext } from "../context/AuthContext";
-import Loading from "../components/loading";
-import history from "../history";
+import { login } from "../../services/myApi/auth";
+import { AuthContext } from "../../context/AuthContext";
+import Loading from "../../components/utilities/loading";
+import history from "../../history";
 
-import NeedAuth from "../components/needAuth";
+import NeedAuth from "../../components/utilities/needAuth";
 
 function Login() {
   const inputEmail = useRef("");

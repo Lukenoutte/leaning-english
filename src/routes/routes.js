@@ -1,16 +1,16 @@
 import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
-import Login from "./pages/login";
-import Main from "./pages/main";
-import SignUp from "./pages/signUp";
-import Profile from "./pages/profile";
-import ForgotPass from "./pages/forgotPassword";
-import TokenForgotPass from "./pages/tokenForgotPass";
-import ChangePass from "./pages/changePass";
-import Welcome from "./pages/welcomePage";
-import ChangePassSucess from "./pages/changePassSucess";
-import EditProfile from "./pages/editProfile";
-import NotFound from "./components/notFound";
+import Login from "../pages/authentication/login";
+import Main from "../pages/main";
+import SignUp from "../pages/authentication/signUp";
+import Profile from "../pages/profile/profile";
+import ForgotPass from "../pages/forgotPass/forgotPassword";
+import TokenForgotPass from "../pages/forgotPass/tokenForgotPass";
+import ChangePass from "../pages/forgotPass/changePass";
+import Welcome from "../pages/welcomePage";
+import ChangePassSucess from "../pages/forgotPass/changePassSucess";
+import EditProfile from "../pages/profile/editProfile";
+import NotFound from "../components/warning/notFound";
 
 function Routes() {
   return (

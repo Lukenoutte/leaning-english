@@ -1,9 +1,9 @@
 import React, { useRef, useState, useContext } from "react";
-import history from "../history";
-import PagesForgotPass from "../components/pagesForgotPass";
-import { MainContext } from "../context/MainContext";
-import { verifyResetToken } from "../services/myApi/resetPass";
-import NeedAuth from "../components/needAuth";
+import history from "../../history";
+import PagesForgotPass from "../../components/forgotPass/pagesForgotPass";
+import { MainContext } from "../../context/MainContext";
+import { verifyResetToken } from "../../services/myApi/resetPass";
+import NeedAuth from "../../components/utilities/needAuth";
 
 export default function TokenForgotPass() {
   const inputRef = useRef("");

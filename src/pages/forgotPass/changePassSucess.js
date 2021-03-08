@@ -1,5 +1,5 @@
 import React from "react";
-import WarningPage from "../components/warningPage";
+import WarningPage from "../../components/warning/warningPage";
 
 
 export default function ChangePassSucess() {

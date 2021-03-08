@@ -1,7 +1,7 @@
 
 import React, { useContext } from "react";
-import { AuthContext } from "../context/AuthContext";
-import NotFound from "./notFound";
+import { AuthContext } from "../../context/AuthContext";
+import NotFound from "../warning/notFound";
 
 export default function NeedAuth(props) {
     const { authenticated } = useContext(AuthContext);

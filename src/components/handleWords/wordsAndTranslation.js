@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import "./styles/words_and_translations.css";
-import { MainContext } from "../context/MainContext";
-import WordContainer from "./wordContainer";
+import { MainContext } from "../../context/MainContext";
+import WordContainer from "../handleWords/wordContainer";
 export default function WordsAndTranslation() {
   const {
     translatedWords,

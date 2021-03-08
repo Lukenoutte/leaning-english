@@ -1,15 +1,15 @@
 import React, { useEffect, useState, useContext } from "react";
 
-import { userInformations } from "../services/myApi/userInfo";
-import { getWords, removeWord } from "../services/myApi/words";
-import { MainContext } from "../context/MainContext";
-import WordContainer from "../components/wordContainer";
-import { AuthContext } from "../context/AuthContext";
-import Loading from "../components/loading";
-import "../styles/profile.css";
+import { userInformations } from "../../services/myApi/userInfo";
+import { getWords, removeWord } from "../../services/myApi/words";
+import { MainContext } from "../../context/MainContext";
+import WordContainer from "../../components/handleWords/wordContainer";
+import { AuthContext } from "../../context/AuthContext";
+import Loading from "../../components/utilities/loading";
+import "./styles/profile.css";
 import { Link } from "react-router-dom";
-import { ReactComponent as ConfigIcon } from "../assets/icons/configIcon.svg";
-import NeedAuth from "../components/needAuth";
+import { ReactComponent as ConfigIcon } from "../../assets/icons/configIcon.svg";
+import NeedAuth from "../../components/utilities/needAuth";
 
 
 export default function Profile() {

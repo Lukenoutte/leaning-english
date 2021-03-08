@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import "./styles/sentence_sliced.css";
-import { MainContext } from "../context/MainContext";
+import { MainContext } from "../../context/MainContext";
 
 export default function SentenceSliced() {
   const {
