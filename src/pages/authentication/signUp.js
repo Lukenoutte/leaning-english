@@ -23,14 +23,14 @@ function SignUp() {
   async function loginAfterSignUp(arg) {
     let loginResponse = await login({ email: arg.email, pass: arg.pass });
 
-    if (loginResponse) {
-      if (loginResponse.status === 200) {
+
+      if (loginResponse && loginResponse.status === 200) {
         handleLogin({ response: loginResponse });
         history.push("/welcome");
-      } else if (loginResponse.status === 400) {
+      } else {
         history.push("/login");
       }
-    }
+    
   }
 
   function validateEmail(email) {
@@ -89,7 +89,7 @@ function SignUp() {
 
 
 
-    if (signUpResponse && signUpResponse.status && signUpResponse.status === 200) {
+    if (signUpResponse && signUpResponse.status === 200) {
       loginAfterSignUp({ email, pass });
     } else {
 

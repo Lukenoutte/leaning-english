@@ -71,7 +71,7 @@ export default function HeaderAndFooter(props) {
 
   return (
     <>
-      <header className="g-shadow-light">
+      <header className="g-shadow-light" data-testid="header">
         <div className="center-container-header icon-and-name">
           <Link to="/">
             <MainIcon className="main-icon" /> Surligner
@@ -87,7 +87,7 @@ export default function HeaderAndFooter(props) {
         </div>
       </header>
       <main>{props.children}</main>
-      <footer className="g-shadow-light">
+      <footer className="g-shadow-light" data-testid="footer">
         <p>
           Developed by{" "}
           <a

@@ -6,7 +6,7 @@ export default function ChooseLanguage(props) {
   const { valueSelected, functionSelect } = props;
 
   return (
-    <div className="choose-language-wrapper">
+    <div className="choose-language-wrapper" data-testid="choose-language">
       <div className="from-container g-shadow-light">
         <span>From: </span>
         <select name="language">

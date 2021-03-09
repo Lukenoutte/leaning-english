@@ -11,24 +11,25 @@ import "./styles/profile.css";
 import { Link } from "react-router-dom";
 import { ReactComponent as ConfigIcon } from "../../assets/icons/configIcon.svg";
 import NeedAuth from "../../components/utilities/needAuth";
-
+import PopUp from "../../components/utilities/popUp";
 
 export default function Profile() {
   const [userInfo, setUserInfo] = useState([]);
-  const { profileWordsList } = useContext(MainContext);
+  const { profileWordsList, showPopUp } = useContext(MainContext);
   const [profileWordsListValue, setProfileWordsList] = profileWordsList;
   const { authenticated } = useContext(AuthContext);
-
+  const [showPopUpValue, setShowPopUp] = showPopUp;
   const [isLoadingCorner, setIsLoadingCorner] = useState(false);
 
   async function removeWordsFromProfile(word) {
     setIsLoadingCorner(true);
     const response = await removeWord({ word });
 
-    if (response.status && response.status === 200) {
+    if (response && response.status === 200) {
       setIsLoadingCorner(false);
     } else {
       setIsLoadingCorner(false);
+      setShowPopUp(true);
     }
   }
 
@@ -63,7 +64,7 @@ export default function Profile() {
     if (authenticated) {
       const wordsList = async () => {
         const words = await getWords();
-        if (words.status && words.status === 200) {
+        if (words && words.status === 200) {
           setProfileWordsList(words.data);
         }
       };
@@ -73,13 +74,13 @@ export default function Profile() {
 
   return (
     <NeedAuth needAuth={true}>
-
-
       <div className="profile global-wrapper">
         <div className="g-center-container">
-          <Link to="/edit_profile" className="edit-profile"><ConfigIcon className="config-icon" /></Link>
+          <Link to="/edit_profile" className="edit-profile">
+            <ConfigIcon className="config-icon" />
+          </Link>
           <h1 className="unknown-title">Profile</h1>
-          {profileWordsListValue && userInfo.data ? (
+          {profileWordsListValue && userInfo && userInfo.data ? (
             <>
               <div className="user-info  g-shadow-light">
                 <p>
@@ -103,14 +104,13 @@ export default function Profile() {
               )}
             </>
           ) : (
-              <Loading />
-            )}
-          {isLoadingCorner && (
-              < LoadingCorner/>
+            <Loading />
           )}
+          {isLoadingCorner && <LoadingCorner />}
         </div>
-      </div>
 
+        {showPopUpValue && <PopUp message={"Something went wrong! :("} />}
+      </div>
     </NeedAuth>
   );
 }

@@ -32,7 +32,7 @@ function Login() {
     setIsloading(true);
     let response = await login({ email, pass });
 
-    if (response && response.status && response.status === 200) {
+    if (response && response.status === 200) {
       handleLogin({ response });
       history.push("/");
     } else {

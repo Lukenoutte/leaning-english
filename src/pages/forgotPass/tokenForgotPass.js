@@ -39,7 +39,7 @@ export default function TokenForgotPass() {
       token: token,
     });
 
-    if (response.status && response.status === 200) {
+    if (response && response.status === 200) {
       var obj = {};
       obj["token"] = token;
 

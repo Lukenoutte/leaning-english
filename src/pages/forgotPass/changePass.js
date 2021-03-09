@@ -54,7 +54,7 @@ export default function ForgotPassword() {
       token: recoverPassInfoValue.token,
     });
 
-    if (response.status && response.status === 200) {
+    if (response && response.status === 200) {
       setIsloading(false);
       setInputError(false);
       history.push("/change_pass_sucess");

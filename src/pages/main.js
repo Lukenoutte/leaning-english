@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useContext } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
 import ChooseLanguage from "../components/chooseLanguage/chooseLanguage";
 import SentenceSliced from "../components/handleWords/sentenceSliced";
 import PopUp from "../components/utilities/popUp";
@@ -13,7 +13,7 @@ function Main() {
   const inputPhrase = useRef(null);
 
   const { authenticated } = useContext(AuthContext);
-
+  const [popUpMessage, setPopUpMessage] = useState("");
   const {
     translatedWords,
     unknownWords,
@@ -67,7 +67,8 @@ function Main() {
     if (validWords && validWords.length > 0) {
       const response = await addWords({ validWords });
 
-      if (response.status && response.status === 200) {
+      if (response && response.status === 200) {
+        setPopUpMessage("You add a new word to your list!");
         setShowPopUp(true);
         setUnknownWords([]);
 
@@ -76,6 +77,9 @@ function Main() {
         } else {
           setAddedNewWords(true);
         }
+      }else{
+        setPopUpMessage("Something went wrong! :(")
+        setShowPopUp(true);
       }
     }
   }
@@ -117,7 +121,7 @@ function Main() {
         </button>
       )}
 
-      {showPopUpValue && <PopUp message={"You add a new word to your list!"} />}
+      {showPopUpValue && <PopUp message={popUpMessage} />}
       <HandleUserEffect/>
     </>
   );

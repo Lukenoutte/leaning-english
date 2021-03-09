@@ -6,10 +6,12 @@
     max-width: 90%;
     padding: 10px 50px;
     font-size: 14px;
+    border-radius: 15px;
 }
 
 .pop-up-wrapper{
     width: 100%;
     display: flex;
     justify-content: center;
+    position: absolute;
 }

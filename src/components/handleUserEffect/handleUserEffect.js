@@ -51,7 +51,7 @@ export default function HandleUserEffect() {
     if (authenticated) {
       const wordsList = async () => {
         const words = await getWords();
-        if (words.status && words.status === 200) {
+        if (words && words.status === 200) {
           setProfileWordsList(words.data);
         }
       };
