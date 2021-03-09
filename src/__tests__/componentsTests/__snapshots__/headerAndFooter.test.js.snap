@@ -1,0 +1,136 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`check header and footer authenticated 1`] = `
+<header
+  class="g-shadow-light"
+  data-testid="header"
+>
+  <div
+    class="center-container-header icon-and-name"
+  >
+    <a
+      href="/"
+    >
+      <svg
+        class="main-icon"
+      >
+        mainIcon.svg
+      </svg>
+       Surligner
+    </a>
+    <button
+      class="drawer-button"
+    >
+      <svg
+        class="menu-icon"
+      >
+        menuIcon.svg
+      </svg>
+    </button>
+    <div
+      class="logout-and-profile link-header"
+    >
+      <a
+        href="/profile"
+      >
+        Profile
+      </a>
+      <button
+        class="logout-button"
+      >
+        <svg
+          class="logout-icon"
+        >
+          logoutIcon.svg
+        </svg>
+         
+      </button>
+    </div>
+  </div>
+</header>
+`;
+
+exports[`check header and footer authenticated 2`] = `
+<footer
+  class="g-shadow-light"
+  data-testid="footer"
+>
+  <p>
+    Developed by
+     
+    <a
+      href="https://github.com/Lukenoutte"
+      rel="noopener noreferrer"
+      target="_blank"
+      title="Github"
+    >
+      @Lukenoutte
+    </a>
+  </p>
+</footer>
+`;
+
+exports[`check header and footer not authenticated 1`] = `
+<header
+  class="g-shadow-light"
+  data-testid="header"
+>
+  <div
+    class="center-container-header icon-and-name"
+  >
+    <a
+      href="/"
+    >
+      <svg
+        class="main-icon"
+      >
+        mainIcon.svg
+      </svg>
+       Surligner
+    </a>
+    <button
+      class="drawer-button"
+    >
+      <svg
+        class="menu-icon"
+      >
+        menuIcon.svg
+      </svg>
+    </button>
+    <div
+      class="login-and-sign-up link-header"
+    >
+      <a
+        href="/login"
+      >
+        Login
+      </a>
+      <a
+        href="/sign_up"
+      >
+        Sign Up
+      </a>
+    </div>
+  </div>
+</header>
+`;
+
+exports[`check header and footer not authenticated 2`] = `
+<footer
+  class="g-shadow-light"
+  data-testid="footer"
+>
+  <p>
+    Developed by
+     
+    <a
+      href="https://github.com/Lukenoutte"
+      rel="noopener noreferrer"
+      target="_blank"
+      title="Github"
+    >
+      @Lukenoutte
+    </a>
+  </p>
+</footer>
+`;
