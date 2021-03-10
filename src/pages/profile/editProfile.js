@@ -19,17 +19,19 @@ function EditProfile() {
   
   useEffect(() => {
     if (authenticated) {
-      setIsLoadingCorner(true);
+
       async function getUserInfo() {
+        setIsLoadingCorner(true);
         const response = await userInformations();
         if (response && response.data) {
           setNameInput(response.data.name);
           setEmailInput(response.data.email);
         }
+        setIsLoadingCorner(false);
       }
 
       getUserInfo();
-      setIsLoadingCorner(false);
+
     }
   }, [authenticated]);
 
@@ -45,6 +47,7 @@ function EditProfile() {
   return (
     <NeedAuth needAuth={true}>
       <div className="edit-profile-wrapper global-wrapper">
+      {isLoadingCorner && <LoadingCorner />}
         <div className="g-center-container-two">
           <div className="g-inputs-wrapper g-shadow-light g-styled-buttons">
             <h1>Profile</h1>
@@ -69,7 +72,7 @@ function EditProfile() {
             </>
           </div>
         </div>
-        {isLoadingCorner && <LoadingCorner />}
+
         {showPopUpValue && (
           <PopUp message={"Something went wrong! :("} />
         )}

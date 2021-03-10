@@ -21,13 +21,14 @@ function Main() {
     sentence,
     showPopUp,
     languageSelect,
-    addedNewWords
+    addedNewWords,
+    clearUnkownAndTranslated
   } = useContext(MainContext);
 
-  const [translatedWordsValue, setTranslatedWords] = translatedWords;
+  const [translatedWordsValue] = translatedWords;
   const [unknownWordsValue, setUnknownWords] = unknownWords;
   const [showPopUpValue, setShowPopUp] = showPopUp;
-  const [languageSelectValue, setLanguageSelect] = languageSelect;
+  const [languageSelectValue] = languageSelect;
   const [addedNewWordsValue, setAddedNewWords] = addedNewWords;
   const setSameWordsFromProfile = sameWordsFromProfile[1];
   const setSentence = sentence[1];
@@ -38,18 +39,6 @@ function Main() {
       setSameWordsFromProfile([]);
       setSentence(currentPhrase.split(" "));
     }
-  }
-
-  function ChangeLanguage(event) {
-    setLanguageSelect(event.target.value);
-
-    clearUnkownAndTranslated();
-  }
-
-  function clearUnkownAndTranslated() {
-    setUnknownWords([]);
-    setTranslatedWords({});
-    setSameWordsFromProfile([]);
   }
 
   function handleClickButtonClear() {
@@ -97,14 +86,13 @@ function Main() {
         <div className="g-center-container">
           <ChooseLanguage
             valueSelected={languageSelectValue}
-            functionSelect={ChangeLanguage}
           />
 
           <div className="input-and-button g-shadow-light g-styled-buttons">
             <h1> Copy and paste some sentence or text in english:</h1>
 
-            <input ref={inputPhrase} type="text" />
-            <button id="try-it-button" onClick={handleButtonSplitPhrase}>
+            <input ref={inputPhrase} type="text" data-testid="main-input" />
+            <button id="try-it-button" onClick={handleButtonSplitPhrase} data-testid="try-it">
               Try it!
             </button>
             <button onClick={handleClickButtonClear}>Clear all</button>

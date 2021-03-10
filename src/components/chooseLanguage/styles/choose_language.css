@@ -31,7 +31,7 @@
   font-size: 1.3rem;
 }
 
-.from-container select:hover,
-.to-container select:hover {
-  background-color:var(--secundary-light);
+
+.choose-language-wrapper optgroup {
+   font-size:15px; 
 }

@@ -82,16 +82,17 @@ footer a {
   flex-direction: row;
 }
 
-.link-header a {
+.link-button-header a, .link-button-header button {
   margin-left: 20px;
   border: 2px solid var(--secundary-color);
   padding: 7px;
   border-radius: 15px;
   height: 35px;
   font-size: 15px;
+  color: var(--secundary-color);
 }
 
-.link-header a:hover {
+.link-button-header a:hover, .link-button-header button:hover {
   color: var(--white-color);
   background-color: var(--secundary-color);
 }

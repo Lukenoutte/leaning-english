@@ -11,32 +11,31 @@ function MainProvider({ children }) {
   const [recoverPassInfo, setRecoverPassInfo] = useState({});
   const [languageSelect, setLanguageToSelect] = useState("pt-br");
   const [addedNewWords, setAddedNewWords] = useState(false);
+
   function cleanWord(word) {
     return word.replace(/[.,?!;:\s]/g, "").toLowerCase();
+  }
+
+  function clearUnkownAndTranslated() {
+    setUnknownWords([]);
+    setTranslatedWords({});
+    setSameWordsFromProfile([]);
   }
 
   return (
     <MainContext.Provider
       value={{
         translatedWords: [translatedWords, setTranslatedWords],
-
         unknownWords: [unknownWords, setUnknownWords],
-
         sameWordsFromProfile: [sameWordsFromProfile, setSameWordsFromProfile],
-
         sentence: [sentence, setSentence],
-
         showPopUp: [showPopUp, setShowPopUp],
-
         profileWordsList: [profileWordsList, setProfileWordsList],
-
         recoverPassInfo: [recoverPassInfo, setRecoverPassInfo],
-
-        languageSelect: [languageSelect, setLanguageToSelect],
-        
+        languageSelect: [languageSelect, setLanguageToSelect],        
         addedNewWords: [addedNewWords, setAddedNewWords],
-
         cleanWord,
+        clearUnkownAndTranslated
       }}
     >
       {children}

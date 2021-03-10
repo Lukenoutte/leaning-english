@@ -12,6 +12,16 @@
   --placeholder: #bfbfbf;
 }
 
+::-moz-selection { /* Code for Firefox */
+  color: var(--white-color);
+  background: var(--secundary-color);
+}
+
+::selection {
+  color: var(--white-color);
+  background: var(--secundary-color);
+}
+
 * {
   margin: 0;
   padding: 0;

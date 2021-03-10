@@ -1,9 +1,9 @@
 import { render, screen, cleanup } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { AuthContext } from "../../context/AuthContext";
+import { AuthContext } from "../context/AuthContext";
 import { BrowserRouter } from "react-router-dom";
 
-import HeaderandFooter from "../../components/headerAndFooter/headerAndFooter";
+import HeaderandFooter from "../components/headerAndFooter/headerAndFooter";
 
 afterEach(() => {
   cleanup();
